@@ -1,0 +1,340 @@
+/* 
+  Localizable.strings
+  ComeHear
+
+  Created by 이정환 on 2022/09/04.
+  
+*/
+
+//탭바
+"탭바1" = "Main";
+"탭바2" = "FeelStorage";
+"탭바3" = "Search";
+"탭바4" = "Favorite";
+"탭바5" = "Mypage";
+
+//메인
+"PlaceHolder_Main1" = "Let's Go Together\n With Come Hear";
+"안내지침서문구" = "Anyone Can Enjoy It\nCOME HEAR\nGUIDE BOOK";
+"느낌 관광지" = "Feel Tourist Destination";
+"주변 관광지" = "Around Tourist Destination";
+
+//상세화면
+"펼치기 " = "Open ";
+"접기 " = "Close ";
+"성우 해설  " = "Actor's Voice";
+"기본 해설  " = "Siri's Voice";
+"아름다운 당신의 목소리를 들려주세요." = "Let everyone hear your beautiful voice.";
+"느낌 공유하기" = "Share Your Feelings";
+"듣기" = "Listen";
+"이야기의" = "of a story";
+"제목 - 기본이야기" = "Title - Basic Story";
+"출연 : 성우 님" = "Actor";
+"출연 : 시리 님" = "Siri";
+"님의 느낌" = "";
+
+//녹음화면
+"배경음악" = "BGM";
+"초 녹음이 완료 되었습니다." = "Seconds of recording completed.";
+"녹음파일" = "Record File";
+"들어보기" = "Listen";
+"녹음한 파일 정지하기" = "Stop a recorded file";
+"녹음한 파일 재생하기" = "Play a recorded file";
+"녹음한 파일 삭제하기" = "Delete the recorded file";
+"녹음버튼입니다. 누르시면 바로 녹음이 시작됩니다." = "This is the recording button. The recording will begin as soon as you press it.";
+"녹음은 10초이상부터 등록가능합니다." = "Need to record for more than 10 seconds to register.";
+"녹음완료시간" = "The recorded time is %@ second.";
+"녹음하기네비타이틀" = "Recording";
+"변경하기" = "Change";
+"제목을 입력해주세요." = "Please Enter a Title.";
+"현재화면은 녹음하기 화면입니다. 녹음은 최소 10초부터 최대 30초까지 등록가능합니다." = "The current screen is the recording screen. Recordings can be registered for a minimum of 10 seconds to a maximum of 30 seconds.";
+"녹음시간 - " = "Record Time - ";
+" 초" = " Seconds";
+
+//재생화면
+"재생화면" = "Play";
+"배속" = "Rate";
+"다시재생하기" = "Replay";
+"재생하기" = "Play";
+"정지하기" = "Stop";
+"신고하기" = "Report";
+"제목" = "Title";
+"기타" = "Etc";
+
+//신고하기화면
+"욕설, 명예훼손" = "Abuse and Defamation";
+"음란물" = "Pornography";
+"내용 부적합" = "Inappropriate content";
+"신고 사유를 선택해주세요." = "Please select the reason for reporting.";
+"신고할 느낌" = "Feeling selected";
+"신고느낌제목" = "The title of the selected feeling is %@.";
+"현재화면은 신고하기 화면입니다." = "The current screen is the report screen.";
+"신고 사유를 입력해주세요." = "Please enter the reason for reporting.";
+
+//느낌저장소
+"인기 Top10" = "Popular Top10";
+"최신 Top10" = "Latest Top10";
+"최근검색어" = "Recent Search Keyword";
+"최근검색어입니다." = "Recent Search Keyword";
+"전체삭제" = "Delete All";
+"느끼고 싶은 곳을 입력해주세요." = "Enter where you want to feel.";
+"현재화면은 느낌저장소입니다. 느낌검색과 인기느낌, 최신느낌 Top10을 제공하고 있습니다." = "The current screen is a repository of feelings. We provide top 1 feeling search, popularity, and latest feeling.";
+"느낌 저장소" = "Feel Storage";
+"검색결과" =  "No search results for %@ entered.";
+
+//검색탭
+"관광지 검색" = "Search for Destination";
+"이야기 검색" = "Search for Stories";
+"지역별 검색" = "Search by Region";
+"지역 검색" = "Search by Region";
+"현재 위치로 검색" = "Search to Current Location";
+"Come Hear와 함께 여행을 떠나요!\n다양한 방법으로 검색해보세요!" = "Let's go on a trip with Come Hear!";
+"맞춤형 검색" = "Customized Search";
+
+"관광지 검색창입니다. 검색후 키보드는 내려갑니다." = "It's a tourist spot search box. After searching, the keyboard goes down.";
+"어디로 갈까요?" = "Where shall we go?";
+"가고싶은 곳을 검색해보세요.\n다양한 목소리를 들으며 여행할 수 있습니다." = "Search where you want to go.\nYou can travel with a variety of voices.";
+"검색 결과 화면입니다. 현재 검색결과가 없습니다." = "This is the search results screen. There are currently no search results.";
+"검색결과수" = "Search results screen. The search result is %@.";
+"검색 결과가 없습니다." = "No search results.";
+
+"이야기 검색창입니다. 검색후 키보드는 내려갑니다." = "This is the story search box. After searching, the keyboard goes down.";
+"듣고싶은 곳을 검색해보세요.\n다양한 목소리를 들으며 여행할 수 있습니다." = "Search where you want to hear it.\nYou can travel with a variety of voices.";
+
+"어디를 둘러볼까요?" = "Where should I look?";
+"시/도" = "City/Province";
+"도시를 선택해주세요." = "Please select a city.";
+"시/군/구" = "City/Country/District";
+"지역구를 선택해주세요." = "Please select a district.";
+"검색하기" = "Searching";
+
+"현재 위치 검색" = "Search current position";
+
+//즐겨찾기탭
+"즐겨찾기 한 관광지" = "Favorite Tourist Destination";
+"내가 좋아요 한 느낌" = "Like Tourist Feeling";
+"ComeHear는 다양한 서비스를 제공하고 있습니다.\n\n로그인 후 다양한 서비스를 만나보세요!!" = "ComeHear offers a wide range of services.\n\nGet various services after logging in!!";
+"아직 \"즐겨찾기\"에 추가된 관광지가 없습니다.\n\n어떤곳들이 있는지 검색해보세요!" = "No tourist attractions have been added to \"Favorite\" yet.\n\nSearch for some places!";
+"관광지 검색하러 가기" = "Go to search for tourist attractions";
+"아직 \"좋아요\"를 누르신 느낌이 없습니다.\n\n좋아하는 느낌을 추가하기 위해 여행지를 검색해보세요!" = "I don't feel like you pressed \"Like\" yet.\n\nSearch for travel destinations to add a feeling you like!";
+
+//브금
+"배경음악을 선택해주세요." = "Please Choose BGM";
+"배경음악을 선택해주세요. 닫기버튼을 누르면 선택된 배경음악으로 적용됩니다." = "Please choose background music. Press the Close button to apply the selected background music.";
+
+//마이페이지
+"회원가입하러가기" = "Go to sign up";
+"로그인하기" = "Log In";
+"로그아웃하기" = "Log Out";
+"내 정보 관리" = "My Information";
+"내가 공유한 느낌" = "My shared Feelings";
+"나의 즐겨찾기" = "My Favorites";
+"내가 좋아요 한 느낌" = "My Like Feelings";
+"공지사항" = "Notice";
+"이용약관" = "Terms of Use";
+"개인정보 처리방침" = "privacy policy";
+"저작물표시 안내" = "Information on copyright display";
+"Come Hear와 함께 즐거운 여행 되세요." = "Enjoy your trip with Come Hear.";
+"현재 로그인 상태입니다." = "You are currently logged in.";
+"아직 Come Hear 회원이 아니신가요?" = "Are you not a Come Hear member yet?";
+"현재 비로그인 상태입니다." = "You are currently logged out.";
+
+//로그인 화면
+"Email 로그인" = "Email Login";
+"이메일 로그인" = "Email Login";
+"비밀번호 입력" = "Enter Password";
+"회원가입" = "Sign Up";
+"SNS 로그인 / 회원가입" = "SNS Login / Sign Up";
+"카카오로그인 및 회원가입" = "KakaoLogin 및 Sign Up";
+"애플로그인 및 회원가입" = "AppleLogin 및 Sign Up";
+
+//회원가입 화면
+"이용약관, 개인정보처리방침 모두 동의취소하기" = "Cancel consent to all terms of use and privacy policy";
+"이용약관, 개인정보처리방침 모두 동의하기" = "Agree to all terms of use and privacy policy";
+"이용약관 동의취소하기" = "Cancel agreement to terms and conditions";
+"이용약관 동의하기" = "Accept the terms and conditions";
+"개인정보처리방침 동의취소하기" = "Cancel consent to privacy policy";
+"개인정보처리방침 동의하기" = "Agree to the Privacy Policy";
+"회원가입을 위해 약관에 동의해주세요." = "Please agree to the terms and conditions to sign up.";
+"이용약관 동의" = "Accept the terms and conditions";
+"이용약관 내용읽기" = "Read Terms and Conditions";
+"개인정보처리방침 동의" = "I agree to the privacy policy";
+"개인정보처리방침 내용읽기" = "Read the Privacy Policy";
+"전체 동의" = "All Agree";
+"회원정보를 기입해주세요." = "Please enter your member information.";
+"이메일 주소" = "Email Address";
+"인증메일 전송" = "Send verification mail";
+"인증번호 입력" = "Certification number input";
+"확인하기" = "check";
+"인증번호 확인하기" = "Check the verification code";
+"비밀번호(영문+숫자+특수문자, 8자리이상)" = "Password (English+Numbers+Special Characters, more than 8 digits)";
+"비밀번호 확인" = "Confirm Password";
+"별명" = "Nickname";
+"취소하기" = "Cancel";
+"인증취소하기" = "Cancel authentication";
+"인증완료" = "Verification completed";
+
+//추가정보입력화면
+"회원가입을 위해 별명을 추가입력해주세요." = "Please add a nickname to register as a member.";
+"추가정보 입력" = "Enter Additional Information";
+
+//나의정보관리
+"나의 정보" = "My Info";
+"로그인 타입" = "Login Type";
+"추가정보 변경" = "Change Additional Information";
+"변경할 별명을 입력해주세요." = "Please enter a nickname to change.";
+"별명 변경하기" = "Change Nickname";
+"비밀번호 변경" = "Change Password";
+"(영문 + 숫자 + 특수문자, 8자리이상)" = "(English + numbers + special characters, more than 8 digits)";
+"현재 비밀번호" = "Current Password";
+"변경할 비밀번호" = "Password to change";
+"변경할 비밀번호 확인" = "Confirm Password to change";
+"암호 변경하기" = "Change Password";
+"탈퇴 / 연동해제" = "Secession / Unlink";
+
+//나의 즐겨찾기, 느낌
+"아직 공유하신 느낌이 없습니다.\n\n느낌을 공유하기 위해 여행지를 검색해보세요!" = "I don't feel like you've shared it yet.\n\nSearch for travel destinations to share your feelings!";
+"아직 \"즐겨찾기\"에 추가된 관광지가 없습니다.\n\n어떤곳들이 있는지 검색해보세요!" = "No tourist attractions have been added to \"Favorites\" yet.\n\nSearch for some places!";
+"관광지 선택" = "Select a tourist destination";
+
+//개인정보처리방침
+"ComeHear 서비스 약관" = "ComeHear Terms of Service";
+"ComeHear 개인정보처리방침" = "ComeHear Privacy Policy";
+"TourAPI 이용약관" = "TourAPI Terms of Use";
+"동의하고 계속하기" = "Agreed and continue";
+
+//알럿
+"알림" = "Alert";
+"제목의 앞과 뒤에 공백을 제거해주세요." = "The title of the space before and after the removal.";
+"나의 느낌을 공유하였습니다." = "Your feelings have been registered.";
+"나의 느낌을 공유하였습니다. 현재화면을 닫겠습니다." = "Your feelings have been registered. Close the current screen.";
+"음성에 부적절한 단어가 포함된것으로 판단됩니다. 다시녹음해주세요." = "Inappropriate words were judged to be included in the voice.Recording again, please.";
+"중복된 제목입니다." = "Duplicate title.";
+"아니오" = "No";
+"확인" = "OK";
+"취소" = "Cancel";
+"설정" = "Settomg";
+"닫기" = "Close";
+"네" = "Yes";
+"로그인" = "Login";
+"로그아웃" = "Logout";
+"탈퇴" = "Leave";
+"느낌삭제" = "Delete Feeling";
+"로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?" = "Login required.\nGo to the login page?";
+"로그아웃 하시겠습니까?" = "Do you want to log out?";
+"정말 탈퇴 하시겠습니까?" = "Are you sure you want to leave?";
+"정말 삭제 하시겠습니까?" = "Are you sure you want to delete it?";
+"로그인알림" = "Welcome! %@";
+"가입인사" = "Congratulations, %@.\nPlease log in and use it.";
+"별명이 변경되었습니다." = "Your nickname has been changed.";
+"잘못된 별명" = "Invalid nickname";
+"잘못된 별명입니다.\n다른 별명을 입력해주세요." = "Invalid nickname.\nPlease enter a different nickname.";
+"중복된 별명" = "Duplicated nicknames";
+"중복된 별명입니다.\n다른 별명을 입력해주세요." = "Duplicated nickname.\nPlease enter a different nickname";
+"현재 비밀번호가 유효하지 않습니다." = "The password is not valid.";
+"비밀번호가 유효하지 않습니다." = "The password is not valid.";
+"비밀번호는 띄어쓰기 및 빈칸이\n포함될 수 없습니다." = "Password cannot contain spaces and spaces.";
+"비밀번호가 일치하지 않습니다." = "The passwords do not match.";
+"비밀번호가 변경되었습니다." = "Your password has been changed.";
+"탈퇴처리 되었습니다." = "It has been withdrawn.";
+"10초이상 녹음해주세요." = "Please record for more than 10 seconds.";
+"도시를 먼저 선택해주세요." = "Please select a city first.";
+"아이디를 이메일형식으로 입력해주세요." = "Please enter your ID in e-mail format.";
+"이메일 또는 암호를 확인해주세요." = "Please check your email or password.";
+"중복된 이메일입니다." = "Duplicate email.";
+"이메일이 유효하지 않습니다." = "Email is not valid.";
+"이용약관에 동의해주세요." = "Please accept the terms and conditions.";
+"개인정보처리방침에 동의해주세요." = "Please agree to the personal information processing policy.";
+"인증번호가 유효하지 않습니다." = "The authentication number is not valid.";
+"별명은 띄어쓰기 및 빈칸이\n포함될 수 없습니다." = "Nickname cannot contain spaces and spaces";
+"별명을 입력해주세요." = "Please enter a nickname.";
+"녹음권한 요청" = "Request permission to record";
+"녹음을 위해 권한을 허용해주세요." = "Please allow permission for recording.";
+
+//토스트알럿
+"'좋아요'를 눌렀습니다." = "Like";
+"'좋아요'를 취소하였습니다." = "Dislike";
+"나의 느낌을 공유하였습니다." = "I shared my feelings.";
+"녹음중 백그라운드로 이동시 녹음은 중지됩니다." = "Recording stops when moving to the background during recording.";
+"신고가 접수되었습니다." = "The report has been received.";
+"이미 신고하신 게시물입니다.\n관리자가 확인 후, 재개시 되었습니다." = "Already post you have declared.\nRestart after the approval by the administrator.";
+"현재위치 정보를 얻기 위해 권한이 필요합니다." = "Permissions are required to obtain current location information.";
+"로그아웃 되었습니다." = "Logged Out.";
+"즐겨찾기에 추가되었습니다." = "Add to Favorites";
+"즐겨찾기에서 삭제되었습니다." = "Delete from Favorites";
+"인증시간이 만료되었습니다." = "The authentication time has expired.";
+"인증번호를 전송했습니다." = "Successfully sent authentication number.";
+"확인되었습니다." = "It's been confirmed.";
+"회원가입을 취소하였습니다." = "The membership registration has been canceled.";
+"느낌이 삭제 되었습니다." = "Has been deleted.";
+
+//보이스알럿
+"현재화면은 메인화면입니다. 검색기능 네가지와 안내지침서를 제공하고있습니다." = "The current screen is the main screen. We provide four search functions and guidance.";
+"현재화면은 느낌저장소입니다. 느낌검색과 인기느낌, 최신느낌 Top10을 제공하고 있습니다." = "The current screen like storage.Search and popular sense of feeling, I feel the latest offers 10 top.";
+"현재화면은 관광지검색화면입니다." = "The current screen is a tourist spot search screen.";
+"현재화면은 이야기검색화면입니다." = "The current screen is the story search screen.";
+"현재화면은 지역별 검색화면입니다. 지역을 선택해주세요." = "Current screen is local search screen. Please select areas.";
+"이야기화면" = "The current screen selects the story of %@.";
+"현재화면은 재생화면입니다." = "The current screen is the Play screen.";
+"현재화면은 지역별 검색 결과화면입니다." = "The current screen is the search result screen by region.";
+"현재화면은 현재위치기반 검색화면입니다." = "The current screen is the current location-based search screen.";
+"이야기상세화면" = "The current screen is the detail page of the %@ story.";
+
+"최근검색어를 모두 삭제하였습니다." = "Delete any search terms recently.";
+"좋아요를 눌렀습니다." = "Like";
+"좋아요를 취소하였습니다." = "Dislike";
+
+"신고가 접수되었습니다. 현재화면을 닫겠습니다." = "The report has been received. Close the current screen.";
+"이미 신고하신 게시물입니다. 관리자가 확인 후, 재게시되었습니다. 현재화면을 닫겠습니다." = "You have already reported this post. Re-published after administrator confirmation. Close the current screen.";
+"최근검색어삭제" = "The recent search Keyword(%@) has been deleted.";
+"현재화면은 즐겨찾기화면입니다. 관광지와 느낌 두종류의 즐겨찾기를 제공하고있습니다." = "Favorites screen is the current screen.Tourism offers two types of favorites, and feeling.";
+"현재화면은 마이페이지 화면입니다. 현재 로그인 상태입니다." = "My page screen is the current screen. Currently logged in status.";
+"현재화면은 마이페이지 화면입니다. 현재 비로그인 상태입니다." = "My page screen is the current screen. Currently birogeuin.";
+"현재화면은 로그인 화면입니다." = "Log-in screen is the current screen.";
+"현재화면은 회원가입화면입니다." = "The current screen is the subscription screen.";
+"회원정보기입화면이 새로고침 되었습니다." = "The member information entry screen has been refreshed.";
+"이용약관, 개인정보처리방침 모두 동의하셨습니다." = "You have agreed to both the terms and conditions and the privacy policy.";
+"이용약관, 개인정보처리방침 모두 동의를 취소하셨습니다." = "You have revoked both the terms and conditions of use and the privacy policy.";
+"이용약관에 동의하셨습니다." = "You have agreed to the Terms and Conditions.";
+"이용약관에 동의를 취소하셨습니다." = "You have rescinded your consent to the Terms and Conditions.";
+"개인정보처리방침에 동의하셨습니다." = "You have agreed to the privacy policy.";
+"개인정보처리방침에 동의를 취소하셨습니다." = "You have canceled your consent to the privacy policy.";
+"인증번호를 전송했습니다. 만료시간은 5분입니다. 인증하기 버튼이 인증취소하기 버튼으로 변경되었습니다." = "We have sent you an authentication number. The expiration time is 5 minutes. The authentication button has been changed to the Unauthentication button.";
+"인증메일 전송버튼이 활성화 되었습니다." = "The Send Authentication Mail button has been activated.";
+"인증번호 확인버튼이 활성화 되었습니다." = "The Verification Number button has been activated.";
+"현재화면은 추가정보 입력 화면입니다. 서비스 이용을 위해 이용약관 동의 및 별명을 추가입력해주세요." = "The current screen is the input screen for additional information. Please enter additional terms and conditions and nicknames for service use.";
+"이용약관 내용 화면입니다." = "This is the Terms and Conditions content screen.";
+"개인정보처리방침 내용 화면입니다." = "This is the privacy statement screen.";
+"이용약관에 동의하셨습니다. 이용약관 화면을 닫겠습니다." = "You have agreed to the Terms and Conditions. Close the Terms and Conditions screen.";
+"개인정보처리방침에 동의하셨습니다. 개인정보처리방침 화면을 닫겠습니다." = "You have agreed to the privacy policy. Close the Privacy Policy screen.";
+"현재화면은 나의 즐겨찾기 화면입니다." = "The current screen is my favorite screen.";
+"현재화면은 내가 공유한 느낌 화면입니다." = "The current screen is a feel screen that I shared.";
+"느낌목록접기" = "Folded %@'s Feeling List.";
+"느낌목록펴기" = "Opened the list of feelings of %@.";
+"현재화면은 내가 좋아요한 느낌 화면입니다." = "The current screen is a feeling that I like.";
+"현재화면은 공지사항화면입니다." = "The current screen is an announcement screen.";
+"공지사항접기" = "%@\nThe announcement has been folded.";
+"공지사항펴기" = "%@\nThe announcement has been opened.";
+"현재화면은 저작물표시 이용약관 안내화면입니다." = "The current screen is a guide to the Terms and Conditions of Use.";
+
+//권한문구
+"GPS권한 요청" = "GPS Permission Request";
+"현재위치 정보를 얻기 위해 권한을 허용해주세요." = "Please allow permission to obtain current location information.";
+
+//서버통신알럿
+"서버점검" = "Server Check";
+"죄송합니다.\n서둘러 복구하겠습니다." = "Sorry, Please Wait.";
+
+"메뉴얼해설" = "How to use Come Hear. Come Hear is a travel platform that can hear and feels stories about beautiful tourist attractions across the country. You can easily search for tourist attractions through various search methods. You can hear the stories of tourist attractions with the realistic voices of voice actors. In addition, you can listen to the memories and feelings of the tourist attractions recorded by other users, so you can experience the tourist attractions more abundantly. Of course, you can record it yourself. Share your feelings and memories on your trip! You can manage your favorite travel destinations and feelings in your favorites. Please join us on 'Come Hear'. For a pleasant trip that everyone can hear.";
+
+"언어변경을 위해 앱을 종료하시겠습니까?\n(앱이 종료되면 앱을 다시 실행해주세요.)" = "Are you sure you want to close the app to change the language?\n(When the app is closed, please run the app again.)";
+"다국어 설정" = "Multilingual settings";
+"다국어 설명" = "You must restart the app to change the language. If you are using voice over, you need to change the region in the settings.";
+"언어를 변경하시려면 앱을 재시작해야합니다." = "You must restart the app to change the language.";
+"현재 언어는 한국어입니다. 다른 언어로 변경을 원하시면 눌러주세요." = "Current language is Korean. If you want to change to another language, please click.";
+"현재 언어는 영어입니다. 다른 언어로 변경을 원하시면 눌러주세요." = "The current language is English. If you want to change to another language, please click.";
+"현재 언어는 일본어입니다. 다른 언어로 변경을 원하시면 눌러주세요." = "The current language is Japanese. If you want to change to another language, please click.";
+
+"kakao_login_medium_wide_ko" = "kakao_login_medium_wide_en";
+"globe.asia.australia" = "globe.americas";
+"다른 언어 설정" = "Other Language Settings";
