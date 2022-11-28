@@ -167,8 +167,8 @@ class FeelRecordViewController: UIViewController {
         return view
     }()
     
-    private lazy var animationView: AnimationView = {
-        let lottiView = AnimationView(name: "recordButton")
+    private lazy var animationView: LottieAnimationView = {
+        let lottiView = LottieAnimationView(name: "recordButton")
         lottiView.frame = lottieView.bounds
         lottiView.contentMode = .scaleAspectFill
         lottiView.loopMode = .loop

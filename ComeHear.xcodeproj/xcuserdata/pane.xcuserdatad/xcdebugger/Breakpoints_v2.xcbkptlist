@@ -354,6 +354,38 @@
             endingLineNumber = "457"
             landmarkName = "postSearchKeyword(keyword:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9D0E0762-3762-410B-93B1-047CB45B42D2 - a0184ec067ea250a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ComeHear.DestinationSearchViewController.postSearchKeyword(keyword: Swift.String) -&gt; ()"
+                  moduleName = "ComeHear"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pane/Desktop/ComeHear/ComeHear/Scenes/SearchTabBar/DestinationSearchViewController.swift.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "457"
+                  endingLineNumber = "457"
+                  offsetFromSymbolStart = "1828">
+               </Location>
+               <Location
+                  uuid = "9D0E0762-3762-410B-93B1-047CB45B42D2 - c89ebbbb6d74aec"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;ComeHear.RecentSearchKeywordModel, Alamofire.AFError&gt;) -&gt; () in ComeHear.DestinationSearchViewController.postSearchKeyword(keyword: Swift.String) -&gt; ()"
+                  moduleName = "ComeHear"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pane/Desktop/ComeHear/ComeHear/Scenes/SearchTabBar/DestinationSearchViewController.swift.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "457"
+                  endingLineNumber = "457"
+                  offsetFromSymbolStart = "416">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -434,6 +466,38 @@
             endingLineNumber = "99"
             landmarkName = "deleteStackView(sender:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F803FFE1-E8DF-4EF3-B082-D230B2E9EF8F - 53ebf74b90dbec36"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ComeHear.RecentSearchView.deleteStackView(sender: __C.UIButton) -&gt; ()"
+                  moduleName = "ComeHear"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pane/Desktop/ComeHear/ComeHear/Scenes/FeelTabBar/RecentSearchView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "1980">
+               </Location>
+               <Location
+                  uuid = "F803FFE1-E8DF-4EF3-B082-D230B2E9EF8F - 6a4874e8001c9651"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;ComeHear.BasicResponseModel, Alamofire.AFError&gt;) -&gt; () in ComeHear.RecentSearchView.deleteStackView(sender: __C.UIButton) -&gt; ()"
+                  moduleName = "ComeHear"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pane/Desktop/ComeHear/ComeHear/Scenes/FeelTabBar/RecentSearchView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "192">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
