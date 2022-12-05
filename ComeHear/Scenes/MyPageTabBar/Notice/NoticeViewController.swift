@@ -8,6 +8,8 @@
 import UIKit
 
 class NoticeViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    
     // MARK: - 변수, 상수
     private var noticeList: [NoticeData]
     private var noticeBoolList: [Bool]
@@ -15,7 +17,7 @@ class NoticeViewController: UIViewController {
     //MARK: - 공지사항 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
@@ -91,10 +93,10 @@ extension NoticeViewController {
         mainContentView.addSubview(subContentView)
         
         subContentView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         subContentView.addSubview(tableView)
@@ -136,11 +138,11 @@ extension NoticeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.subTitleLabel.text = String(notice.regDt.components(separatedBy: "T")[0])
             if bool {
                 cell.openButton.tintColor = UIColor(rgb: 0xFEDD84)
-                cell.openButton.setImage(systemName: "minus.circle", pointSize: buttonSize)
+                cell.openButton.setImage(systemName: "minus.circle", pointSize: constantSize.buttonSize)
                 cell.accessibilityLabel = "제목 \(noticeList[indexPath.section].title), 등록일 \(cell.subTitleLabel.text ?? "") 펼치기 버튼"
             } else {
                 cell.openButton.tintColor = UIColor(rgb: 0x888888)
-                cell.openButton.setImage(systemName: "plus.circle", pointSize: buttonSize)
+                cell.openButton.setImage(systemName: "plus.circle", pointSize: constantSize.buttonSize)
                 cell.accessibilityLabel = "제목 \(noticeList[indexPath.section].title) 접기 버튼"
             }
             return cell

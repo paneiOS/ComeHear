@@ -12,12 +12,13 @@ import WebKit
 class MyPageViewController: UIViewController {
     
     //MARK: - 변수, 상수
-    var webView: WKWebView!
+    private let constantSize = ConstantSize()
+    private var webView: WKWebView!
     
     //MARK: - 마이페이지 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
@@ -41,7 +42,7 @@ class MyPageViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
-        stackView.spacing = intervalSize
+        stackView.spacing = constantSize.intervalSize
         
         [
             myInfoView,
@@ -111,7 +112,7 @@ class MyPageViewController: UIViewController {
     //MARK: - 마이페이지_로그인 UI
     lazy var loginView: UIView = {
         let view = UIView()
-        view.setupSubViewFooter(color: firstCellColor)
+        view.setupSubViewFooter(color: ContentColor.firstCellColor.getColor())
         view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapLogin))
         view.addGestureRecognizer(tapGestureRecognizer)
@@ -546,9 +547,9 @@ extension MyPageViewController {
         
         //MARK: - 마이페이지_프로필 UI_SETUP
         myProfileView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -558,9 +559,9 @@ extension MyPageViewController {
         }
         
         profileLabelView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -579,7 +580,7 @@ extension MyPageViewController {
         }
         
         profileLoginBottomLabel.snp.makeConstraints {
-            $0.top.equalTo(profileLoginTopLabel.snp.bottom).offset(intervalSize/2)
+            $0.top.equalTo(profileLoginTopLabel.snp.bottom).offset(constantSize.intervalSize/2)
             $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
@@ -591,18 +592,18 @@ extension MyPageViewController {
         }
         
         profileLogoutBottomButton.snp.makeConstraints {
-            $0.top.equalTo(profileLogoutTopLabel.snp.bottom).offset(intervalSize/2)
+            $0.top.equalTo(profileLogoutTopLabel.snp.bottom).offset(constantSize.intervalSize/2)
             $0.leading.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
         
         //MARK: - 마이페이지_로그인 UI_SETUP
         loginView.snp.makeConstraints {
-            $0.top.equalTo(profileLabelView.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(profileLabelView.snp.bottom).offset(constantSize.intervalSize)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.height.equalTo(40 + intervalSize/2)
+            $0.height.equalTo(40 + constantSize.intervalSize/2)
         }
         
         [loginLeftButton, loginRightButton].forEach {
@@ -610,25 +611,25 @@ extension MyPageViewController {
         }
         
         loginLeftButton.snp.makeConstraints {
-            $0.leading.equalTo(loginView.snp.leading).offset(intervalSize)
+            $0.leading.equalTo(loginView.snp.leading).offset(constantSize.intervalSize)
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         loginRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         //MARK: - 마이페이지_로그아웃 UI_SETUP
         logoutView.snp.makeConstraints {
-            $0.top.equalTo(profileLabelView.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(profileLabelView.snp.bottom).offset(constantSize.intervalSize)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.height.equalTo(40 + intervalSize/2)
+            $0.height.equalTo(40 + constantSize.intervalSize/2)
         }
         
         [logoutLeftButton, logoutRightButton].forEach {
@@ -638,31 +639,31 @@ extension MyPageViewController {
         logoutLeftButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         logoutRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         //MARK: - 마이페이지 UI_SETUP
         myInfoContentView.snp.makeConstraints {
-            $0.top.equalTo(myProfileView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(intervalSize)
+            $0.top.equalTo(myProfileView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(constantSize.intervalSize)
         }
         
         myInfoContentView.addSubview(contentScrollView)
         
         contentScrollView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(intervalSize)
-            $0.width.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
+            $0.width.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
         }
         
         contentScrollView.addSubview(contentStackView)
@@ -673,7 +674,7 @@ extension MyPageViewController {
         
         //MARK: - 마이페이지_내정보관리 UI_SETUP
         myInfoView.snp.makeConstraints {
-            $0.width.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.width.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
             $0.height.equalTo(40)
         }
         
@@ -683,19 +684,19 @@ extension MyPageViewController {
         
         myInfoLeftButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         myInfoRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         //MARK: - 마이페이지_내가공유한느낌 UI_SETUP
         myShareFeelView.snp.makeConstraints {
-            $0.width.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.width.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
             $0.height.equalTo(40)
         }
         
@@ -706,18 +707,18 @@ extension MyPageViewController {
         myShareFeelLeftButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         myShareFeelRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         //MARK: - 마이페이지_나의즐겨찾기 UI_SETUP
         myFavoriteView.snp.makeConstraints {
-            $0.width.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.width.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
             $0.height.equalTo(40)
         }
         
@@ -728,18 +729,18 @@ extension MyPageViewController {
         myFavoriteLeftButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         myFavoriteRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         //MARK: - 마이페이지_좋아요느낌 UI_SETUP
         myLikeView.snp.makeConstraints {
-            $0.width.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.width.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
             $0.height.equalTo(40)
         }
         
@@ -750,18 +751,18 @@ extension MyPageViewController {
         myLikeLeftButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         myLikeRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         //MARK: - 마이페이지_공지사항 UI_SETUP
         noticeView.snp.makeConstraints {
-            $0.width.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.width.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
             $0.height.equalTo(40)
         }
         
@@ -772,18 +773,18 @@ extension MyPageViewController {
         noticeLeftButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         noticeRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         //MARK: - 마이페이지_다른언어설정 UI_SETUP
         languageView.snp.makeConstraints {
-            $0.width.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.width.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
             $0.height.equalTo(40)
         }
         
@@ -794,18 +795,18 @@ extension MyPageViewController {
         languageLeftButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         languageRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         //MARK: - 마이페이지_이용약관 UI_SETUP
         termsView.snp.makeConstraints {
-            $0.width.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.width.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
             $0.height.equalTo(40)
         }
         
@@ -816,18 +817,18 @@ extension MyPageViewController {
         termsLeftButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         termsRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         //MARK: - 마이페이지_개인정보처리방침 UI_SETUP
         privacyView.snp.makeConstraints {
-            $0.width.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.width.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
             $0.height.equalTo(40)
         }
         
@@ -838,18 +839,18 @@ extension MyPageViewController {
         privacyLeftButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         privacyRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         //MARK: - 마이페이지_저작물표시안내 UI_SETUP
         copyrightView.snp.makeConstraints {
-            $0.width.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.width.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
             $0.height.equalTo(40)
         }
         
@@ -860,13 +861,13 @@ extension MyPageViewController {
         copyrightLeftButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         copyrightRightButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
     }
     
@@ -879,9 +880,9 @@ extension MyPageViewController {
             profileLoginBottomLabel.isHidden = false
             profileLogoutTopLabel.isHidden = true
             profileLogoutBottomButton.isHidden = true
-            myProfileView.setupShadow(color: firstCellColor)
-            profileLoginTopLabel.backgroundColor = firstCellColor
-            profileLoginBottomLabel.backgroundColor = firstCellColor
+            myProfileView.setupShadow(color: ContentColor.firstCellColor.getColor())
+            profileLoginTopLabel.backgroundColor = ContentColor.firstCellColor.getColor()
+            profileLoginBottomLabel.backgroundColor = ContentColor.firstCellColor.getColor()
             if let nickname = app.userNickName {
                 profileLoginTopLabel.text = "로그인알림".localized(with: nickname)
                 profileLoginBottomLabel.text = "Come Hear와 함께 즐거운 여행 되세요.".localized()
@@ -918,7 +919,7 @@ extension MyPageViewController {
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             let myInfoViewController = MyInfoViewController()
             self.navigationController?.pushViewController(myInfoViewController, animated: true)
@@ -932,7 +933,7 @@ extension MyPageViewController {
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             let myFeelRegViewController = MyFeelRegTableViewController()
             guard let topViewController = keyWindow?.visibleViewController else { return }
@@ -947,7 +948,7 @@ extension MyPageViewController {
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             let myFavoriteViewController = MyFavoriteViewController()
             self.navigationController?.pushViewController(myFavoriteViewController, animated: true)
@@ -961,7 +962,7 @@ extension MyPageViewController {
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             let myFeelLikeViewController = MyFeelLikeTableViewController()
             guard let topViewController = keyWindow?.visibleViewController else { return }
@@ -972,8 +973,7 @@ extension MyPageViewController {
     @objc private func tapNotice() {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         let languageCode = app.languageCode == "ja" ? "jp" : app.languageCode
-        let url = noticeURL + "&langCode=\(languageCode)"
-        print("url",url)
+        let url = URLString.SubDomain.noticeURL.getURL() + "&langCode=\(languageCode)"
         AF.request(url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             .responseDecodable(of: NoticeModel.self) { [weak self] response in
                 guard let self = self else { return }
@@ -981,11 +981,8 @@ extension MyPageViewController {
                 case .success(let data):
                     let viewController = NoticeViewController(noticeList: data.noticeList)
                     self.navigationController?.pushViewController(viewController, animated: true)
-                case .failure(let error):
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                    print(error)
-#endif
+                case .failure(_):
+                    self.showCloseAlert(type: .unknownError)
                 }
             }
     }
@@ -1031,7 +1028,7 @@ extension MyPageViewController {
                 self.showToast(message: "로그아웃 되었습니다.", font: .systemFont(ofSize: 16), vcBool: true)
                 self.showToVoice(type: .announcement, text: "로그아웃 되었습니다.")
             }
-            showTwoActionAlert("로그아웃 하시겠습니까?", "로그아웃", logoutAction)
+            showTwoButtonAlert(type: .requestLogout, logoutAction)
         }
     }
     
@@ -1045,7 +1042,7 @@ extension MyPageViewController {
                 app.languageCode = "ko"
                 exit(0)
             }
-            self.showTwoActionAlert("언어변경을 위해 앱을 종료하시겠습니까?\n(앱이 종료되면 앱을 다시 실행해주세요.)", "알림", restart)
+            self.showTwoButtonAlert(type: .requestChangeLanguage, restart)
         }
         let engAction = UIAlertAction(title: "English", style: .default) { _ in
             let restart = UIAlertAction(title: "네".localized(), style: UIAlertAction.Style.default) { _ in
@@ -1054,7 +1051,7 @@ extension MyPageViewController {
                 app.languageCode = "en"
                 exit(0)
             }
-            self.showTwoActionAlert("언어변경을 위해 앱을 종료하시겠습니까?\n(앱이 종료되면 앱을 다시 실행해주세요.)", "알림", restart)
+            self.showTwoButtonAlert(type: .requestChangeLanguage, restart)
         }
         
         let jpAction = UIAlertAction(title: "Japanese", style: .default) { _ in
@@ -1064,7 +1061,7 @@ extension MyPageViewController {
                 app.languageCode = "ja"
                 exit(0)
             }
-            self.showTwoActionAlert("언어변경을 위해 앱을 종료하시겠습니까?\n(앱이 종료되면 앱을 다시 실행해주세요.)", "알림", restart)
+            self.showTwoButtonAlert(type: .requestChangeLanguage, restart)
         }
         let cancelAction = UIAlertAction(title: "취소".localized(), style: .cancel, handler: nil)
         alert.addAction(korAction)

@@ -9,6 +9,8 @@ import UIKit
 import AVFoundation
 
 final class BGMSelectTableViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    private let commonFunc = CommonFunc()
     // MARK: - 변수, 상수
     var delegate: SendDataDelegate?
         private var audioPlayer: AVAudioPlayer?
@@ -97,8 +99,8 @@ extension BGMSelectTableViewController {
         
         mainContentView.snp.makeConstraints {
             $0.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [titleLabel, closeButton, tableView].forEach {
@@ -106,22 +108,22 @@ extension BGMSelectTableViewController {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.trailing.equalTo(closeButton.snp.leading)
             $0.height.equalTo(50)
         }
         
         closeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize/2)
             $0.width.height.equalTo(50)
         }
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(constantSize.intervalSize)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40 * 11)
         }
     }
@@ -141,7 +143,7 @@ extension BGMSelectTableViewController {
 #endif
         }
         let index = UserDefaults.standard.integer(forKey: "selectBgmIndex")
-        audioPlayer = try? AVAudioPlayer(contentsOf: Bundle.main.url(forResource: bgmList[index], withExtension: "mp3")!)
+        audioPlayer = try? AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ContentBGM.allCases[index].rawValue, withExtension: "mp3")!)
         audioPlayer?.volume = audioSession.outputVolume
         audioPlayer?.delegate = self
         audioPlayer?.play()
@@ -177,21 +179,21 @@ extension BGMSelectTableViewController: UITableViewDelegate {
 // MARK: - TableView DataSource
 extension BGMSelectTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bgmList.count
+        return ContentBGM.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "BGMSelectTableViewCell", for: indexPath) as? BGMSelectTableViewCell else { return UITableViewCell() }
         cell.cellDelegate = self
         cell.selectionStyle = .none
-        cell.titleLabel.text = bgmList[indexPath.row]
+        cell.titleLabel.text = ContentBGM.allCases[indexPath.row].rawValue
         cell.selectButton.tag = indexPath.row
-        cell.selectButton.accessibilityLabel = "\(intToString(indexPath.row + 1))번 " + bgmList[indexPath.row] + "들어보기 및 선택하기"
+        cell.selectButton.accessibilityLabel = "\(commonFunc.intToString(indexPath.row + 1))번 " + ContentBGM.allCases[indexPath.row].rawValue + "들어보기 및 선택하기"
         let index = UserDefaults.standard.integer(forKey: "selectBgmIndex")
         if indexPath.row == index {
-            cell.selectButton.setImage(systemName: "chevron.down.circle.fill", pointSize: buttonSize)
+            cell.selectButton.setImage(systemName: "chevron.down.circle.fill", pointSize: constantSize.buttonSize)
         } else {
-            cell.selectButton.setImage(systemName: "circle", pointSize: buttonSize)
+            cell.selectButton.setImage(systemName: "circle", pointSize: constantSize.buttonSize)
         }
         return cell
     }

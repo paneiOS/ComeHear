@@ -45,8 +45,8 @@ extension UIButton {
         self.setTitle(title, for: .normal)
         self.setTitleColor(.label, for: .normal)
         self.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
-        self.backgroundColor = personalColor
-        self.layer.cornerRadius = (frameSizeWidth / 2) / 10
+        self.backgroundColor = ContentColor.personalColor.getColor()
+        self.layer.cornerRadius = (ConstantSize().frameSizeWidth / 2) / 10
         self.layer.borderWidth = 0.5
     }
     
@@ -55,7 +55,7 @@ extension UIButton {
         self.setTitleColor(.label, for: .normal)
         self.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
         self.backgroundColor = color ?? .white
-        self.layer.cornerRadius = (frameSizeWidth / 2) / 10
+        self.layer.cornerRadius = (ConstantSize().frameSizeWidth / 2) / 10
         self.layer.borderWidth = 0.5
     }
     
@@ -63,7 +63,7 @@ extension UIButton {
         self.setTitle(title, for: .normal)
         self.setTitleColor(.label, for: .normal)
         self.titleLabel?.font = .systemFont(ofSize: fontSize, weight: .bold)
-        self.backgroundColor = personalColor
+        self.backgroundColor = ContentColor.personalColor.getColor()
         self.layer.cornerRadius = 12
     }
     

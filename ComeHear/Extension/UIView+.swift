@@ -106,8 +106,8 @@ extension UIView {
     
     func setupSubViewTextFieldView() {
         self.layer.borderWidth = 0.5
-        self.layer.borderColor = moreLightGrayColor?.cgColor
+        self.layer.borderColor = ContentColor.moreLightGrayColor.getColor().cgColor
         self.layer.cornerRadius = 12
-        self.backgroundColor = moreLightGrayColor
+        self.backgroundColor = ContentColor.moreLightGrayColor.getColor()
     }
 }

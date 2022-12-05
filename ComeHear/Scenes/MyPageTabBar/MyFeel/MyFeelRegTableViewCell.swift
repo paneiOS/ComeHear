@@ -15,6 +15,7 @@ protocol MyFeelRegTableViewDelegate: AnyObject {
 }
 
 class MyFeelRegTableViewCell: UITableViewCell {
+    private let constantSize = ConstantSize()
     var feelList: FeelListData?
     var indexPath: IndexPath?
     var cellDelegate: MyFeelRegTableViewDelegate?
@@ -55,7 +56,7 @@ class MyFeelRegTableViewCell: UITableViewCell {
     lazy var listenButton: UIButton = {
         let button = UIButton()
         button.tintColor = .black
-        button.setImage(systemName: "headphones", pointSize: buttonSize)
+        button.setImage(systemName: "headphones", pointSize: constantSize.buttonSize)
         button.addTarget(self, action: #selector(feelListenButtonTap), for: .touchUpInside)
         return button
     }()
@@ -63,7 +64,7 @@ class MyFeelRegTableViewCell: UITableViewCell {
     lazy var likeButton: UIButton = {
         let button = UIButton()
         button.tintColor = .black
-        button.setImage(systemName: "heart", pointSize: buttonSize)
+        button.setImage(systemName: "heart", pointSize: constantSize.buttonSize)
         button.addTarget(self, action: #selector(feelLikeButtonTap), for: .touchUpInside)
         return button
     }()
@@ -71,7 +72,7 @@ class MyFeelRegTableViewCell: UITableViewCell {
     lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.tintColor = .black
-        button.setImage(systemName: "trash", pointSize: buttonSize)
+        button.setImage(systemName: "trash", pointSize: constantSize.buttonSize)
         button.addTarget(self, action: #selector(feelDeleteTap), for: .touchUpInside)
         return button
     }()
@@ -83,12 +84,12 @@ class MyFeelRegTableViewCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         stackView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
     }
     

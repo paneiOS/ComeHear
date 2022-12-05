@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 final class ContentCollectionViewHeader: UICollectionReusableView {
+    private let constantSize = ConstantSize()
+    
     private lazy var sectionNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
@@ -26,10 +28,10 @@ final class ContentCollectionViewHeader: UICollectionReusableView {
         addSubview(sectionNameLabel)
         
         sectionNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize * 1.5)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize / 2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize * 1.5)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize / 2)
         }
     }
 }

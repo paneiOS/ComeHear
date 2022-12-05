@@ -15,6 +15,7 @@ protocol RegionPopupDelegate {
 
 class RegionSearchViewController: UIViewController {
     //MARK: - 변수, 상수
+    private let constantSize = ConstantSize()
     private var cityItems = [String]()
     private var countryItems = [[String]]()
     private var regions: [RegionDetail] = []
@@ -26,7 +27,7 @@ class RegionSearchViewController: UIViewController {
     // MARK: - 지역검색 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = thirdCellColor
+        view.backgroundColor = ContentColor.thirdCellColor.getColor()
         return view
     }()
     
@@ -51,7 +52,7 @@ class RegionSearchViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.spacing = intervalSize * 2
+        stackView.spacing = constantSize.intervalSize * 2
         
         [
             cityView,
@@ -76,7 +77,7 @@ class RegionSearchViewController: UIViewController {
     
         private lazy var cityView: UIView = {
             let view = UIView()
-            view.setupShadow(color: thirdCellColor)
+            view.setupShadow(color: ContentColor.thirdCellColor.getColor())
             view.hero.id = "RegionCityPopupViewController_MainContentView"
             view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapCityPopupView)))
             return view
@@ -98,7 +99,7 @@ class RegionSearchViewController: UIViewController {
     
         private lazy var countryView: UIView = {
             let view = UIView()
-            view.setupShadow(color: thirdCellColor)
+            view.setupShadow(color: ContentColor.thirdCellColor.getColor())
             view.hero.id = "RegionCountryPopupViewController_MainContentView"
             view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapCountryPopupView)))
             return view
@@ -170,10 +171,10 @@ class RegionSearchViewController: UIViewController {
         }
         
         subContentView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -186,29 +187,29 @@ class RegionSearchViewController: UIViewController {
         }
         
         placeholdLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         stackView.snp.makeConstraints {
-            $0.top.equalTo(placeholdLabel.snp.bottom).offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize * 2)
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
+            $0.top.equalTo(placeholdLabel.snp.bottom).offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.height.equalTo(150)
         }
         
         placeImageView.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(stackView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         searchButton.snp.makeConstraints {
-            $0.top.equalTo(placeImageView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize * 2)
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
-            $0.bottom.equalToSuperview().inset(intervalSize * 2)
+            $0.top.equalTo(placeImageView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.height.equalTo(50)
         }
     }
@@ -238,7 +239,7 @@ class RegionSearchViewController: UIViewController {
             guard let topViewController = keyWindow?.visibleViewController else { return }
             topViewController.present(countryPopupViewController, animated: true, completion: nil)
         } else {
-            self.showConfirmAlert("도시를 먼저 선택해주세요.", "알림")
+            showConfirmAlert(type: .selectCity)
         }
     }
     
@@ -278,9 +279,9 @@ class RegionSearchViewController: UIViewController {
     
     private func requestSearch() {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
-        guard let city = cityLabel.text, city != "시/도".localized() else { return self.showConfirmAlert("도시를 선택해주세요.", "알림")}
+        guard let city = cityLabel.text, city != "시/도".localized() else { return showConfirmAlert(type: .selectCity)}
         let languageCode = app.languageCode == "ja" ? "jp" : app.languageCode
-        var urlString = apiURL + "/api/v1/tour/place/region?langCode=\(languageCode)&pageNo=\(nowPage)&pageSize=20000&depth1=\(city)"
+        var urlString = URLString.apiURL.rawValue + "/api/v1/tour/place/region?langCode=\(languageCode)&pageNo=\(nowPage)&pageSize=20000&depth1=\(city)"
         var country = ""
         if countryLabel.text != "시/군/구".localized() {
             country = countryLabel.text ?? "시/군/구".localized()
@@ -294,11 +295,8 @@ class RegionSearchViewController: UIViewController {
                 if let topViewController = keyWindow?.visibleViewController {
                     topViewController.navigationController?.pushViewController(viewController, animated: true)
                 }
-            case .failure(let error):
-                self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                print(error)
-#endif
+            case .failure(_):
+                self.showCloseAlert(type: .unknownError)
             }
         }
     }

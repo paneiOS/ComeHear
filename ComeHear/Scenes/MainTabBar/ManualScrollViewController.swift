@@ -8,6 +8,8 @@
 import UIKit
 
 class ManualScrollViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    
     private lazy var mainContentView: UIView = {
         let view = UIView()
         return view
@@ -84,13 +86,13 @@ extension ManualScrollViewController {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(intervalSize)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(constantSize.intervalSize)
             $0.centerX.equalToSuperview()
         }
         
         closeButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
 
         mainContentView.addSubview(scrollView)

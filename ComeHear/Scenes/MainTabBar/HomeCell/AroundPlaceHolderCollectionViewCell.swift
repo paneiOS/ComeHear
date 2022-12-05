@@ -8,6 +8,8 @@
 import UIKit
 
 final class AroundPlaceHolderCollectionViewCell: UICollectionViewCell {
+    private let constantSize = ConstantSize()
+    
     private lazy var mainContentView: UIView = {
         let view = UIView()
         return view
@@ -68,10 +70,10 @@ final class AroundPlaceHolderCollectionViewCell: UICollectionViewCell {
         }
         
         placeHolderView.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).inset(intervalSize * 2)
+            $0.top.equalTo(imageView.snp.bottom).inset(constantSize.intervalSize * 2)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [placeHolderLabel, settingButton].forEach {
@@ -79,7 +81,7 @@ final class AroundPlaceHolderCollectionViewCell: UICollectionViewCell {
         }
         
         placeHolderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().inset(constantSize.intervalSize)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.height.equalTo(30)
@@ -89,13 +91,13 @@ final class AroundPlaceHolderCollectionViewCell: UICollectionViewCell {
             $0.top.equalTo(placeHolderLabel.snp.bottom)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(intervalSize/2)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/2)
             $0.height.equalTo(30)
         }
     }
     
     @objc private func tapSettingButton() {
         guard let topViewController = keyWindow?.visibleViewController else { return }
-        topViewController.showSettingAlert(title: "GPS권한 요청", message: "현재위치 정보를 얻기 위해 권한을 허용해주세요.")
+        topViewController.showSettingAlert(type: .gps)
     }
 }

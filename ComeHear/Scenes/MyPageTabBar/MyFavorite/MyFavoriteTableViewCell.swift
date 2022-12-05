@@ -63,7 +63,7 @@ class MyFavoriteTableViewCell: UITableViewCell {
     lazy var bgImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
-        imageView.layer.borderColor = moreLightGrayColor?.cgColor
+        imageView.layer.borderColor = ContentColor.moreLightGrayColor.getColor().cgColor
         imageView.layer.borderWidth = 1
         imageView.clipsToBounds = true
         imageView.isAccessibilityElement = true

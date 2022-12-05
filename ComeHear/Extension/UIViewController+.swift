@@ -9,24 +9,9 @@
 //import Alamofire
 
 extension UIViewController {
-    func showTwoActionAlert(_ message: String, _ title: String, _ closeAction: UIAlertAction) {
-        let localMessage = NSLocalizedString(message, comment: "")
-        let localTitle = NSLocalizedString(title, comment: "")
-        var alertTitle = localTitle
-        if UIAccessibility.isVoiceOverRunning {
-            alertTitle = ""
-        }
-        guard let topViewController = keyWindow?.visibleViewController else { return }
-        let alter = UIAlertController(title:  alertTitle, message: localMessage, preferredStyle: UIAlertController.Style.alert)
-        let logNoAction = UIAlertAction(title: "아니오".localized(), style: UIAlertAction.Style.default, handler: nil)
-        alter.addAction(logNoAction)
-        alter.addAction(closeAction)
-        topViewController.present(alter, animated: true, completion: nil)
-    }
-    
-    func showCloseAlert(_ message: String, _ title: String) {
-        let localMessage = NSLocalizedString(message, comment: "")
-        let localTitle = NSLocalizedString(title, comment: "")
+    func showCloseAlert(type: AlertCloseType) {
+        let localMessage = NSLocalizedString(type.alertDescription, comment: "")
+        let localTitle = NSLocalizedString(type.alertTitle, comment: "")
         var alertTitle = localTitle
         if UIAccessibility.isVoiceOverRunning {
             alertTitle = ""
@@ -38,6 +23,21 @@ extension UIViewController {
             topViewController.navigationController?.popViewController(animated: true)
         }
         alter.addAction(logOkAction)
+        topViewController.present(alter, animated: true, completion: nil)
+    }
+    
+    func showTwoButtonAlert(type: AlertTwoButtonType, _ closeAction: UIAlertAction) {
+        let localMessage = NSLocalizedString(type.alertDescription, comment: "")
+        let localTitle = NSLocalizedString(type.alertTitle, comment: "")
+        var alertTitle = localTitle
+        if UIAccessibility.isVoiceOverRunning {
+            alertTitle = ""
+        }
+        guard let topViewController = keyWindow?.visibleViewController else { return }
+        let alter = UIAlertController(title:  alertTitle, message: localMessage, preferredStyle: UIAlertController.Style.alert)
+        let logNoAction = UIAlertAction(title: "아니오".localized(), style: UIAlertAction.Style.default, handler: nil)
+        alter.addAction(logNoAction)
+        alter.addAction(closeAction)
         topViewController.present(alter, animated: true, completion: nil)
     }
     
@@ -56,7 +56,7 @@ extension UIViewController {
         topViewController.present(alter, animated: true, completion: nil)
     }
     
-    func showOneActionAlert(_ message: String, _ title: String, _ closeAction: UIAlertAction) {
+    func showOneButtonAlert(_ message: String, _ title: String, _ closeAction: UIAlertAction) {
         var alertTitle = title
         if UIAccessibility.isVoiceOverRunning {
             alertTitle = ""
@@ -67,9 +67,9 @@ extension UIViewController {
         topViewController.present(alter, animated: true, completion: nil)
     }
     
-    func showConfirmAlert(_ message: String?, _ title: String?) {
-        let localMessage = NSLocalizedString(message ?? "", comment: "")
-        let localTitle = NSLocalizedString(title ?? "", comment: "")
+    func showConfirmAlert(type: AlertConfirmType) {
+        let localMessage = NSLocalizedString(type.alertDescription, comment: "")
+        let localTitle = NSLocalizedString(type.alertTitle, comment: "")
         var alertTitle = localTitle
         if UIAccessibility.isVoiceOverRunning {
             alertTitle = ""
@@ -81,7 +81,7 @@ extension UIViewController {
         topViewController.present(alter, animated: true, completion: nil)
     }
     
-    func showConfirmAlert2(_ message: String?, _ title: String?) {
+    func showConfirmAlert(_ message: String, _ title: String?) {
         var alertTitle = title
         if UIAccessibility.isVoiceOverRunning {
             alertTitle = ""
@@ -93,9 +93,9 @@ extension UIViewController {
         topViewController.present(alter, animated: true, completion: nil)
     }
     
-    func showSettingAlert(title: String?, message: String?) {
-        let localMessage = NSLocalizedString(message ?? "", comment: "")
-        let localTitle = NSLocalizedString(title ?? "", comment: "")
+    func showSettingAlert(type: AlertSettingType) {
+        let localTitle = NSLocalizedString(type.alertTitle, comment: "")
+        let localMessage = NSLocalizedString(type.alertDescription, comment: "")
         var alertTitle = localTitle
         if UIAccessibility.isVoiceOverRunning {
             alertTitle = ""
@@ -142,7 +142,7 @@ extension UIViewController {
                     if let topViewController = keyWindow?.visibleViewController as? FeelRecordViewController, topViewController.className == "FeelRecordViewController" {
                         topViewController.titleTextFieldView.backgroundColor = .white
                         topViewController.sendView.backgroundColor = .white
-                        let scale = CGAffineTransform(translationX: intervalSize, y:0)
+                        let scale = CGAffineTransform(translationX: ConstantSize().intervalSize, y:0)
                         topViewController.sendButton.transform = scale
                     }
                 }
@@ -155,9 +155,9 @@ extension UIViewController {
             UIView.animate(withDuration: 1) {
                 self.view.window?.frame.origin.y = 0
                 if let topViewController = keyWindow?.visibleViewController as? FeelRecordViewController, topViewController.className == "FeelRecordViewController" {
-                    topViewController.titleTextFieldView.backgroundColor = moreLightGrayColor
+                    topViewController.titleTextFieldView.backgroundColor = ContentColor.moreLightGrayColor.getColor()
                     topViewController.sendView.backgroundColor = .clear
-                    let scale = CGAffineTransform(translationX: -intervalSize, y:0)
+                    let scale = CGAffineTransform(translationX: -ConstantSize().intervalSize, y:0)
                     topViewController.sendButton.transform = scale
                 }
             }

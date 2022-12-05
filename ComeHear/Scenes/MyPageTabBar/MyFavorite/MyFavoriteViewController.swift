@@ -9,13 +9,15 @@ import UIKit
 import Alamofire
 
 class MyFavoriteViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    
     // MARK: - 변수, 상수
     private var myFavoriteList = [DestinationDetailData]()
     
     //MARK: - 나의 즐겨찾기 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
@@ -43,7 +45,7 @@ class MyFavoriteViewController: UIViewController {
     
     private lazy var coverImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = landScapeImage
+        imageView.image = ContentImage.landScapeImage.getImage()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -58,7 +60,7 @@ class MyFavoriteViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.separatorStyle = .none
-        tableView.backgroundColor = personalColor
+        tableView.backgroundColor = ContentColor.personalColor.getColor()
         tableView.layer.cornerRadius = 12
         tableView.clipsToBounds = true
         tableView.isHidden = true
@@ -114,10 +116,10 @@ extension MyFavoriteViewController {
         }
         
         coverView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [coverPlaceholderLabel, searchTabButton, coverImageView].forEach {
@@ -125,24 +127,24 @@ extension MyFavoriteViewController {
         }
         
         coverPlaceholderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         searchTabButton.snp.makeConstraints {
-            $0.top.equalTo(coverPlaceholderLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(coverPlaceholderLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         coverImageView.snp.makeConstraints {
-            $0.top.equalTo(searchTabButton.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize * 2)
-            $0.height.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.top.equalTo(searchTabButton.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize * 2)
+            $0.height.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
         }
         
         tableView.snp.makeConstraints {
@@ -155,7 +157,7 @@ extension MyFavoriteViewController {
         self.coverView.isHidden = true
         self.tableView.isHidden = true
         guard let app = UIApplication.shared.delegate as? AppDelegate, app.loginState == .login, let memberIdx = app.userMemberIdx else { return }
-        let urlString = favoritePlace + "?memberIdx=\(memberIdx)&pageNo=1&pageSize=20000"
+        let urlString = URLString.SubDomain.favoritePlace.getURL() + "?memberIdx=\(memberIdx)&pageNo=1&pageSize=20000"
         
         AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             .responseDecodable(of: DestinationModel.self) { [weak self] response in
@@ -171,12 +173,9 @@ extension MyFavoriteViewController {
                         self.coverView.isHidden = true
                         self.tableView.isHidden = false
                     }
-                case .failure(let error):
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
+                case .failure(_):
+                    self.showCloseAlert(type: .unknownError)
                     self.coverPlaceholderLabel.isHidden = false
-#if DEBUG
-                    print(error)
-#endif
                 }
             }
     }
@@ -210,19 +209,19 @@ extension MyFavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return UITableViewCell() }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyFavoriteTableViewCell") as? MyFavoriteTableViewCell else { return UITableViewCell() }
         guard let memberLike = myFavoriteList[indexPath.row].memberLike else { return UITableViewCell() }
-        cell.bgImageView.setImage(with: myFavoriteList[indexPath.row].imageUrl ?? "", placeholder: landScapeImage, cornerRadius: 0)
+        cell.bgImageView.setImage(with: myFavoriteList[indexPath.row].imageUrl ?? "", placeholder: ContentImage.landScapeImage.getImage(), cornerRadius: 0)
         cell.titleLabel.text = "  # " + myFavoriteList[indexPath.row].title + "  "
         cell.favoriteButton.tag = indexPath.row
         if memberLike {
-            cell.bgImageView.layer.borderColor = checkButtonColor?.cgColor
-            cell.buttonView.backgroundColor = checkButtonColor
+            cell.bgImageView.layer.borderColor = ContentColor.checkButtonColor.getColor().cgColor
+            cell.buttonView.backgroundColor = ContentColor.checkButtonColor.getColor()
             cell.bgImageView.alpha = 1.0
             if app.languageCode == "ko" {
                 cell.buttonView.accessibilityLabel = "즐겨찾기 취소하는"
             }
         } else {
-            cell.bgImageView.layer.borderColor = moreLightGrayColor?.cgColor
-            cell.buttonView.backgroundColor = moreLightGrayColor
+            cell.bgImageView.layer.borderColor = ContentColor.moreLightGrayColor.getColor().cgColor
+            cell.buttonView.backgroundColor = ContentColor.moreLightGrayColor.getColor()
             cell.bgImageView.alpha = 0.3
             if app.languageCode == "ko" {
                 cell.buttonView.accessibilityLabel = "즐겨찾기 추가하는"
@@ -245,13 +244,13 @@ extension MyFavoriteViewController: MyFavoriteTableViewDelegate {
                 let loginViewContrller = LoginViewController()
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             let favoriteData = myFavoriteList[tag]
             guard let memberIdx = app.userMemberIdx else { return }
             guard let memberLike = favoriteData.memberLike else { return }
-            
-            var request = URLRequest(url: URL(string: favoritePlace)!)
+            guard let url = URL(string: URLString.SubDomain.favoritePlace.getURL()) else { return }
+            var request = URLRequest(url: url)
             request.httpMethod = memberLike ? "DELETE" : "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.timeoutInterval = 10
@@ -285,12 +284,9 @@ extension MyFavoriteViewController: MyFavoriteTableViewDelegate {
                     } else {
                         print(data.status, data.message)
                     }
-                case .failure(let error):
+                case .failure(_):
                     guard let topViewController = keyWindow?.visibleViewController else { return }
-                    topViewController.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                    topViewController.showCloseAlert(type: .unknownError)
                 }
                 DispatchQueue.main.async {
                     LoadingIndicator.hideLoading()

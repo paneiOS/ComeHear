@@ -13,6 +13,7 @@ import Speech
 
 class FeelRecordViewController: UIViewController {
     // MARK: - 변수, 상수
+    private var constantSize = ConstantSize()
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "ko-KR"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
@@ -26,7 +27,7 @@ class FeelRecordViewController: UIViewController {
     private var tempText = ""
     private var selectBgmIndex = UserDefaults.standard.integer(forKey: "selectBgmIndex") {
         didSet {
-            bgmLabel.text = "배경음악".localized() + " : \(bgmList[selectBgmIndex])"
+            bgmLabel.text = "배경음악".localized() + " : \(ContentBGM.allCases[selectBgmIndex].rawValue)"
         }
     }
     var stid: String = ""
@@ -288,7 +289,7 @@ class FeelRecordViewController: UIViewController {
     
     private lazy var separateView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         return view
     }()
     
@@ -297,7 +298,7 @@ class FeelRecordViewController: UIViewController {
         label.font = .systemFont(ofSize: 15, weight: .regular)
         label.textColor = .label
         label.textAlignment = .center
-        label.text = "배경음악".localized() + " - \(bgmList[selectBgmIndex])"
+        label.text = "배경음악".localized() + " - \(ContentBGM.allCases[selectBgmIndex].rawValue)"
         label.isAccessibilityElement = true
         return label
     }()
@@ -316,7 +317,7 @@ class FeelRecordViewController: UIViewController {
     
     lazy var titleTextFieldView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 25
         view.hero.id = "FeelRecordViewController_Button"
         return view
@@ -401,20 +402,20 @@ class FeelRecordViewController: UIViewController {
         }
         
         closeButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.centerY.equalToSuperview()
         }
         
         shareTitle.snp.makeConstraints {
-            $0.top.equalTo(titleView.snp.bottom).offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(titleView.snp.bottom).offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         lottieView.snp.makeConstraints {
-            $0.top.equalTo(shareTitle.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(shareTitle.snp.bottom).offset(constantSize.intervalSize)
             $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(frameSizeWidth * 2 / 3)
+            $0.width.height.equalTo(constantSize.frameSizeWidth * 2 / 3)
         }
         
         animationView.snp.makeConstraints {
@@ -422,13 +423,13 @@ class FeelRecordViewController: UIViewController {
         }
         
         placeholderLabel.snp.makeConstraints {
-            $0.top.equalTo(lottieView.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(lottieView.snp.bottom).offset(constantSize.intervalSize)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
         
         separateLabel.snp.makeConstraints {
-            $0.top.equalTo(placeholderLabel.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(placeholderLabel.snp.bottom).offset(constantSize.intervalSize)
             $0.centerX.equalToSuperview()
         }
         
@@ -443,9 +444,9 @@ class FeelRecordViewController: UIViewController {
         }
         
         recordPlayView.snp.makeConstraints {
-            $0.top.equalTo(secondLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(secondLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(100)
         }
         
@@ -459,8 +460,8 @@ class FeelRecordViewController: UIViewController {
         
         recordFileLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalTo(playButton.snp.leading).inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalTo(playButton.snp.leading).inset(constantSize.intervalSize)
             $0.height.equalTo(50)
         }
         
@@ -472,12 +473,12 @@ class FeelRecordViewController: UIViewController {
         
         removeButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.width.equalTo(50)
         }
         
         bgmLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
             $0.height.equalTo(50)
         }
@@ -485,20 +486,20 @@ class FeelRecordViewController: UIViewController {
         
         separateView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(1)
         }
         
         bgmSelectButton.snp.makeConstraints {
             $0.centerY.equalTo(bgmLabel.snp.centerY)
-            $0.leading.equalTo(playButton.snp.leading).offset(intervalSize/2)
-            $0.trailing.equalTo(removeButton.snp.trailing).inset(intervalSize/2)
+            $0.leading.equalTo(playButton.snp.leading).offset(constantSize.intervalSize/2)
+            $0.trailing.equalTo(removeButton.snp.trailing).inset(constantSize.intervalSize/2)
             $0.height.equalTo(25)
         }
         
         sendView.snp.makeConstraints {
-            $0.top.equalTo(recordPlayView.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(recordPlayView.snp.bottom).offset(constantSize.intervalSize)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
@@ -508,9 +509,9 @@ class FeelRecordViewController: UIViewController {
         
         titleTextFieldView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize + 18)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize + 18)
         }
         
         [
@@ -521,7 +522,7 @@ class FeelRecordViewController: UIViewController {
         
         titleTextField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.trailing.equalTo(sendButton.snp.leading).inset(5)
             $0.bottom.equalToSuperview().inset(5)
         }
@@ -827,19 +828,19 @@ class FeelRecordViewController: UIViewController {
         titleTextField.resignFirstResponder()
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard let second = secondLabel.text, Int(second)! <= 20 else {
-            return showConfirmAlert("10초이상 녹음해주세요.", "알림")
+            return showConfirmAlert(type: .limitTime)
         }
         
         guard titleTextField.text != "" else {
-            return showConfirmAlert("제목을 입력해주세요.", "알림")
+            return showConfirmAlert(type: .insertTitle)
         }
         guard titleTextField.text?.first != " " && titleTextField.text?.last != " " else {
-            return showConfirmAlert("제목의 앞과 뒤에 공백을 제거해주세요.", "알림")
+            return showConfirmAlert(type: .deleteBlank)
         }
         
         if app.languageCode == "ko" {
             guard titleTextField.text?.count ?? 0 <= 10 else {
-                return showConfirmAlert("제목은 글자수 10자까지 가능합니다.", "알림")
+                return showConfirmAlert(type: .limitTitle)
             }
         }
         
@@ -863,7 +864,7 @@ class FeelRecordViewController: UIViewController {
         LoadingIndicator.showLoading(className: self.className, function: "uploadButton")
         
         let url1 = self.audioRecorder!.url
-        let url2 = Bundle.main.url(forResource: bgmList[selectBgmIndex], withExtension: "mp3")!
+        let url2 = Bundle.main.url(forResource: ContentBGM.allCases[selectBgmIndex].rawValue, withExtension: "mp3")!
         
         recordMerge(audio1: url1, audio2: url2) { bool in
             guard bool else { return }
@@ -876,7 +877,7 @@ class FeelRecordViewController: UIViewController {
                 for (key, value) in parameters {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
                 }
-            }, to: feelUploadURL, usingThreshold: UInt64.init(), method: .post, headers: header).responseDecodable(of: BasicResponseModel.self) { [weak self] response in
+            }, to: URLString.SubDomain.feelUploadURL.rawValue, usingThreshold: UInt64.init(), method: .post, headers: header).responseDecodable(of: BasicResponseModel.self) { [weak self] response in
                 guard let self = self else { return }
                 switch response.result {
                 case .success(let data):
@@ -891,18 +892,18 @@ class FeelRecordViewController: UIViewController {
                             }
                         }
                     } else if data.status == 406 {
-                        self.showConfirmAlert("음성에 부적절한 단어가 포함된것으로 판단됩니다. 다시녹음해주세요.","알림")
+                        self.showConfirmAlert(type: .warningRecord)
                     } else if data.status == 409 {
-                        self.showConfirmAlert("중복된 제목입니다.", "알림")
+                        self.showConfirmAlert(type: .duplicateTitle)
                     } else {
-                        self.showConfirmAlert("죄송합니다. \n서둘러 복구하겠습니다.", "서버점검")
+                        self.showConfirmAlert(type: .unknownError)
                     }
                     
                 case .failure(let msg):
     #if DEBUG
                     print("requestERR", msg)
     #endif
-                    self.showConfirmAlert("죄송합니다. \n서둘러 복구하겠습니다.", "서버점검")
+                    self.showConfirmAlert(type: .unknownError)
                 }
                 DispatchQueue.main.async {
                     LoadingIndicator.hideLoading()

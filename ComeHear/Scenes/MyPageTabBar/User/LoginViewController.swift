@@ -11,6 +11,8 @@ import AuthenticationServices
 import Alamofire
 
 class LoginViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    
     // MARK: - 변수, 상수
     private var testUser = ""
     private var testAuthCode = ""
@@ -18,7 +20,7 @@ class LoginViewController: UIViewController {
     // MARK: - 로그인 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
@@ -48,7 +50,7 @@ class LoginViewController: UIViewController {
     
     private lazy var emailView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 12
         return view
     }()
@@ -74,7 +76,7 @@ class LoginViewController: UIViewController {
     
     private lazy var passwordView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 12
         return view
     }()
@@ -225,9 +227,9 @@ extension LoginViewController {
         }
         
         loginView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -240,15 +242,15 @@ extension LoginViewController {
         }
         
         signInLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         emailView.snp.makeConstraints {
-            $0.top.equalTo(signInLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(signInLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [persionView ,emailTextField].forEach {
@@ -258,14 +260,14 @@ extension LoginViewController {
         
         persionView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.width.height.equalTo(50)
         }
         
         emailTextField.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalTo(persionView.snp.trailing).offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalTo(persionView.snp.trailing).offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -275,43 +277,43 @@ extension LoginViewController {
         }
         
         passwordView.snp.makeConstraints {
-            $0.top.equalTo(emailView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(emailView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         eyeView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.width.height.equalTo(50)
         }
 
         passwordTextField.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalTo(eyeView.snp.trailing).offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalTo(eyeView.snp.trailing).offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         signUpButton.snp.makeConstraints {
-            $0.top.equalTo(loginButton.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(loginButton.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         snsLoginView.snp.makeConstraints {
-            $0.top.equalTo(loginView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(loginView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -324,52 +326,53 @@ extension LoginViewController {
         }
         
         snsSignUpLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         kakaoLoginImageView.snp.makeConstraints {
-            $0.top.equalTo(snsSignUpLabel.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(snsSignUpLabel.snp.bottom).offset(constantSize.intervalSize)
             $0.centerX.equalToSuperview()
         }
         
         kakaoLoginLeadingImageView.snp.makeConstraints {
             $0.top.equalTo(kakaoLoginImageView.snp.top)
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.bottom.equalTo(kakaoLoginImageView.snp.bottom)
         }
         
         kakaoLoginTrailingImageView.snp.makeConstraints {
             $0.top.equalTo(kakaoLoginImageView.snp.top)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalTo(kakaoLoginImageView.snp.bottom)
         }
         
         kakaoLoginView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalTo(kakaoLoginImageView.snp.bottom)
         }
         
         appleLoginbBtton.snp.makeConstraints {
-            $0.top.equalTo(kakaoLoginImageView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(kakaoLoginImageView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(kakaoLoginImageView.snp.height)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         signUpView.snp.makeConstraints {
-            $0.top.equalTo(snsLoginView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(snsLoginView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
     }
     
     private func socialLogin(_ nickname: String?, _ token: String, _ type: String, _ fullName: String, _ authCode: String) {
-        var request = URLRequest(url: URL(string: socialLoginURL)!)
+        guard let url = URL(string: URLString.SubDomain.socialLoginURL.getURL()) else { return }
+        var request = URLRequest(url: url)
         let params = ["token": token, "type": type, "authCode" : authCode] as Dictionary
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -418,12 +421,10 @@ extension LoginViewController {
                         }
                     }
                 }
-            case .failure(let error):
-                self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+            case .failure(_):
+                self.showCloseAlert(type: .unknownError)
             }
+            
             DispatchQueue.main.async {
                 LoadingIndicator.hideLoading()
             }
@@ -431,7 +432,8 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
     }
     
     private func sendAppleToken(_ token: String, _ type: String, _ fullName: String, _ authCode: String) {
-        var request = URLRequest(url: URL(string: sendAppleTokenURL)!)
+        guard let url = URL(string: URLString.SubDomain.sendAppleTokenURL.getURL()) else { return }
+        var request = URLRequest(url: url)
         let params = ["token": token, "authCode" : authCode] as Dictionary
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -458,12 +460,10 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
                     additionalInformationViewController.modalPresentationStyle = UIAccessibility.isVoiceOverRunning ? .fullScreen : .overFullScreen
                     self.present(additionalInformationViewController, animated: true)
                 }
-            case .failure(let error):
-                self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+            case .failure(_):
+                self.showCloseAlert(type: .unknownError)
             }
+            
             DispatchQueue.main.async {
                 LoadingIndicator.hideLoading()
             }
@@ -471,10 +471,10 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
     }
 
     @objc func login() {
-        guard isValidEmail() else { return self.showConfirmAlert("아이디를 이메일형식으로 입력해주세요.", "알림") }
-        guard let password = passwordTextField.text, password != "", !password.contains(" ") else { return self.showConfirmAlert("비밀번호는 띄어쓰기 및 빈칸이\n포함될 수 없습니다.", "알림") }
-        
-        var request = URLRequest(url: URL(string: loginURL)!)
+        guard isValidEmail() else { return showConfirmAlert(type: .idToEmail) }
+        guard let password = passwordTextField.text, password != "", !password.contains(" ") else { return showConfirmAlert(type: .passwordNotBlank) }
+        guard let url = URL(string: URLString.SubDomain.loginURL.getURL()) else { return }
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 10
@@ -506,13 +506,10 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
                         app.userLogin = true
                     }
                 } else {
-                    self.showConfirmAlert("이메일 또는 암호를 확인해주세요.", "알림")
+                    self.showConfirmAlert(type: .emailAndPasswordCheck)
                 }
-            case .failure(let error):
-                self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+            case .failure(_):
+                self.showCloseAlert(type: .unknownError)
             }
             DispatchQueue.main.async {
                 LoadingIndicator.hideLoading()

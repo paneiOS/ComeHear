@@ -12,6 +12,7 @@ protocol BGMSelectDelegate {
 }
 
 final class BGMSelectTableViewCell: UITableViewCell {
+    private let constantSize = ConstantSize()
     var cellDelegate: BGMSelectDelegate?
     
     lazy var titleLabel: UILabel = {
@@ -25,7 +26,7 @@ final class BGMSelectTableViewCell: UITableViewCell {
     
     lazy var selectButton: UIButton = {
         let button = UIButton()
-        button.setImage(systemName: "circle", pointSize: buttonSize)
+        button.setImage(systemName: "circle", pointSize: constantSize.buttonSize)
         button.addTarget(self, action: #selector(tapSelectButton), for: .touchUpInside)
         return button
     }()
@@ -50,14 +51,14 @@ extension BGMSelectTableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
         
         selectButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize/2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize/2)
             $0.bottom.equalToSuperview()
             $0.width.equalTo(selectButton.snp.height)
         }

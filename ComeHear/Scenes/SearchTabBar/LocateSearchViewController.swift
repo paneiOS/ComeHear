@@ -10,6 +10,7 @@ import CoreLocation
 import Alamofire
 
 class LocateSearchViewController: UIViewController, MTMapViewDelegate {
+    private let constantSize = ConstantSize()
     private var storyDetails: [StoryDetail] = []
     private var nowPage = 1
     private var totalPage = 0
@@ -132,8 +133,8 @@ class LocateSearchViewController: UIViewController, MTMapViewDelegate {
         }
         
         currentButtonView.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.width.equalTo(40)
             $0.height.equalTo(40)
         }
@@ -165,14 +166,14 @@ class LocateSearchViewController: UIViewController, MTMapViewDelegate {
         if self.locationManager.authorizationStatus == .authorizedWhenInUse || self.locationManager.authorizationStatus == .authorizedAlways {
             mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: currentPosition.1, longitude: currentPosition.0)), zoomLevel: 3, animated: true)
         } else {
-            self.showSettingAlert(title: "GPS권한 요청", message: "현재위치 정보를 얻기 위해 권한을 허용해주세요.")
+            showSettingAlert(type: .gps)
         }
     }
     
     private func requestSearch(_ longtitude: String, _ latitude: String) {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         let languageCode = app.languageCode == "ja" ? "jp" : app.languageCode
-        let urlString = storyLocationSearch +  "/\(longtitude)/\(latitude)?langCode=\(languageCode)&pageNo=\(nowPage)&pageSize=100"
+        let urlString = URLString.SubDomain.storyLocationSearch.getURL() +  "/\(longtitude)/\(latitude)?langCode=\(languageCode)&pageNo=\(nowPage)&pageSize=100"
 
         AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             .responseDecodable(of: StoryDetailModel.self) { [weak self] response in
@@ -183,11 +184,8 @@ class LocateSearchViewController: UIViewController, MTMapViewDelegate {
                     self.totalPage = data.pages.totalPages
                     self.makeMarker()
                     self.tableView.reloadData()
-                case .failure(let error):
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                    print(error)
-#endif
+                case .failure(_):
+                    self.showCloseAlert(type: .unknownError)
                 }
             }
     }

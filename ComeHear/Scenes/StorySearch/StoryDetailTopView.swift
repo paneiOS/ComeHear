@@ -9,6 +9,8 @@ import SnapKit
 import UIKit
 
 final class StoryDetailTopView: UIView {
+    private let constantSize = ConstantSize()
+    
     //MARK: - 상단 UI
     private lazy var imageBGView: UIView = {
         let view = UIView()
@@ -62,7 +64,7 @@ final class StoryDetailTopView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = intervalSize
+        stackView.spacing = constantSize.intervalSize
         
         [
             actorSound,
@@ -126,13 +128,13 @@ private extension StoryDetailTopView {
         ].forEach { addSubview($0) }
         
         imageBGView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             if UIAccessibility.isVoiceOverRunning {
                 $0.height.equalTo(0)
             } else {
-                $0.height.equalTo((frameSizeWidth - 64) * 0.9)
+                $0.height.equalTo((constantSize.frameSizeWidth - 64) * 0.9)
             }
         }
         
@@ -143,9 +145,9 @@ private extension StoryDetailTopView {
         }
         
         scriptView.snp.makeConstraints {
-            $0.top.equalTo(imageBGView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(imageBGView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             if UIAccessibility.isVoiceOverRunning {
                 $0.height.equalTo(0)
             }
@@ -159,14 +161,14 @@ private extension StoryDetailTopView {
             } else {
                 $0.height.equalTo(25)
             }
-            $0.top.equalTo(scriptView.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(scriptView.snp.bottom).offset(constantSize.intervalSize)
         }
         
         stackView.snp.makeConstraints {
-            $0.top.equalTo(moreButton.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(moreButton.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
     }

@@ -13,6 +13,8 @@ protocol SendDataDelegate {
 }
 
 final class SignUpViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    
     // MARK: - 변수, 상수
     private var uuid: String?
     private var codeBool = false
@@ -65,7 +67,7 @@ final class SignUpViewController: UIViewController {
     // MARK: - 회원가입 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         return view
     }()
     
@@ -152,7 +154,7 @@ final class SignUpViewController: UIViewController {
     
     private lazy var allAgreeView: UIView = {
         let view = UIView()
-        view.setupSubViewFooter(color: personalColor)
+        view.setupSubViewFooter(color: ContentColor.personalColor.getColor())
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapAllAgree))
         view.addGestureRecognizer(tapGestureRecognizer)
         return view
@@ -402,7 +404,7 @@ extension SignUpViewController {
         }
         
         privacyView.snp.makeConstraints {
-            $0.height.equalTo(30 + intervalSize)
+            $0.height.equalTo(30 + constantSize.intervalSize)
         }
         
         allAgreeView.snp.makeConstraints {
@@ -411,9 +413,9 @@ extension SignUpViewController {
         
         // MARK: - 약관화면 UI_SETUP
         agreePlaceHolderView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -423,13 +425,13 @@ extension SignUpViewController {
         }
         
         agreePlaceHolderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         agreeStackView.snp.makeConstraints {
-            $0.top.equalTo(agreePlaceHolderLabel.snp.bottom).offset(intervalSize/2)
+            $0.top.equalTo(agreePlaceHolderLabel.snp.bottom).offset(constantSize.intervalSize/2)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
@@ -441,13 +443,13 @@ extension SignUpViewController {
         
         allAgreeLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         allAgreeButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.bottom.equalToSuperview()
         }
         
@@ -457,13 +459,13 @@ extension SignUpViewController {
         
         termsLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         termsAgreeButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.bottom.equalToSuperview()
         }
         
@@ -473,22 +475,22 @@ extension SignUpViewController {
         
         privacyLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize/2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/2)
         }
         
         privacyAgreeButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
-            $0.bottom.equalToSuperview().inset(intervalSize/2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/2)
         }
         
         // MARK: - 회원가입정보 UI_SETUP
         infoPlaceHolderView.snp.makeConstraints {
-            $0.top.equalTo(agreeStackView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(intervalSize)
+            $0.top.equalTo(agreeStackView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(constantSize.intervalSize)
         }
         
         [infoPlaceHolderLabel, infoView].forEach {
@@ -496,13 +498,13 @@ extension SignUpViewController {
         }
         
         infoPlaceHolderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         infoView.snp.makeConstraints {
-            $0.top.equalTo(infoPlaceHolderLabel.snp.bottom).offset(intervalSize/2)
+            $0.top.equalTo(infoPlaceHolderLabel.snp.bottom).offset(constantSize.intervalSize/2)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
@@ -520,35 +522,35 @@ extension SignUpViewController {
         }
         
         emailView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         emailTextField.snp.makeConstraints {
             $0.top.bottom.equalTo(emailView)
-            $0.leading.equalTo(emailView.snp.leading).offset(intervalSize / 2)
+            $0.leading.equalTo(emailView.snp.leading).offset(constantSize.intervalSize / 2)
             $0.trailing.equalTo(certificationButton.snp.leading)
         }
         
         certificationButton.snp.makeConstraints {
-            $0.trailing.equalTo(emailView.snp.trailing).inset(intervalSize / 2)
+            $0.trailing.equalTo(emailView.snp.trailing).inset(constantSize.intervalSize / 2)
             $0.centerY.equalTo(emailView.snp.centerY)
             $0.height.equalTo(25)
             $0.width.equalTo(80)
         }
         
         codeView.snp.makeConstraints {
-            $0.top.equalTo(emailView.snp.bottom).offset(intervalSize / 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(emailView.snp.bottom).offset(constantSize.intervalSize / 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         codeTextField.snp.makeConstraints {
             $0.top.bottom.equalTo(codeView)
-            $0.leading.equalTo(codeView.snp.leading).offset(intervalSize / 2)
+            $0.leading.equalTo(codeView.snp.leading).offset(constantSize.intervalSize / 2)
         }
         
         timeStampLabel.snp.makeConstraints {
@@ -557,56 +559,56 @@ extension SignUpViewController {
         }
         
         codeConfirmButton.snp.makeConstraints {
-            $0.leading.equalTo(timeStampLabel.snp.trailing).offset(intervalSize / 2)
-            $0.trailing.equalTo(codeView.snp.trailing).inset(intervalSize / 2)
+            $0.leading.equalTo(timeStampLabel.snp.trailing).offset(constantSize.intervalSize / 2)
+            $0.trailing.equalTo(codeView.snp.trailing).inset(constantSize.intervalSize / 2)
             $0.centerY.equalTo(codeView.snp.centerY)
             $0.height.equalTo(25)
             $0.width.equalTo(80)
         }
         
         passwordView.snp.makeConstraints {
-            $0.top.equalTo(codeView.snp.bottom).offset(intervalSize / 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(codeView.snp.bottom).offset(constantSize.intervalSize / 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         passwordTextField.snp.makeConstraints {
             $0.top.bottom.equalTo(passwordView)
-            $0.leading.equalTo(passwordView.snp.leading).offset(intervalSize / 2)
+            $0.leading.equalTo(passwordView.snp.leading).offset(constantSize.intervalSize / 2)
             $0.trailing.equalTo(passwordView.snp.trailing)
         }
         
         passwordConfirmView.snp.makeConstraints {
-            $0.top.equalTo(passwordView.snp.bottom).offset(intervalSize / 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(passwordView.snp.bottom).offset(constantSize.intervalSize / 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         passwordConfirmTextField.snp.makeConstraints {
             $0.top.bottom.equalTo(passwordConfirmView)
-            $0.leading.equalTo(passwordConfirmView.snp.leading).offset(intervalSize / 2)
+            $0.leading.equalTo(passwordConfirmView.snp.leading).offset(constantSize.intervalSize / 2)
             $0.trailing.equalTo(passwordConfirmView.snp.trailing)
         }
         
         nickNameView.snp.makeConstraints {
-            $0.top.equalTo(passwordConfirmView.snp.bottom).offset(intervalSize / 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(passwordConfirmView.snp.bottom).offset(constantSize.intervalSize / 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         nickNameTextField.snp.makeConstraints {
             $0.top.bottom.equalTo(nickNameView)
-            $0.leading.equalTo(nickNameView.snp.leading).offset(intervalSize / 2)
+            $0.leading.equalTo(nickNameView.snp.leading).offset(constantSize.intervalSize / 2)
             $0.trailing.equalTo(nickNameView.snp.trailing)
         }
         
         signUpButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
@@ -685,7 +687,7 @@ extension SignUpViewController {
         codeView.alpha = 1
         codeTextField.alpha = 1
         codeTextField.isEnabled = true
-        emailView.layer.borderColor = personalColor?.cgColor
+        emailView.layer.borderColor = ContentColor.personalColor.getColor().cgColor
         emailTextField.alpha = 0.1
         emailTextField.accessibilityElementsHidden = true
         emailTextField.isEnabled = false
@@ -698,12 +700,12 @@ extension SignUpViewController {
     
     func codeViewDesable() {
         codeBool = true
-        codeView.layer.borderColor = personalColor?.cgColor
+        codeView.layer.borderColor = ContentColor.personalColor.getColor().cgColor
         codeTextField.alpha = 0.1
         codeTextField.isEnabled = false
-        certificationButton.setupValidButton(title: "인증완료".localized(), textColor: .black, backgroundColor: personalColor, alpha: 0.1, enable: false)
+        certificationButton.setupValidButton(title: "인증완료".localized(), textColor: .black, backgroundColor: ContentColor.personalColor.getColor(), alpha: 0.1, enable: false)
         certificationButton.accessibilityLabel = "인증메일 전송".localized()
-        codeConfirmButton.setupValidButton(textColor: .black, backgroundColor: personalColor, alpha: 0.1, enable: false)
+        codeConfirmButton.setupValidButton(textColor: .black, backgroundColor: ContentColor.personalColor.getColor(), alpha: 0.1, enable: false)
         signUpButton.alpha = 1
         signUpButton.isEnabled = true
         signUpButton.isAccessibilityElement = true
@@ -816,7 +818,8 @@ extension SignUpViewController {
             reset()
         } else {
             if isValidEmail() {
-                var request = URLRequest(url: URL(string: emailValidateURL)!)
+                guard let url = URL(string: URLString.SubDomain.emailValidateURL.getURL()) else { return }
+                var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 request.timeoutInterval = 10
@@ -843,27 +846,25 @@ extension SignUpViewController {
                             self.showToast(message: "인증번호를 전송했습니다.", font: .systemFont(ofSize: 16), vcBool: true)
                             self.showToVoice(type: .announcement, text: "인증번호를 전송했습니다. 만료시간은 5분입니다. 인증하기 버튼이 인증취소하기 버튼으로 변경되었습니다.")
                         } else {
-                            self.showConfirmAlert("중복된 이메일입니다.", "알림")
+                            self.showConfirmAlert(type: .duplicateEmail)
                         }
-                    case .failure(let error):
-                        self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                    case .failure(_):
+                        self.showCloseAlert(type: .unknownError)
                     }
+                    
                     DispatchQueue.main.async {
                         LoadingIndicator.hideLoading()
                     }
                 }
             } else {
-                showConfirmAlert("이메일이 유효하지 않습니다.", "알림")
+                showConfirmAlert(type: .emailInvalid)
             }
         }
     }
     
     @objc func emailTextFieldDidChange() {
         if isValidEmail() {
-            certificationButton.setupValidButton(textColor: .black, backgroundColor: personalColor, alpha: 1, enable: true)
+            certificationButton.setupValidButton(textColor: .black, backgroundColor: ContentColor.personalColor.getColor(), alpha: 1, enable: true)
             showToVoice(type: .announcement, text: "인증메일 전송버튼이 활성화 되었습니다.")
         } else {
             certificationButton.setupValidButton(textColor: .white, backgroundColor: .lightGray, alpha: 0.5, enable: false)
@@ -872,7 +873,7 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
     
     @objc func codeTextFieldDidChange() {
         if isValidCode() {
-            codeConfirmButton.setupValidButton(textColor: .black, backgroundColor: personalColor, alpha: 1, enable: true)
+            codeConfirmButton.setupValidButton(textColor: .black, backgroundColor: ContentColor.personalColor.getColor(), alpha: 1, enable: true)
             showToVoice(type: .announcement, text: "인증번호 확인버튼이 활성화 되었습니다.")
         } else {
             codeConfirmButton.setupValidButton(textColor: .white, backgroundColor: .lightGray, alpha: 0.5, enable: false)
@@ -882,18 +883,19 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
     // MARK: - 함수_objc API_Request
     @objc func signUp() {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
-        guard termsAgreeBool else { return showConfirmAlert("이용약관에 동의해주세요.", "알림") }
-        guard privacyAgreeBool else { return showConfirmAlert("개인정보처리방침에 동의해주세요.", "알림") }
-        guard codeBool else { return showConfirmAlert("인증번호가 유효하지 않습니다.", "알림") }
-        guard isValidPassword() else { return showConfirmAlert("비밀번호가 유효하지 않습니다.", "알림") }
-        guard let passwordCheck = passwordTextField.text, !passwordCheck.contains(" ") else { return showConfirmAlert("비밀번호는 띄어쓰기 및 빈칸이\n포함될 수 없습니다.", "알림") }
-        guard isSamePassword() else { return showConfirmAlert("비밀번호가 일치하지 않습니다.", "알림") }
-        guard let nickname = nickNameTextField.text, nickname != "", !nickname.contains(" ") else { return self.showConfirmAlert("별명은 띄어쓰기 및 빈칸이\n포함될 수 없습니다.", "알림") }
+        guard termsAgreeBool else { return showConfirmAlert(type: .agreeTerms) }
+        guard privacyAgreeBool else { return showConfirmAlert(type: .agreePrivacy) }
+        guard codeBool else { return showConfirmAlert(type: .numberInValid) }
+        guard isValidPassword() else { return showConfirmAlert(type: .passwordInvalid) }
+        guard let passwordCheck = passwordTextField.text, !passwordCheck.contains(" ") else { return showConfirmAlert(type: .passwordNotBlank) }
+        guard isSamePassword() else { return showConfirmAlert(type: .passwordNotCheck) }
+        guard let nickname = nickNameTextField.text, nickname != "", !nickname.contains(" ") else { return showConfirmAlert(type: .nicknameNotBlank) }
         if app.languageCode == "ko" {
-            guard nickNameTextField.text?.count ?? 0 <= 10 else { return showConfirmAlert("별명은 글자수 10자까지 가능합니다.", "알림") }
+            guard nickNameTextField.text?.count ?? 0 <= 10 else { return showConfirmAlert(type: .limitNickname) }
         }
         
-        var request = URLRequest(url: URL(string: signUpURL)!)
+        guard let url = URL(string: URLString.SubDomain.signUpURL.getURL()) else { return }
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 10
@@ -921,13 +923,11 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
                     self.delegate?.recieveData(response: self.emailTextField.text!)
                     topViewController.navigationController?.popViewController(animated: true)
                 }
-                self.showOneActionAlert("가입인사".localized(with: nickname), "알림".localized(), logOkAction)
-            case .failure(let error):
-                self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                self.showOneButtonAlert("가입인사".localized(with: nickname), "알림".localized(), logOkAction)
+            case .failure(_):
+                self.showCloseAlert(type: .unknownError)
             }
+            
             DispatchQueue.main.async {
                 LoadingIndicator.hideLoading()
             }
@@ -936,7 +936,8 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
     
     @objc func codeConfirm() {
         if isValidCode() {
-            var request = URLRequest(url: URL(string: codeValidateURL)!)
+            guard let url = URL(string: URLString.SubDomain.codeValidateURL.getURL()) else { return }
+            var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.timeoutInterval = 10
@@ -960,20 +961,18 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
                         self.showToast(message: "확인되었습니다.", font: .systemFont(ofSize: 16), vcBool: true)
                         self.showToVoice(type: .announcement, text: "확인되었습니다.")
                     } else {
-                        self.showConfirmAlert("인증번호가 유효하지 않습니다.", "알림")
+                        self.showConfirmAlert(type: .numberInValid)
                     }
-                case .failure(let error):
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                case .failure(_):
+                    self.showCloseAlert(type: .unknownError)
                 }
+                
                 DispatchQueue.main.async {
                     LoadingIndicator.hideLoading()
                 }
             }
         } else {
-            self.showConfirmAlert("인증번호가 유효하지 않습니다.", "알림")
+            self.showConfirmAlert(type: .numberInValid)
         }
     }
 }

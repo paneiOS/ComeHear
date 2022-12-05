@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 
 final class StoryDetailMiddleView: UIView {
+    private let constantSize = ConstantSize()
+    private let commonFunc = CommonFunc()
     lazy var feelList: [FeelListData] = [] {
         didSet {
             if feelList.isEmpty {
@@ -23,7 +25,7 @@ final class StoryDetailMiddleView: UIView {
     
     private lazy var tableHeaderView: UIView = {
         let view = UIView()
-        view.setupSubViewHeader(color: moreLightGrayColor)
+        view.setupSubViewHeader(color: ContentColor.moreLightGrayColor.getColor())
         return view
     }()
     
@@ -125,9 +127,9 @@ extension StoryDetailMiddleView: UITableViewDataSource {
         self.feelListData = feelList[indexPath.row]
         cell.titleLabel.text = feelList[indexPath.row].title
         if app.languageCode == "ko" {
-            cell.titleLabel.accessibilityLabel = "\(intToString(indexPath.row + 1))번 제목" + feelList[indexPath.row].title
-            cell.listenButton.accessibilityLabel = "\(intToString(indexPath.row + 1))번" + feelList[indexPath.row].title + "의 듣기"
-            cell.sendButton.accessibilityLabel = "\(intToString(indexPath.row + 1))번" + feelList[indexPath.row].title + "의 신고하기"
+            cell.titleLabel.accessibilityLabel = "\(commonFunc.intToString(indexPath.row + 1))번 제목" + feelList[indexPath.row].title
+            cell.listenButton.accessibilityLabel = "\(commonFunc.intToString(indexPath.row + 1))번" + feelList[indexPath.row].title + "의 듣기"
+            cell.sendButton.accessibilityLabel = "\(commonFunc.intToString(indexPath.row + 1))번" + feelList[indexPath.row].title + "의 신고하기"
         }
         
         cell.listenButton.tag = indexPath.row
@@ -136,12 +138,12 @@ extension StoryDetailMiddleView: UITableViewDataSource {
         if feelList[indexPath.row].memberLike ?? false {
             cell.likeButton.setImage(systemName: "heart.fill", pointSize: 25)
             if app.languageCode == "ko" {
-                cell.likeButton.accessibilityLabel = "\(intToString(indexPath.row + 1))번" + feelList[indexPath.row].title + "의 좋아요를 취소하는"
+                cell.likeButton.accessibilityLabel = "\(commonFunc.intToString(indexPath.row + 1))번" + feelList[indexPath.row].title + "의 좋아요를 취소하는"
             }
         } else {
             cell.likeButton.setImage(systemName: "heart", pointSize: 25)
             if app.languageCode == "ko" {
-                cell.likeButton.accessibilityLabel = "\(intToString(indexPath.row + 1))번" + feelList[indexPath.row].title + "의 좋아요를 누르는"
+                cell.likeButton.accessibilityLabel = "\(commonFunc.intToString(indexPath.row + 1))번" + feelList[indexPath.row].title + "의 좋아요를 누르는"
             }
         }
         cell.sendButton.tag = indexPath.row
@@ -174,19 +176,19 @@ private extension StoryDetailMiddleView {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         feelCountLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalTo(titleLabel.snp.trailing).offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalTo(titleLabel.snp.trailing).offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         placeHolderView.snp.makeConstraints {
-            $0.top.equalTo(tableHeaderView.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(tableHeaderView.snp.bottom).offset(constantSize.intervalSize)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
@@ -200,30 +202,30 @@ private extension StoryDetailMiddleView {
         }
         
         tableView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(-intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(-constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         placeHolderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         imageView.snp.makeConstraints {
             $0.top.equalTo(placeHolderLabel.snp.bottom)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
             $0.height.equalTo(imageView.snp.width)
         }
         
         feelShareButton.snp.makeConstraints {
-            $0.top.equalTo(placeHolderView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(intervalSize)
+            $0.top.equalTo(placeHolderView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(constantSize.intervalSize)
             $0.height.equalTo(50)
         }
         
@@ -277,10 +279,11 @@ extension StoryDetailMiddleView: FeelStoreTableViewDelegate {
                 let loginViewContrller = LoginViewController()
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             guard let memberIdx = app.userMemberIdx else { return }
-            var request = URLRequest(url: URL(string: feelLikeURL)!)
+            guard let url = URL(string: URLString.SubDomain.feelLikeURL.getURL()) else { return }
+            var request = URLRequest(url: url)
             request.httpMethod = (feelList[tag].memberLike ?? false) ? "DELETE" : "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.timeoutInterval = 10
@@ -321,12 +324,9 @@ extension StoryDetailMiddleView: FeelStoreTableViewDelegate {
                     } else {
                         print(data.status, data.message)
                     }
-                case .failure(let error):
+                case .failure(_):
                     guard let topViewController = keyWindow?.visibleViewController else { return }
-                    topViewController.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                    topViewController.showCloseAlert(type: .unknownError)
                 }
                 DispatchQueue.main.async {
                     LoadingIndicator.hideLoading()
@@ -344,7 +344,7 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             let feelReportViewController = FeelReportViewController(selectFeel: feel)
             feelReportViewController.hero.isEnabled = true

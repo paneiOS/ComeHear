@@ -11,6 +11,8 @@ import Kingfisher
 import SwiftUI
 
 final class FeelPlayViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    
     //MARK: - 변수, 상수
     var audioURL = ""
     var script = ""
@@ -36,7 +38,7 @@ final class FeelPlayViewController: UIViewController {
                     audioPlayer.rate = 0.8
                     tapURLReplay()
                 }
-                slowSpeedButton.backgroundColor = checkButtonColor
+                slowSpeedButton.backgroundColor = ContentColor.checkButtonColor.getColor()
                 normalSpeedButton.backgroundColor = .white
                 fastSpeedButton.backgroundColor = .white
                 moreFastSpeedButton.backgroundColor = .white
@@ -49,7 +51,7 @@ final class FeelPlayViewController: UIViewController {
                     tapURLReplay()
                 }
                 slowSpeedButton.backgroundColor = .white
-                normalSpeedButton.backgroundColor = checkButtonColor
+                normalSpeedButton.backgroundColor = ContentColor.checkButtonColor.getColor()
                 fastSpeedButton.backgroundColor = .white
                 moreFastSpeedButton.backgroundColor = .white
             case .fast :
@@ -62,7 +64,7 @@ final class FeelPlayViewController: UIViewController {
                 }
                 slowSpeedButton.backgroundColor = .white
                 normalSpeedButton.backgroundColor = .white
-                fastSpeedButton.backgroundColor = checkButtonColor
+                fastSpeedButton.backgroundColor = ContentColor.checkButtonColor.getColor()
                 moreFastSpeedButton.backgroundColor = .white
             case .moreFast :
                 if audioURL == "" {
@@ -75,7 +77,7 @@ final class FeelPlayViewController: UIViewController {
                 slowSpeedButton.backgroundColor = .white
                 normalSpeedButton.backgroundColor = .white
                 fastSpeedButton.backgroundColor = .white
-                moreFastSpeedButton.backgroundColor = checkButtonColor
+                moreFastSpeedButton.backgroundColor = ContentColor.checkButtonColor.getColor()
             }
         }
     }
@@ -109,13 +111,13 @@ final class FeelPlayViewController: UIViewController {
     
     private lazy var subContentView: UIView = {
         let view = UIView()
-        view.setupShadow(color: moreLightGrayColor)
+        view.setupShadow(color: ContentColor.moreLightGrayColor.getColor())
         return view
     }()
     
     private lazy var subView: UIView = {
         let view = UIView()
-        view.setupShadow(color: personalColor, cornerRadius: 15)
+        view.setupShadow(color: ContentColor.personalColor.getColor(), cornerRadius: 15)
         return view
     }()
     
@@ -150,11 +152,11 @@ final class FeelPlayViewController: UIViewController {
         imageView.layer.cornerRadius = 15
         imageView.layer.borderWidth = 1
         imageView.clipsToBounds = true
-        imageView.layer.borderColor = personalColor?.cgColor
+        imageView.layer.borderColor = ContentColor.personalColor.getColor().cgColor
         if defaultImageUrl == "" {
-            imageView.image = landScapeImage
+            imageView.image = ContentImage.landScapeImage.getImage()
         } else {
-            imageView.setImage(with: defaultImageUrl, placeholder: landScapeImage, cornerRadius: 15)
+            imageView.setImage(with: defaultImageUrl, placeholder: ContentImage.landScapeImage.getImage(), cornerRadius: 15)
         }
         return imageView
     }()
@@ -180,7 +182,7 @@ final class FeelPlayViewController: UIViewController {
         if UIAccessibility.isVoiceOverRunning {
             stackView.isHidden = true
         }
-        stackView.setupShadow(color: personalColor)
+        stackView.setupShadow(color: ContentColor.personalColor.getColor())
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 0
@@ -238,7 +240,7 @@ final class FeelPlayViewController: UIViewController {
         button.setTitle("1.0", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 10.0, weight: .bold)
-        button.setupShadow(color: checkButtonColor, cornerRadius: 15)
+        button.setupShadow(color: ContentColor.checkButtonColor.getColor(), cornerRadius: 15)
         button.addTarget(self, action: #selector(tapNormalButton), for: .touchUpInside)
         button.accessibilityLabel = "1.0 " + "배속".localized()
         return button
@@ -278,7 +280,7 @@ final class FeelPlayViewController: UIViewController {
     
     private lazy var playControllerStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.setupShadow(color: personalColor)
+        stackView.setupShadow(color: ContentColor.personalColor.getColor())
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 0
@@ -351,7 +353,7 @@ final class FeelPlayViewController: UIViewController {
         button.tintColor = .black
         button.titleLabel?.font = .systemFont(ofSize: 15.0, weight: .regular)
         button.titleLabel?.textAlignment = .center
-        button.setupShadow(color: personalColor, cornerRadius: 12)
+        button.setupShadow(color: ContentColor.personalColor.getColor(), cornerRadius: 12)
         button.addTarget(self, action: #selector(feelListReportTapped), for: .touchUpInside)
         return button
     }()
@@ -396,8 +398,8 @@ extension FeelPlayViewController {
         
         subContentView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -411,7 +413,7 @@ extension FeelPlayViewController {
         }
         
         titleView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/2)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(100)
         }
@@ -419,8 +421,8 @@ extension FeelPlayViewController {
         closeView.addSubview(closeButton)
         
         closeView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/2)
-            $0.trailing.equalToSuperview().inset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize/2)
             $0.height.width.equalTo(50)
         }
         
@@ -441,9 +443,9 @@ extension FeelPlayViewController {
         }
         
         subView.snp.makeConstraints {
-            $0.top.equalTo(titleView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(titleView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(subView.snp.width)
         }
         
@@ -461,9 +463,9 @@ extension FeelPlayViewController {
         }
         
         speedControllerStackView.snp.makeConstraints {
-            $0.top.equalTo(subView.snp.bottom).offset(intervalSize)
-            $0.leading.equalTo(sendMessageButton.snp.trailing).offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(subView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalTo(sendMessageButton.snp.trailing).offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
@@ -503,10 +505,10 @@ extension FeelPlayViewController {
         }
         
         playControllerStackView.snp.makeConstraints {
-            $0.top.equalTo(speedControllerStackView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(speedControllerStackView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(80)
         }
         
@@ -712,7 +714,7 @@ extension FeelPlayViewController {
                     topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
                 }
             }
-            showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             dismiss(animated: true) {
                 guard let topViewController = keyWindow?.visibleViewController else { return }

@@ -8,6 +8,7 @@
 import UIKit
 
 final class ContentCollectionViewManualCell: UICollectionViewCell {
+    private let constantSize = ConstantSize()
     private lazy var topLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -29,8 +30,8 @@ final class ContentCollectionViewManualCell: UICollectionViewCell {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "LoadingImage_Circle_\(randumNumber)")
-        imageView.tintColor = personalColor
+        imageView.image = UIImage(named: "LoadingImage_Circle_\(constantSize.randumNumber)")
+        imageView.tintColor = ContentColor.personalColor.getColor()
         imageView.backgroundColor = .white
         return imageView
     }()
@@ -38,8 +39,8 @@ final class ContentCollectionViewManualCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let roundViewSize = contentView.frame.size.height - intervalSize * 2
-        contentView.backgroundColor = personalColor
+        let roundViewSize = contentView.frame.size.height - constantSize.intervalSize * 2
+        contentView.backgroundColor = ContentColor.personalColor.getColor()
         
         contentView.hero.id = "manual"
         
@@ -49,18 +50,18 @@ final class ContentCollectionViewManualCell: UICollectionViewCell {
         }
         
         topLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize*2)
-            $0.leading.equalToSuperview().offset(intervalSize * 1.5)
-            $0.bottom.equalToSuperview().inset(intervalSize*2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize*2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize * 1.5)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize*2)
         }
         
         roundView.addSubview(imageView)
         
         roundView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalTo(topLabel.snp.trailing).offset(intervalSize * 2)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalTo(topLabel.snp.trailing).offset(constantSize.intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.width.equalTo(roundViewSize)
         }
         

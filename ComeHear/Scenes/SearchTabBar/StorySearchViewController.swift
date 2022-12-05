@@ -9,6 +9,9 @@ import UIKit
 import Alamofire
 
 class StorySearchViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    private let commonFunc = CommonFunc()
+    
     // MARK: - 변수, 상수
     private var nowPage = 1
     private var totalPage = 0
@@ -22,14 +25,14 @@ class StorySearchViewController: UIViewController {
     // MARK: - 이야기검색 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = secondCellColor
+        view.backgroundColor = ContentColor.secondCellColor.getColor()
         return view
     }()
     
     private let searchBar = SearchBar(frame: .zero, placeHorder: UIAccessibility.isVoiceOverRunning ? "이야기 검색창입니다. 검색후 키보드는 내려갑니다.".localized() : "어디로 갈까요?".localized())
     
     //MARK: - 최근검색어 UI
-    private let separatorView = SeparatorView(frame: .zero, color: moreLightGrayColor ?? .white)
+    private let separatorView = SeparatorView(frame: .zero, color: ContentColor.moreLightGrayColor.getColor())
     
     private lazy var noSearchStackView: UIStackView = {
         let stackView = UIStackView()
@@ -264,13 +267,13 @@ extension StorySearchViewController {
         
         recentSearchHeaderLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize * 2)
             $0.bottom.equalToSuperview()
         }
         
         recentSearchHeaderButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalTo(recentSearchHeaderLabel.snp.trailing).offset(intervalSize)
+            $0.leading.equalTo(recentSearchHeaderLabel.snp.trailing).offset(constantSize.intervalSize)
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
             $0.width.equalTo(100)
@@ -291,8 +294,8 @@ extension StorySearchViewController {
         
         recentSearchStackView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize/2)
-            $0.trailing.equalToSuperview().inset(intervalSize/2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize/2)
             $0.bottom.equalToSuperview()
         }
         
@@ -306,10 +309,10 @@ extension StorySearchViewController {
         noSearchCoverView.addSubview(noSearchView)
         
         noSearchView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         // MARK: - 검색화면_대기 UI_SETUP
@@ -325,25 +328,25 @@ extension StorySearchViewController {
         }
         
         placeholdLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize * 2)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(100)
         }
         
         placeImageView.snp.makeConstraints {
             $0.top.equalTo(placeholdLabel.snp.bottom)
-            $0.leading.equalToSuperview().offset(intervalSize * 1.5)
-            $0.trailing.equalToSuperview().inset(intervalSize * 1.5)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize * 1.5)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 1.5)
             $0.bottom.equalToSuperview()
         }
         
         // MARK: - 검색화면_결과 UI_SETUP
         tableShadowView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         tableShadowView.addSubview(tableView)
@@ -354,10 +357,10 @@ extension StorySearchViewController {
         
         // MARK: - 검색화면_결과없음 UI_SETUP
         noResultView.snp.makeConstraints {
-            $0.top.equalTo(searchBar.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(intervalSize)
+            $0.top.equalTo(searchBar.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(constantSize.intervalSize)
         }
         
         [noResultLabel, noResultImageView].forEach {
@@ -365,17 +368,17 @@ extension StorySearchViewController {
         }
         
         noResultLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(100)
         }
         
         noResultImageView.snp.makeConstraints {
             $0.top.equalTo(noResultLabel.snp.bottom)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
     }
     
@@ -384,7 +387,7 @@ extension StorySearchViewController {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard storyName != "" else { return }
         let languageCode = app.languageCode == "ja" ? "jp" : app.languageCode
-        var urlString = storySearchURL + "?keyword=\(storyName)&langCode=\(languageCode)&pageNo=\(nowPage)&pageSize=20000"
+        var urlString = URLString.SubDomain.storySearchURL.getURL() + "?keyword=\(storyName)&langCode=\(languageCode)&pageNo=\(nowPage)&pageSize=20000"
         if app.loginState == .login, let memberIdx = app.userMemberIdx {
             urlString += "&memberIdx=\(memberIdx)"
         }
@@ -431,8 +434,8 @@ extension StorySearchViewController {
         guard keyword != "" else { return }
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard let memberIdx = app.userMemberIdx else { return }
-        
-        var request = URLRequest(url: URL(string: searchHistoryURL)!)
+        guard let url = URL(string: URLString.SubDomain.searchHistoryURL.getURL()) else { return }
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 10
@@ -493,7 +496,7 @@ extension StorySearchViewController {
     private func requestRecentSearchKeyword() {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard let memberIdx = app.userMemberIdx else { return }
-        let urlString = searchHistoryURL + "?memberIdx=\(memberIdx)&type=STORY"
+        let urlString = URLString.SubDomain.searchHistoryURL.getURL() + "?memberIdx=\(memberIdx)&type=STORY"
         LoadingIndicator.showLoading(className: self.className, function: "requestRecentSearchKeyword")
         AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             .responseDecodable(of: RecentSearchKeywordModel.self) { [weak self] response in
@@ -553,7 +556,8 @@ extension StorySearchViewController {
         
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard let userMemberIdx = app.userMemberIdx else { return }
-        var request = URLRequest(url: URL(string: allDeleteSearchHistoryURL + "/\(userMemberIdx)" + "?searchCode=STORY")!)
+        guard let url = URL(string: URLString.SubDomain.allDeleteSearchHistoryURL.getURL() + "/\(userMemberIdx)" + "?searchCode=STORY") else { return }
+        var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 10
@@ -628,7 +632,7 @@ extension StorySearchViewController: UITableViewDataSource {
         
         let storyDetail = storyDetails[indexPath.row]
         cell.textLabel?.text = storyDetail.title
-        cell.textLabel?.accessibilityLabel = "\(intToString(indexPath.row + 1))번 " + storyDetail.title
+        cell.textLabel?.accessibilityLabel = "\(commonFunc.intToString(indexPath.row + 1))번 " + storyDetail.title
         cell.accessoryType = .disclosureIndicator
         
         return cell

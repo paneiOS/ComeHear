@@ -15,6 +15,7 @@ protocol MyFeelLikeTableViewDelegate: AnyObject {
 }
 
 class MyFeelLikeTableViewCell: UITableViewCell {
+    private let constantSize = ConstantSize()
     var feelList: FeelListData?
     var indexPath: IndexPath?
     var tableIndex: Int?
@@ -56,7 +57,7 @@ class MyFeelLikeTableViewCell: UITableViewCell {
     lazy var listenButton: UIButton = {
         let button = UIButton()
         button.tintColor = .black
-        button.setImage(systemName: "headphones", pointSize: buttonSize)
+        button.setImage(systemName: "headphones", pointSize: constantSize.buttonSize)
         button.addTarget(self, action: #selector(feelListenButtonTap), for: .touchUpInside)
         button.accessibilityLabel = "듣기".localized()
         return button
@@ -65,7 +66,7 @@ class MyFeelLikeTableViewCell: UITableViewCell {
     lazy var likeButton: UIButton = {
         let button = UIButton()
         button.tintColor = .black
-        button.setImage(systemName: "heart", pointSize: buttonSize)
+        button.setImage(systemName: "heart", pointSize: constantSize.buttonSize)
         button.addTarget(self, action: #selector(feelLikeButtonTap), for: .touchUpInside)
         return button
     }()
@@ -73,7 +74,7 @@ class MyFeelLikeTableViewCell: UITableViewCell {
     lazy var reportButton: UIButton = {
         let button = UIButton()
         button.tintColor = .black
-        button.setImage(systemName: "exclamationmark.bubble", pointSize: buttonSize)
+        button.setImage(systemName: "exclamationmark.bubble", pointSize: constantSize.buttonSize)
         button.addTarget(self, action: #selector(feelListReportTap), for: .touchUpInside)
         button.accessibilityLabel = "신고하기".localized()
         return button
@@ -86,12 +87,12 @@ class MyFeelLikeTableViewCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         stackView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
     }
     

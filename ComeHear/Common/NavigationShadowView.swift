@@ -8,6 +8,8 @@
 import UIKit
 
 final class NavigationShadowView: UIView {
+    private let constantSize = ConstantSize()
+    
     lazy var separator: UIView = {
         let separator = UIView()
         separator.setupShadow()
@@ -20,7 +22,7 @@ final class NavigationShadowView: UIView {
         separator.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.height.equalTo(2)
-            $0.width.equalTo(frameSizeWidth*2)
+            $0.width.equalTo(constantSize.frameSizeWidth*2)
         } 
     }
 

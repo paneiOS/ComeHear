@@ -10,7 +10,7 @@ import UIKit
 class LaunchScreenManager {
     
     // MARK: - Properties
-    
+    private let constantSize = ConstantSize()
     static let instance = LaunchScreenManager(animationDurationBase: 1)
     
     var view: UIView?
@@ -53,9 +53,10 @@ class LaunchScreenManager {
             withDuration: animationDurationBase,
             delay: 0,
             options: .curveEaseIn,
-            animations: {
-                coverTopView.transform = CGAffineTransform(translationX: 0, y: -frameSizeHeight/2 - 200)
-                coverBottomView.transform = CGAffineTransform(translationX: 0, y: frameSizeHeight/2 + 200)
+            animations: { [weak self] in
+                guard let self = self else { return }
+                coverTopView.transform = CGAffineTransform(translationX: 0, y: -self.constantSize.frameSizeHeight/2 - 200)
+                coverBottomView.transform = CGAffineTransform(translationX: 0, y: self.constantSize.frameSizeHeight/2 + 200)
             }
         ) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in

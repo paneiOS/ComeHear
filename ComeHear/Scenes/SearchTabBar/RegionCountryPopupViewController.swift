@@ -8,6 +8,8 @@
 import UIKit
 
 class RegionCountryPopupViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    private let commonFunc = CommonFunc()
     private var countryItems = [String]()
     
     var delegate: RegionPopupDelegate?
@@ -72,8 +74,8 @@ extension RegionCountryPopupViewController {
         
         mainContentView.snp.makeConstraints {
             $0.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [titleLabel, closeButton, tableView].forEach {
@@ -81,22 +83,22 @@ extension RegionCountryPopupViewController {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.trailing.equalTo(closeButton.snp.leading)
             $0.height.equalTo(50)
         }
         
         closeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize/2)
             $0.width.height.equalTo(50)
         }
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(constantSize.intervalSize)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40 * 11)
         }
     }
@@ -127,7 +129,7 @@ extension RegionCountryPopupViewController: UITableViewDataSource {
 
         let country = countryItems[indexPath.row]
         cell.textLabel?.text = country
-        cell.textLabel?.accessibilityLabel = "\(intToString(indexPath.row + 1))번 " + country
+        cell.textLabel?.accessibilityLabel = "\(commonFunc.intToString(indexPath.row + 1))번 " + country
         cell.accessoryType = .disclosureIndicator
         return cell
     }

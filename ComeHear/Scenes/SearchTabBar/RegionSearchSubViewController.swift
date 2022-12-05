@@ -12,6 +12,7 @@ import CoreLocation
 import MapKit
 
 class RegionSearchSubViewController: UIViewController, MTMapViewDelegate {
+    private let constantSize = ConstantSize()
     
     // MARK: - 변수, 상수
     private var currentPosition = (37.568491, 126.981614)
@@ -157,8 +158,8 @@ class RegionSearchSubViewController: UIViewController, MTMapViewDelegate {
         }
         
         currentButtonView.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.width.equalTo(40)
             $0.height.equalTo(40)
         }
@@ -190,7 +191,7 @@ class RegionSearchSubViewController: UIViewController, MTMapViewDelegate {
         if self.locationManager.authorizationStatus == .authorizedWhenInUse || self.locationManager.authorizationStatus == .authorizedAlways {
             mapView.setMapCenter(MTMapPoint(geoCoord: MTMapPointGeo(latitude: currentPosition.1, longitude: currentPosition.0)), zoomLevel: 7, animated: true)
         } else {
-            self.showSettingAlert(title: "GPS권한 요청", message: "현재위치 정보를 얻기 위해 권한을 허용해주세요.")
+            showSettingAlert(type: .gps)
         }
     }
 }
@@ -242,7 +243,7 @@ extension RegionSearchSubViewController: CLLocationManagerDelegate {
             print("GPS 권한 설정됨")
             #endif
         case .restricted, .denied:
-            self.showSettingAlert(title: "GPS권한 요청", message: "현재위치 정보를 얻기 위해 권한을 허용해주세요.")
+            showSettingAlert(type: .gps)
         default:
             #if DEBUG
             print("GPS: Default")

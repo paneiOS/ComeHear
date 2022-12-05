@@ -8,10 +8,11 @@
 import UIKit
 
 class BasicSearchViewController: UIViewController {
+    private let constantSize = ConstantSize()
     //MARK: - 검색탭 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
@@ -25,7 +26,7 @@ class BasicSearchViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.spacing = intervalSize
+        stackView.spacing = constantSize.intervalSize
         
         [
             tourSearchButton,
@@ -44,7 +45,7 @@ class BasicSearchViewController: UIViewController {
         button.setTitle("관광지 검색".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 24.0, weight: .bold)
-        button.setupShadow(color: firstCellColor)
+        button.setupShadow(color: ContentColor.firstCellColor.getColor())
         button.addTarget(self, action: #selector(keywordSearch), for: .touchUpInside)
         return button
     }()
@@ -54,7 +55,7 @@ class BasicSearchViewController: UIViewController {
         button.setTitle("이야기 검색".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 24.0, weight: .bold)
-        button.setupShadow(color: secondCellColor)
+        button.setupShadow(color: ContentColor.secondCellColor.getColor())
         button.addTarget(self, action: #selector(storySearch), for: .touchUpInside)
         return button
     }()
@@ -64,7 +65,7 @@ class BasicSearchViewController: UIViewController {
         button.setTitle("지역별 검색".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 24.0, weight: .bold)
-        button.setupShadow(color: thirdCellColor)
+        button.setupShadow(color: ContentColor.thirdCellColor.getColor())
         button.addTarget(self, action: #selector(regionSearch), for: .touchUpInside)
         return button
     }()
@@ -74,7 +75,7 @@ class BasicSearchViewController: UIViewController {
         button.setTitle("현재 위치로 검색".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 24.0, weight: .bold)
-        button.setupShadow(color: fourthCellColor)
+        button.setupShadow(color: ContentColor.fourthCellColor.getColor())
         button.addTarget(self, action: #selector(locateSearch), for: .touchUpInside)
         return button
     }()
@@ -138,29 +139,29 @@ extension BasicSearchViewController {
         }
         
         subContentView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         buttonStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         placeHolderLabel.snp.makeConstraints {
-            $0.top.equalTo(buttonStackView.snp.bottom).offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(buttonStackView.snp.bottom).offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         carrierImageView.snp.makeConstraints {
-            $0.top.equalTo(buttonStackView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(buttonStackView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
     }
     
@@ -180,7 +181,7 @@ extension BasicSearchViewController {
             let viewController = RegionSearchViewController()
             navigationController?.pushViewController(viewController, animated: true)
         } else {
-            self.showSettingAlert(title: "GPS권한 요청", message: "현재위치 정보를 얻기 위해 권한을 허용해주세요.")
+            showSettingAlert(type: .gps)
         }
     }
     
@@ -190,7 +191,7 @@ extension BasicSearchViewController {
             let viewController = LocateSearchViewController()
             navigationController?.pushViewController(viewController, animated: true)
         } else {
-            self.showSettingAlert(title: "GPS권한 요청", message: "현재위치 정보를 얻기 위해 권한을 허용해주세요.")
+            showSettingAlert(type: .gps)
         }
     }
 }

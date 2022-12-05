@@ -10,6 +10,7 @@ import Alamofire
 
 final class FeelReportViewController: UIViewController {
     // MARK: - 변수, 상수
+    private let constantSize = ConstantSize()
     private var reportText: String = ""
     private var etcViewBool = false
     private let selectFeel: FeelListData
@@ -19,7 +20,7 @@ final class FeelReportViewController: UIViewController {
             case .abuseType:
                 reportText = "욕설, 명예훼손".localized()
                 abuseButton.setImage(systemName: "checkmark.circle.fill", pointSize: 27)
-                abuseButton.tintColor = checkButtonColor
+                abuseButton.tintColor = ContentColor.checkButtonColor.getColor()
                 [pornoButton, unsuitableButton, etcButton].forEach {
                     $0.setImage(systemName: "checkmark.circle", pointSize: 25)
                     $0.tintColor = .black
@@ -27,7 +28,7 @@ final class FeelReportViewController: UIViewController {
             case .pornoType:
                 reportText = "음란물".localized()
                 pornoButton.setImage(systemName: "checkmark.circle.fill", pointSize: 27)
-                pornoButton.tintColor = checkButtonColor
+                pornoButton.tintColor = ContentColor.checkButtonColor.getColor()
                 [abuseButton, unsuitableButton, etcButton].forEach {
                     $0.setImage(systemName: "checkmark.circle", pointSize: 25)
                     $0.tintColor = .black
@@ -35,7 +36,7 @@ final class FeelReportViewController: UIViewController {
             case .unsuitableType:
                 reportText = "내용 부적합".localized()
                 unsuitableButton.setImage(systemName: "checkmark.circle.fill", pointSize: 27)
-                unsuitableButton.tintColor = checkButtonColor
+                unsuitableButton.tintColor = ContentColor.checkButtonColor.getColor()
                 [abuseButton, pornoButton, etcButton].forEach {
                     $0.setImage(systemName: "checkmark.circle", pointSize: 25)
                     $0.tintColor = .black
@@ -43,7 +44,7 @@ final class FeelReportViewController: UIViewController {
             case .etcType:
                 reportText = ""
                 etcButton.setImage(systemName: "checkmark.circle.fill", pointSize: 27)
-                etcButton.tintColor = checkButtonColor
+                etcButton.tintColor = ContentColor.checkButtonColor.getColor()
                 [abuseButton, unsuitableButton, pornoButton].forEach {
                     $0.setImage(systemName: "checkmark.circle", pointSize: 25)
                     $0.tintColor = .black
@@ -51,7 +52,7 @@ final class FeelReportViewController: UIViewController {
             case .none:
                 [abuseButton, pornoButton, unsuitableButton, etcButton].forEach {
                     $0.setImage(systemName: "checkmark.circle.fill", pointSize: 27)
-                    $0.tintColor = checkButtonColor
+                    $0.tintColor = ContentColor.checkButtonColor.getColor()
                 }
             }
         }
@@ -90,7 +91,7 @@ final class FeelReportViewController: UIViewController {
     
     private lazy var placeholderView: UIView = {
         let view = UIView()
-        view.setupSubViewHeader(color: personalColor)
+        view.setupSubViewHeader(color: ContentColor.personalColor.getColor())
         return view
     }()
     
@@ -259,7 +260,7 @@ final class FeelReportViewController: UIViewController {
     
     private lazy var reportReasonSubView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 12.0
         view.isAccessibilityElement = false
         return view
@@ -269,7 +270,7 @@ final class FeelReportViewController: UIViewController {
         let textView = UITextView()
         textView.font = .systemFont(ofSize: 18, weight: .regular)
         textView.textColor = .label
-        textView.backgroundColor = moreLightGrayColor
+        textView.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         textView.delegate = self
         return textView
     }()
@@ -324,8 +325,8 @@ extension FeelReportViewController {
         
         subContentView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize * 2)
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
         }
         
         [placeholderView, selectLabel, stackView, sendButton].forEach {
@@ -365,28 +366,28 @@ extension FeelReportViewController {
         
         placeholderLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         closeButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalTo(placeholderLabel.snp.trailing).offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize/2)
+            $0.leading.equalTo(placeholderLabel.snp.trailing).offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize/2)
             $0.bottom.equalToSuperview()
             $0.width.equalTo(closeButton.snp.height)
         }
         
         selectLabel.snp.makeConstraints {
-            $0.top.equalTo(placeholderView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(placeholderView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         stackView.snp.makeConstraints {
-            $0.top.equalTo(selectLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(selectLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         abuseView.snp.makeConstraints {
@@ -454,28 +455,28 @@ extension FeelReportViewController {
         }
         
         reportReasonView.snp.makeConstraints {
-            $0.height.equalTo(frameSizeWidth * 3 / 5)
+            $0.height.equalTo(constantSize.frameSizeWidth * 3 / 5)
         }
         
         reportReasonSubView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
         
         reportReasonTextView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         sendButton.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom).offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(stackView.snp.bottom).offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
     }
@@ -545,12 +546,12 @@ extension FeelReportViewController {
     
     // MARK: - Request API
     @objc private func tapSendButton() {
-        guard reportType != .none else { return showConfirmAlert("신고 사유를 선택해주세요.", "알림") }
-        guard reportText != "", reportText != "신고 사유를 입력해주세요.".localized() else { return showConfirmAlert("신고 사유를 입력해주세요.", "알림") }
+        guard reportType != .none else { return showConfirmAlert(type: .reasonReport) }
+        guard reportText != "", reportText != "신고 사유를 입력해주세요.".localized() else { return showConfirmAlert(type: .reasonReport) }
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard let memberIdx = app.userMemberIdx else { return }
-        
-        var request = URLRequest(url: URL(string: feelReportURL + "/\(memberIdx)")!)
+        guard let url = URL(string: URLString.SubDomain.feelReportURL.getURL() + "/\(memberIdx)") else { return }
+        var request = URLRequest(url: url)
         
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -591,11 +592,8 @@ extension FeelReportViewController {
                         self.showToVoice(type: .announcement, text: "이미 신고하신 게시물입니다. 관리자가 확인 후, 재게시되었습니다. 현재화면을 닫겠습니다.")
                     }
                 }
-            case .failure(let error):
-                self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-                #if DEBUG
-                print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-                #endif
+            case .failure(_):
+                self.showCloseAlert(type: .unknownError)
             }
             DispatchQueue.main.async {
                 LoadingIndicator.hideLoading()

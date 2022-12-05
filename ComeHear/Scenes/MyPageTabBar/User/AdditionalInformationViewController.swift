@@ -9,6 +9,8 @@ import UIKit
 import Alamofire
 
 class AdditionalInformationViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    
     var token: String = ""
     var type: String = ""
     var fullName: String?
@@ -144,7 +146,7 @@ class AdditionalInformationViewController: UIViewController {
     
     private lazy var allAgreeView: UIView = {
         let view = UIView()
-        view.setupSubViewFooter(color: personalColor)
+        view.setupSubViewFooter(color: ContentColor.personalColor.getColor())
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapAllAgree))
         view.addGestureRecognizer(tapGestureRecognizer)
         return view
@@ -158,6 +160,7 @@ class AdditionalInformationViewController: UIViewController {
         label.isAccessibilityElement = false
         return label
     }()
+    
     private lazy var allAgreeButton: UIButton = {
         let button = UIButton()
         button.setImage(systemName: "square", pointSize: 20)
@@ -169,7 +172,7 @@ class AdditionalInformationViewController: UIViewController {
     
     private lazy var popupView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 5
         return view
     }()
@@ -219,7 +222,7 @@ class AdditionalInformationViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.spacing = intervalSize
+        stackView.spacing = constantSize.intervalSize
         
         [
             inputButton,
@@ -281,8 +284,8 @@ class AdditionalInformationViewController: UIViewController {
         }
         
         popupView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.centerY.equalToSuperview()
         }
         
@@ -300,7 +303,7 @@ class AdditionalInformationViewController: UIViewController {
         }
         
         privacyView.snp.makeConstraints {
-            $0.height.equalTo(30 + intervalSize)
+            $0.height.equalTo(30 + constantSize.intervalSize)
         }
         
         allAgreeView.snp.makeConstraints {
@@ -308,15 +311,15 @@ class AdditionalInformationViewController: UIViewController {
         }
         
         popupTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         agreePlaceHolderView.snp.makeConstraints {
-            $0.top.equalTo(popupTitleLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(popupTitleLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -326,13 +329,13 @@ class AdditionalInformationViewController: UIViewController {
         }
         
         agreePlaceHolderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         agreeStackView.snp.makeConstraints {
-            $0.top.equalTo(agreePlaceHolderLabel.snp.bottom).offset(intervalSize/2)
+            $0.top.equalTo(agreePlaceHolderLabel.snp.bottom).offset(constantSize.intervalSize/2)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
@@ -344,13 +347,13 @@ class AdditionalInformationViewController: UIViewController {
         
         allAgreeLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         allAgreeButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.bottom.equalToSuperview()
         }
         
@@ -360,13 +363,13 @@ class AdditionalInformationViewController: UIViewController {
         
         termsLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         termsAgreeButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.bottom.equalToSuperview()
         }
         
@@ -376,20 +379,20 @@ class AdditionalInformationViewController: UIViewController {
         
         privacyLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize/2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/2)
         }
         
         privacyAgreeButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
-            $0.bottom.equalToSuperview().inset(intervalSize/2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/2)
         }
         
         nickNameView.snp.makeConstraints {
-            $0.top.equalTo(agreePlaceHolderView.snp.bottom).offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(agreePlaceHolderView.snp.bottom).offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -400,16 +403,16 @@ class AdditionalInformationViewController: UIViewController {
         }
         
         nickNamePlaceHolderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         nickNameTextFieldView.snp.makeConstraints {
-            $0.top.equalTo(nickNamePlaceHolderLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(nickNamePlaceHolderLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
@@ -417,31 +420,31 @@ class AdditionalInformationViewController: UIViewController {
         
         nickNameTextField.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
             $0.height.equalTo(30)
         }
         
         buttonStackView.snp.makeConstraints {
-            $0.top.equalTo(nickNameView.snp.bottom).offset(intervalSize * 2)
-            $0.leading.equalTo(popupView.snp.leading).offset(intervalSize)
-            $0.trailing.equalTo(popupView.snp.trailing).inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(nickNameView.snp.bottom).offset(constantSize.intervalSize * 2)
+            $0.leading.equalTo(popupView.snp.leading).offset(constantSize.intervalSize)
+            $0.trailing.equalTo(popupView.snp.trailing).inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
     }
     
     // MARK: - 함수_objc
     @objc private func inputInfo() {
-        guard let nickname = nickNameTextField.text, nickname != "" else { return self.showConfirmAlert("별명을 입력해주세요.", "알림")}
-        guard let nickname = nickNameTextField.text, !nickname.contains(" ") else { return self.showConfirmAlert("별명은 띄어쓰기 및 빈칸이\n포함될 수 없습니다.", "알림") }
+        guard let nickname = nickNameTextField.text, nickname != "" else { return self.showConfirmAlert(type: .insertNickname)}
+        guard let nickname = nickNameTextField.text, !nickname.contains(" ") else { return self.showConfirmAlert(type: .nicknameNotBlank) }
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         if app.languageCode == "ko" {
-            guard nickNameTextField.text?.count ?? 0 <= 10 else { return showConfirmAlert("별명은 글자수 10자까지 가능합니다.", "알림") }
+            guard nickNameTextField.text?.count ?? 0 <= 10 else { return showConfirmAlert(type: .limitNickname) }
         }
-        
-        var request = URLRequest(url: URL(string: socialSignupURL)!)
+        guard let url = URL(string: URLString.SubDomain.socialSignupURL.getURL()) else { return }
+        var request = URLRequest(url: url)
         let params = ["nickname": nickname, "token": token, "type": type, "username": fullName] as Dictionary
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -475,19 +478,17 @@ class AdditionalInformationViewController: UIViewController {
                         let okAction = UIAlertAction(title: "확인".localized(), style: UIAlertAction.Style.default){ _ in
                             self.dismiss(animated: true)
                         }
-                        self.showOneActionAlert("로그인알림".localized(with: userData.nickName), "알림".localized(), okAction)
+                        self.showOneButtonAlert("로그인알림".localized(with: userData.nickName), "알림".localized(), okAction)
                     }
                 } else if data.status == 406 {
-                    self.showConfirmAlert("잘못된 별명입니다.\n다른 별명을 입력해주세요.", "잘못된 별명")
+                    self.showConfirmAlert(type: .nicknameError)
                 } else if data.status == 409 {
-                    self.showConfirmAlert("중복된 별명입니다.\n다른 별명을 입력해주세요.", "중복된 별명")
+                    self.showConfirmAlert(type: .duplicateNickname)
                 }
-            case .failure(let error):
-                self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+            case .failure(_):
+                self.showCloseAlert(type: .unknownError)
             }
+
             DispatchQueue.main.async {
                 LoadingIndicator.hideLoading()
             }
@@ -496,7 +497,8 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
     
     @objc private func tapCancel() {
         if type == "APPLE" {
-            var request = URLRequest(url: URL(string: appleSecessionURL)!)
+            guard let url = URL(string: URLString.SubDomain.appleSecessionURL.getURL()) else { return }
+            var request = URLRequest(url: url)
             let params = ["token": token] as Dictionary
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")

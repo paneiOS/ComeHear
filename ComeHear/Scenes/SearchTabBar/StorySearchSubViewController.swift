@@ -9,7 +9,8 @@ import UIKit
 import Alamofire
 
 class StorySearchSubViewController: UIViewController {
-    private let frameSizeWidth = UIScreen.main.bounds.size.width * 0.7
+    private let constantSize = ConstantSize()
+    private let commonFunc = CommonFunc()
     private var gradientLayer: CAGradientLayer!
     
     private var tid: String = ""
@@ -20,10 +21,10 @@ class StorySearchSubViewController: UIViewController {
         didSet {
             if favorite {
                 favoriteButton.setImage(systemName: "star.fill", pointSize: 23)
-                buttonView.backgroundColor = checkButtonColor
+                buttonView.backgroundColor = ContentColor.checkButtonColor.getColor()
             } else {
                 favoriteButton.setImage(systemName: "star.fill", pointSize: 23)
-                buttonView.backgroundColor = moreLightGrayColor
+                buttonView.backgroundColor = ContentColor.moreLightGrayColor.getColor()
             }
         }
     }
@@ -42,7 +43,7 @@ class StorySearchSubViewController: UIViewController {
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.layer.borderColor = moreLightGrayColor?.cgColor
+        tableView.layer.borderColor = ContentColor.moreLightGrayColor.getColor().cgColor
         tableView.layer.borderWidth = 0.5
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -63,7 +64,7 @@ class StorySearchSubViewController: UIViewController {
         view.layer.shadowOffset = CGSize(width: 0, height: 4)
         view.layer.shadowRadius = 5
         view.layer.shadowOpacity = 0.3
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         if !UIAccessibility.isVoiceOverRunning {
             view.isHidden = true
         }
@@ -145,10 +146,10 @@ class StorySearchSubViewController: UIViewController {
         }
         
         imageHeaderView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(-intervalSize)
+            $0.top.equalToSuperview().offset(-constantSize.intervalSize)
             if imageUrl == "" {
-                $0.leading.equalToSuperview().offset(-intervalSize)
-                $0.trailing.equalToSuperview().inset(-intervalSize)
+                $0.leading.equalToSuperview().offset(-constantSize.intervalSize)
+                $0.trailing.equalToSuperview().inset(-constantSize.intervalSize)
             } else {
                 $0.leading.equalToSuperview()
                 $0.trailing.equalToSuperview()
@@ -164,11 +165,11 @@ class StorySearchSubViewController: UIViewController {
         
         buttonView.snp.makeConstraints {
             if imageUrl == "" {
-                $0.trailing.equalTo(imageHeaderView.snp.trailing).inset(intervalSize * 2)
-                $0.bottom.equalTo(imageHeaderView.snp.bottom).inset(intervalSize * 2)
+                $0.trailing.equalTo(imageHeaderView.snp.trailing).inset(constantSize.intervalSize * 2)
+                $0.bottom.equalTo(imageHeaderView.snp.bottom).inset(constantSize.intervalSize * 2)
             } else {
-                $0.trailing.equalTo(imageHeaderView.snp.trailing).inset(intervalSize)
-                $0.bottom.equalTo(imageHeaderView.snp.bottom).inset(intervalSize)
+                $0.trailing.equalTo(imageHeaderView.snp.trailing).inset(constantSize.intervalSize)
+                $0.bottom.equalTo(imageHeaderView.snp.bottom).inset(constantSize.intervalSize)
             }
             $0.height.width.equalTo(38)
         }
@@ -181,13 +182,13 @@ class StorySearchSubViewController: UIViewController {
         
         titleLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         subLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalTo(titleLabel.snp.trailing).offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalTo(titleLabel.snp.trailing).offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         tableView.snp.makeConstraints {
@@ -210,9 +211,9 @@ class StorySearchSubViewController: UIViewController {
         subLabel.text = "[\(storyDetails.count)]"
         titleLabel.accessibilityLabel = "관광지 " + titleLabel.text! + "의 이야기 \(subLabel.text!)개"
         if imageUrl == "" {
-            imageHeaderView.image = landScapeImage
+            imageHeaderView.image = ContentImage.landScapeImage.getImage()
         } else {
-            imageHeaderView.setImage(with: imageUrl, placeholder: loadingImage, cornerRadius: 0)
+            imageHeaderView.setImage(with: imageUrl, placeholder: ContentImage.loadingImage.getImage(), cornerRadius: 0)
         }
     }
     
@@ -221,13 +222,13 @@ class StorySearchSubViewController: UIViewController {
         navigationItem.backBarButtonItem = backBarButtonItem
         
         gradientLayer = CAGradientLayer()
-        self.gradientLayer.frame = CGRect(x: 0, y: 0, width: frameSizeWidth*2, height: 100)
+        self.gradientLayer.frame = CGRect(x: 0, y: 0, width: constantSize.frameSizeWidth * 1.4, height: 100)
         self.gradientLayer.colors = [UIColor.white.cgColor, UIColor(white: 1, alpha: 0).cgColor]
         headerView.layer.addSublayer(self.gradientLayer)
     }
     
     private func requestSearch() {
-        var urlString = storySearchURL + "/\(tid)/\(tlid)?langCode=ko&pageNo=\(nowPage)&pageSize=20000"
+        var urlString = URLString.SubDomain.storySearchURL.getURL() + "/\(tid)/\(tlid)?langCode=ko&pageNo=\(nowPage)&pageSize=20000"
         if let app = UIApplication.shared.delegate as? AppDelegate, app.userLogin, let memberIdx = app.userMemberIdx {
             urlString += "&memberIdx=\(memberIdx)"
         }
@@ -243,11 +244,8 @@ class StorySearchSubViewController: UIViewController {
                     self.subLabel.text = "[\(self.storyDetails.count)]"
                     self.titleLabel.accessibilityLabel = "관광지 " + self.titleLabel.text! + "의 이야기 \(self.storyDetails.count)개"
                     self.tableView.reloadData()
-                case .failure(let error):
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                    print(error)
-#endif
+                case .failure(_):
+                    self.showCloseAlert(type: .unknownError)
                 }
             }
     }
@@ -260,10 +258,11 @@ class StorySearchSubViewController: UIViewController {
                 let loginViewContrller = LoginViewController()
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             guard let memberIdx = app.userMemberIdx else { return }
-            var request = URLRequest(url: URL(string: favoritePlace)!)
+            guard let url = URL(string: URLString.SubDomain.favoritePlace.getURL()) else { return }
+            var request = URLRequest(url: url)
             request.httpMethod = favorite ? "DELETE" : "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.timeoutInterval = 10
@@ -293,12 +292,9 @@ class StorySearchSubViewController: UIViewController {
                         self.showToast(message: self.favorite ? "즐겨찾기에 추가되었습니다." : "즐겨찾기에서 삭제되었습니다.", font: .systemFont(ofSize: 16), vcBool: true)
                         self.showToVoice(type: .announcement, text: self.favorite ?  "즐겨찾기에 추가되었습니다." : "즐겨찾기에서 삭제되었습니다.")
                     }
-                case .failure(let error):
+                case .failure(_):
                     guard let topViewController = keyWindow?.visibleViewController else { return }
-                    topViewController.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                    topViewController.showCloseAlert(type: .unknownError)
                 }
                 DispatchQueue.main.async {
                     LoadingIndicator.hideLoading()
@@ -309,18 +305,15 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
     
     private func requestFavoriteValidate() {
         guard let app = UIApplication.shared.delegate as? AppDelegate, app.loginState == .login, let memberIdx = app.userMemberIdx else { return }
-        let urlString = favoriteValidate + "?memberIdx=\(memberIdx)&place=\(storyTitle)&tid=\(tid)&tlid=\(tlid)"
+        let urlString = URLString.SubDomain.favoriteValidate.getURL() + "?memberIdx=\(memberIdx)&place=\(storyTitle)&tid=\(tid)&tlid=\(tlid)"
         AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             .responseDecodable(of: BasicResponseBoolModel.self) { [weak self] response in
                 guard let self = self else { return }
                 switch response.result {
                 case .success(let data):
                     self.favorite = data.data
-                case .failure(let error):
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                    print(error)
-#endif
+                case .failure(_):
+                    self.showCloseAlert(type: .unknownError)
                 }
             }
     }
@@ -347,7 +340,7 @@ extension StorySearchSubViewController: UITableViewDataSource {
         cell.accessoryType = .disclosureIndicator
         cell.accessoryView?.accessibilityElementsHidden = true
         cell.textLabel?.text = story.title
-        cell.textLabel?.accessibilityLabel = "\(intToString(indexPath.row + 1))번 " + story.title
+        cell.textLabel?.accessibilityLabel = "\(commonFunc.intToString(indexPath.row + 1))번 " + story.title
         cell.detailTextLabel?.text = story.audioTitle ?? ""
         cell.detailTextLabel?.textColor = .secondaryLabel
         cell.detailTextLabel?.accessibilityElementsHidden = true

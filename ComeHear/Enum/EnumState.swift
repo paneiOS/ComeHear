@@ -1,5 +1,5 @@
 //
-//  Content_State.swift
+//  EnumState.swift
 //  ComeHear
 //
 //  Created by Pane on 2022/08/11.

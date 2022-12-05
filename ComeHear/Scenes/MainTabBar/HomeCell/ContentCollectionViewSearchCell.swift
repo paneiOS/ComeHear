@@ -31,7 +31,7 @@ final class ContentCollectionViewSearchCell: UICollectionViewCell {
     
     private lazy var tourSearchButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = firstCellColor
+        button.backgroundColor = ContentColor.firstCellColor.getColor()
         button.setTitle("관광지 검색".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13.0, weight: .bold)
@@ -41,7 +41,7 @@ final class ContentCollectionViewSearchCell: UICollectionViewCell {
     
     private lazy var storySearchButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = secondCellColor
+        button.backgroundColor = ContentColor.secondCellColor.getColor()
         button.setTitle("이야기 검색".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13.0, weight: .bold)
@@ -51,7 +51,7 @@ final class ContentCollectionViewSearchCell: UICollectionViewCell {
     
     private lazy var regionSearchButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = thirdCellColor
+        button.backgroundColor = ContentColor.thirdCellColor.getColor()
         button.setTitle("지역 검색".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13.0, weight: .bold)
@@ -61,7 +61,7 @@ final class ContentCollectionViewSearchCell: UICollectionViewCell {
     
     lazy var locateSearchButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = fourthCellColor
+        button.backgroundColor = ContentColor.fourthCellColor.getColor()
         button.setTitle("현재 위치 검색".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 13.0, weight: .bold)
@@ -107,7 +107,7 @@ final class ContentCollectionViewSearchCell: UICollectionViewCell {
             let viewController = RegionSearchViewController()
             topViewController.navigationController?.pushViewController(viewController, animated: true)
         } else {
-            topViewController.showSettingAlert(title: "GPS권한 요청", message: "현재위치 정보를 얻기 위해 권한을 허용해주세요.")
+            topViewController.showSettingAlert(type: .gps)
         }
     }
     
@@ -118,7 +118,7 @@ final class ContentCollectionViewSearchCell: UICollectionViewCell {
             let viewController = LocateSearchViewController()
             topViewController.navigationController?.pushViewController(viewController, animated: true)
         } else {
-            topViewController.showSettingAlert(title: "GPS권한 요청", message: "현재위치 정보를 얻기 위해 권한을 허용해주세요.")
+            topViewController.showSettingAlert(type: .gps)
         }
     }
 }

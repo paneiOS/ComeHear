@@ -8,6 +8,7 @@
 import UIKit
 
 class NoticeSectionTableViewCell: UITableViewCell {
+    private let constantSize = ConstantSize()
     private lazy var titleView: UIView = {
         let view = UIView()
         return view
@@ -32,7 +33,7 @@ class NoticeSectionTableViewCell: UITableViewCell {
     
     lazy var openButton: UIButton = {
         let button = UIButton()
-        button.setImage(systemName: "plus.circle", pointSize: buttonSize)
+        button.setImage(systemName: "plus.circle", pointSize: constantSize.buttonSize)
         button.isEnabled = false
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         button.isAccessibilityElement = false
@@ -60,16 +61,16 @@ class NoticeSectionTableViewCell: UITableViewCell {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/2)
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.trailing.equalToSuperview()
         }
         
         subTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(intervalSize/2)
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(constantSize.intervalSize/2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
             $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(intervalSize/2)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/2)
         }
         
         openButton.snp.makeConstraints {

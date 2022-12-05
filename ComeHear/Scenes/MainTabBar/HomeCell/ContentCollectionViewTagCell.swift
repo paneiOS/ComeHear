@@ -8,6 +8,8 @@
 import UIKit
 
 final class ContentCollectionViewTagCell: UICollectionViewCell {
+    private let constantSize = ConstantSize()
+    
     lazy var firstTag: UILabel = {
         let label = UILabel()
         label.setupTagTypeLayout()
@@ -61,26 +63,26 @@ final class ContentCollectionViewTagCell: UICollectionViewCell {
         }
         
         firstTag.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/2)
-            $0.leading.equalToSuperview().offset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize/2)
             $0.height.equalTo(30)
         }
         
         secondTag.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/2)
-            $0.leading.equalTo(firstTag.snp.trailing).offset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.leading.equalTo(firstTag.snp.trailing).offset(constantSize.intervalSize/2)
             $0.height.equalTo(30)
         }
         
         thirdTag.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/2)
-            $0.leading.equalTo(secondTag.snp.trailing).offset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.leading.equalTo(secondTag.snp.trailing).offset(constantSize.intervalSize/2)
             $0.height.equalTo(30)
         }
         
         detailLabel.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(intervalSize/2)
-            $0.bottom.equalToSuperview().inset(intervalSize/2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize/2)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/2)
             $0.height.equalTo(30)
         }
     }

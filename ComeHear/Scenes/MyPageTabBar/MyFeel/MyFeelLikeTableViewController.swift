@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 
 class MyFeelLikeTableViewController: UIViewController {
+    private let constantSize = ConstantSize()
     // MARK: - 변수, 상수
     private var myFeelBoolList = [Bool]()
     private var myFeelShareList = [MyFeelShareDataList]()
@@ -16,7 +17,7 @@ class MyFeelLikeTableViewController: UIViewController {
     //MARK: - 나의 공유한 느낌 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
@@ -128,10 +129,10 @@ extension MyFeelLikeTableViewController {
         }
         
         coverView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [coverPlaceholderLabel, searchTabButton, coverImageView].forEach {
@@ -139,31 +140,31 @@ extension MyFeelLikeTableViewController {
         }
         
         coverPlaceholderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         searchTabButton.snp.makeConstraints {
-            $0.top.equalTo(coverPlaceholderLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(coverPlaceholderLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         coverImageView.snp.makeConstraints {
-            $0.top.equalTo(searchTabButton.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize * 2)
-            $0.height.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.top.equalTo(searchTabButton.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize * 2)
+            $0.height.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
         }
         
         tableShadowView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         tableShadowView.addSubview(tableView)
@@ -176,7 +177,7 @@ extension MyFeelLikeTableViewController {
     // MARK: - API Request
     private func requestData() {
         guard let app = UIApplication.shared.delegate as? AppDelegate, app.loginState == .login, let memberIdx = app.userMemberIdx else { return }
-        let urlString = feelLikeURL + "?memberIdx=\(memberIdx)"
+        let urlString = URLString.SubDomain.feelLikeURL.getURL() + "?memberIdx=\(memberIdx)"
         
         AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             .responseDecodable(of: MyFeelShareDataModel.self) { [weak self] response in
@@ -195,11 +196,8 @@ extension MyFeelLikeTableViewController {
                         self.tableView.isHidden = false
                         self.tableShadowView.isHidden = false
                     }
-                case .failure(let error):
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                    print(error)
-#endif
+                case .failure(_):
+                    self.showCloseAlert(type: .unknownError)
                 }
             }
     }
@@ -257,13 +255,13 @@ extension MyFeelLikeTableViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyFavoriteTableViewSectionCell") as? MyFeelSectionTableViewCell else { return UITableViewCell() }
             cell.titleLabel.text = "# \(myFeelShareList[indexPath.section].place) ( \(myFeelShareList[indexPath.section].list.count) )"
             if myFeelBoolList[indexPath.section] {
-                cell.openButton.setImage(systemName: "chevron.up", pointSize: buttonSize)
-                cell.contentView.backgroundColor = moreLightGrayColor
+                cell.openButton.setImage(systemName: "chevron.up", pointSize: constantSize.buttonSize)
+                cell.contentView.backgroundColor = ContentColor.moreLightGrayColor.getColor()
                 if app.languageCode == "ko" {
                     cell.accessibilityLabel = "\(myFeelShareList[indexPath.section].place)의 이야기 느낌 \(myFeelShareList[indexPath.section].list.count)개 접기 버튼"
                 }
             } else {
-                cell.openButton.setImage(systemName: "chevron.down", pointSize: buttonSize)
+                cell.openButton.setImage(systemName: "chevron.down", pointSize: constantSize.buttonSize)
                 cell.contentView.backgroundColor = .white
                 if app.languageCode == "ko" {
                     cell.accessibilityLabel = "\(myFeelShareList[indexPath.section].place)의 이야기 느낌 \(myFeelShareList[indexPath.section].list.count)개 펼치기 버튼"
@@ -278,12 +276,12 @@ extension MyFeelLikeTableViewController: UITableViewDataSource {
             cell.titleLabel.text = myFeelShareList[indexPath.section].list[indexPath.row-1].title
             cell.indexPath = IndexPath(item: indexPath.row-1, section: indexPath.section)
             if (myFeelShareList[indexPath.section].list[indexPath.row-1].memberLike ?? false) {
-                cell.likeButton.setImage(systemName: "heart.fill", pointSize: buttonSize)
+                cell.likeButton.setImage(systemName: "heart.fill", pointSize: constantSize.buttonSize)
                 if app.languageCode == "ko" {
                     cell.likeButton.accessibilityLabel = "좋아요를 취소하는"
                 }
             } else {
-                cell.likeButton.setImage(systemName: "heart", pointSize: buttonSize)
+                cell.likeButton.setImage(systemName: "heart", pointSize: constantSize.buttonSize)
                 if app.languageCode == "ko" {
                     cell.likeButton.accessibilityLabel = "좋아요를 누르는"
                 }
@@ -305,7 +303,7 @@ extension MyFeelLikeTableViewController: MyFeelLikeTableViewDelegate {
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             LoadingIndicator.showLoading(className: self.className, function: "feelListenButtonTapped")
             let playViewController = FeelPlayViewController()
@@ -337,11 +335,12 @@ extension MyFeelLikeTableViewController: MyFeelLikeTableViewDelegate {
                 let loginViewContrller = LoginViewController()
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             guard let memberIdx = app.userMemberIdx else { return }
             let feel = myFeelShareList[indexPath.section].list[indexPath.row]
-            var request = URLRequest(url: URL(string: feelLikeURL)!)
+            guard let url = URL(string: URLString.SubDomain.feelLikeURL.getURL()) else { return }
+            var request = URLRequest(url: url)
             request.httpMethod = (feel.memberLike ?? false) ? "DELETE" : "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.timeoutInterval = 10
@@ -379,13 +378,11 @@ extension MyFeelLikeTableViewController: MyFeelLikeTableViewDelegate {
                         self.showToVoice(type: .announcement, text: "좋아요를 취소하였습니다.")
                         self.tableView.reloadData()
                     }
-                case .failure(let error):
+                case .failure(_):
                     guard let topViewController = keyWindow?.visibleViewController else { return }
-                    topViewController.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                    topViewController.showCloseAlert(type: .unknownError)
                 }
+                
                 DispatchQueue.main.async {
                     LoadingIndicator.hideLoading()
                 }
@@ -402,7 +399,7 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             let feelReportViewController = FeelReportViewController(selectFeel: feel)
             feelReportViewController.hero.isEnabled = true

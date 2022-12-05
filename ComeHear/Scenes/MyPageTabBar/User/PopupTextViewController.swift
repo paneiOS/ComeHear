@@ -16,12 +16,13 @@ final class PopupTextViewController: UIViewController {
     // MARK: - 변수, 상수
     var delegate : SendAgreeDataDelegate?
     var type: PopupType?
+    private let constantSize = ConstantSize()
     
     // MARK: - 기본 UI
     private lazy var mainView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 12
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         return view
     }()
     
@@ -69,7 +70,7 @@ final class PopupTextViewController: UIViewController {
         textView.backgroundColor = .white
         textView.layer.cornerRadius = 12
         textView.isEditable = false
-        textView.contentInset = .init(top: intervalSize, left: intervalSize, bottom: intervalSize, right: intervalSize)
+        textView.contentInset = .init(top: constantSize.intervalSize, left: constantSize.intervalSize, bottom: constantSize.intervalSize, right: constantSize.intervalSize)
         return textView
     }()
     
@@ -93,7 +94,7 @@ final class PopupTextViewController: UIViewController {
     
     lazy var contentFooterView: UIView = {
         let view = UIView()
-        view.setupSubViewFooter(color: personalColor)
+        view.setupSubViewFooter(color: ContentColor.personalColor.getColor())
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapAgree))
         view.addGestureRecognizer(tapGestureRecognizer)
         view.isAccessibilityElement = true
@@ -170,17 +171,17 @@ extension PopupTextViewController {
         }
 
         mainView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(intervalSize * 2)
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize * 2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.centerY.equalToSuperview()
-            $0.height.equalTo(frameSizeHeight * 2 / 3)
+            $0.height.equalTo(constantSize.frameSizeHeight * 2 / 3)
         }
         
         closeView.addSubview(closeButton)
         
         closeView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.width.equalTo(50)
         }
         
@@ -189,10 +190,10 @@ extension PopupTextViewController {
         }
         
         subView.snp.makeConstraints {
-            $0.top.equalTo(mainView.snp.top).offset(intervalSize)
-            $0.leading.equalTo(mainView.snp.leading).offset(intervalSize)
-            $0.trailing.equalTo(mainView.snp.trailing).inset(intervalSize)
-            $0.bottom.equalTo(mainView.snp.bottom).inset(intervalSize)
+            $0.top.equalTo(mainView.snp.top).offset(constantSize.intervalSize)
+            $0.leading.equalTo(mainView.snp.leading).offset(constantSize.intervalSize)
+            $0.trailing.equalTo(mainView.snp.trailing).inset(constantSize.intervalSize)
+            $0.bottom.equalTo(mainView.snp.bottom).inset(constantSize.intervalSize)
         }
         
         titleView.snp.makeConstraints {
@@ -204,28 +205,28 @@ extension PopupTextViewController {
         titleView.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/2)
             $0.centerX.equalToSuperview()
         }
         
         contentTextView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalTo(mainView.snp.leading).offset(intervalSize)
-            $0.trailing.equalTo(mainView.snp.trailing).inset(intervalSize)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalTo(mainView.snp.leading).offset(constantSize.intervalSize)
+            $0.trailing.equalTo(mainView.snp.trailing).inset(constantSize.intervalSize)
         }
         
         footerStackView.snp.makeConstraints {
-            $0.top.equalTo(contentTextView.snp.bottom).offset(intervalSize)
-            $0.leading.equalTo(mainView.snp.leading).offset(intervalSize)
-            $0.trailing.equalTo(mainView.snp.trailing).inset(intervalSize)
-            $0.bottom.equalTo(mainView.snp.bottom).inset(intervalSize)
+            $0.top.equalTo(contentTextView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalTo(mainView.snp.leading).offset(constantSize.intervalSize)
+            $0.trailing.equalTo(mainView.snp.trailing).inset(constantSize.intervalSize)
+            $0.bottom.equalTo(mainView.snp.bottom).inset(constantSize.intervalSize)
         }
         
         contentFooterImageView.snp.makeConstraints {
-            $0.leading.equalTo(subView.snp.leading).offset(intervalSize)
-            $0.trailing.equalTo(subView.snp.trailing).inset(intervalSize)
-            $0.bottom.equalTo(subView.snp.bottom).inset(intervalSize)
+            $0.leading.equalTo(subView.snp.leading).offset(constantSize.intervalSize)
+            $0.trailing.equalTo(subView.snp.trailing).inset(constantSize.intervalSize)
+            $0.bottom.equalTo(subView.snp.bottom).inset(constantSize.intervalSize)
         }
         
         contentFooterView.snp.makeConstraints {
@@ -237,8 +238,8 @@ extension PopupTextViewController {
         contentFooterView.addSubview(footerLabel)
         
         footerLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/2)
-            $0.bottom.equalToSuperview().inset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/2)
             $0.centerX.equalToSuperview()
         }
     }
@@ -247,20 +248,16 @@ extension PopupTextViewController {
         if type == .comeHearTerms {
             switch languageCode {
             case "ko":
-                return termsContentText_ko
-            case "en":
-                return termsContentText_en
+                return ContentString.terms.ko.rawValue
             default:
-                return termsContentText_en
+                return ContentString.terms.en.rawValue
             }
         } else if type == .comeHearPrivacy {
             switch languageCode {
             case "ko":
-                return privacyContentText_ko
-            case "en":
-                return privacyContentText_en
+                return ContentString.privacy.ko.rawValue
             default:
-                return privacyContentText_en
+                return ContentString.privacy.en.rawValue
             }
         } else {
             return ""

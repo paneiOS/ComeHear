@@ -9,6 +9,7 @@ import UIKit
 import Kingfisher
 
 class MyFeelSectionTableViewCell: UITableViewCell {
+    private let constantSize = ConstantSize()
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .regular)
@@ -20,7 +21,7 @@ class MyFeelSectionTableViewCell: UITableViewCell {
     lazy var openButton: UIButton = {
         let button = UIButton()
         button.tintColor = .black
-        button.setImage(systemName: "chevron.down", pointSize: buttonSize)
+        button.setImage(systemName: "chevron.down", pointSize: constantSize.buttonSize)
         button.isEnabled = false
         return button
     }()
@@ -36,13 +37,13 @@ class MyFeelSectionTableViewCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
         }
         
         openButton.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalTo(titleLabel.snp.trailing)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
     }
 }

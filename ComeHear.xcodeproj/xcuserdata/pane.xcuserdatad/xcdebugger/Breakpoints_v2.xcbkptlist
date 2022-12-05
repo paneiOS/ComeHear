@@ -302,8 +302,8 @@
             filePath = "ComeHear/Scenes/FavoriteTabBar/MyFavoriteTabBarViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "713"
-            endingLineNumber = "713"
+            startingLineNumber = "705"
+            endingLineNumber = "705"
             landmarkName = "feelListenButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -334,8 +334,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/FeelPlayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "667"
-            endingLineNumber = "667"
+            startingLineNumber = "669"
+            endingLineNumber = "669"
             landmarkName = "tapBasicReplay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -350,13 +350,13 @@
             filePath = "ComeHear/Scenes/SearchTabBar/DestinationSearchViewController.swift.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "457"
-            endingLineNumber = "457"
+            startingLineNumber = "460"
+            endingLineNumber = "460"
             landmarkName = "postSearchKeyword(keyword:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "9D0E0762-3762-410B-93B1-047CB45B42D2 - a0184ec067ea250a"
+                  uuid = "9D0E0762-3762-410B-93B1-047CB45B42D2 - a0184ec067ea26af"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -366,12 +366,12 @@
                   urlString = "file:///Users/pane/Desktop/ComeHear/ComeHear/Scenes/SearchTabBar/DestinationSearchViewController.swift.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "457"
-                  endingLineNumber = "457"
-                  offsetFromSymbolStart = "1828">
+                  startingLineNumber = "460"
+                  endingLineNumber = "460"
+                  offsetFromSymbolStart = "1848">
                </Location>
                <Location
-                  uuid = "9D0E0762-3762-410B-93B1-047CB45B42D2 - c89ebbbb6d74aec"
+                  uuid = "9D0E0762-3762-410B-93B1-047CB45B42D2 - c89ebbbb6d74949"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -381,8 +381,8 @@
                   urlString = "file:///Users/pane/Desktop/ComeHear/ComeHear/Scenes/SearchTabBar/DestinationSearchViewController.swift.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "457"
-                  endingLineNumber = "457"
+                  startingLineNumber = "460"
+                  endingLineNumber = "460"
                   offsetFromSymbolStart = "416">
                </Location>
             </Locations>
@@ -398,8 +398,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/FeelPlayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "696"
-            endingLineNumber = "696"
+            startingLineNumber = "698"
+            endingLineNumber = "698"
             landmarkName = "tapURLReplay()"
             landmarkType = "7">
          </BreakpointContent>
@@ -414,8 +414,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/FeelPlayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "621"
-            endingLineNumber = "621"
+            startingLineNumber = "623"
+            endingLineNumber = "623"
             landmarkName = "stopTime()"
             landmarkType = "7">
          </BreakpointContent>
@@ -430,8 +430,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/FeelPlayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "628"
-            endingLineNumber = "628"
+            startingLineNumber = "630"
+            endingLineNumber = "630"
             landmarkName = "tapClose()"
             landmarkType = "7">
          </BreakpointContent>
@@ -446,8 +446,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/RecentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "deleteStackView(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -462,13 +462,13 @@
             filePath = "ComeHear/Scenes/FeelTabBar/RecentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "deleteStackView(sender:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "F803FFE1-E8DF-4EF3-B082-D230B2E9EF8F - 53ebf74b90dbec36"
+                  uuid = "F803FFE1-E8DF-4EF3-B082-D230B2E9EF8F - 53ebf74b90dbefba"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -478,12 +478,12 @@
                   urlString = "file:///Users/pane/Desktop/ComeHear/ComeHear/Scenes/FeelTabBar/RecentSearchView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "1980">
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "2008">
                </Location>
                <Location
-                  uuid = "F803FFE1-E8DF-4EF3-B082-D230B2E9EF8F - 6a4874e8001c9651"
+                  uuid = "F803FFE1-E8DF-4EF3-B082-D230B2E9EF8F - 6a4874e8001c95dd"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -493,8 +493,8 @@
                   urlString = "file:///Users/pane/Desktop/ComeHear/ComeHear/Scenes/FeelTabBar/RecentSearchView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104"
                   offsetFromSymbolStart = "192">
                </Location>
             </Locations>
@@ -510,8 +510,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/RecentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "deleteStackView(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -526,8 +526,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/RecentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "deleteStackView(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -542,8 +542,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/FeelRecordViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "937"
-            endingLineNumber = "937"
+            startingLineNumber = "938"
+            endingLineNumber = "938"
             landmarkName = "tapSelectButton()"
             landmarkType = "7">
          </BreakpointContent>
@@ -558,8 +558,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/FeelRecordViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "isPlay"
             landmarkType = "24">
          </BreakpointContent>
@@ -574,8 +574,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/FeelRecordViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "638"
-            endingLineNumber = "638"
+            startingLineNumber = "639"
+            endingLineNumber = "639"
             landmarkName = "play()"
             landmarkType = "7">
          </BreakpointContent>
@@ -590,8 +590,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/FeelRecordViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "794"
-            endingLineNumber = "794"
+            startingLineNumber = "795"
+            endingLineNumber = "795"
             landmarkName = "recordRemove()"
             landmarkType = "7">
          </BreakpointContent>
@@ -606,8 +606,8 @@
             filePath = "ComeHear/Scenes/FeelTabBar/BGMSelectTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "tapClose()"
             landmarkType = "7">
          </BreakpointContent>
@@ -622,8 +622,8 @@
             filePath = "ComeHear/Scenes/SearchTabBar/RegionSearchViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "tapCityPopupView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -638,8 +638,8 @@
             filePath = "ComeHear/Scenes/SearchTabBar/RegionSearchViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "requestSearch()"
             landmarkType = "7">
          </BreakpointContent>
@@ -654,8 +654,8 @@
             filePath = "ComeHear/Scenes/StorySearch/StoryDetailMiddleView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "317"
+            endingLineNumber = "317"
             landmarkName = "feelLikeButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -670,8 +670,8 @@
             filePath = "ComeHear/Scenes/StorySearch/StoryDetailMiddleView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "feelLikeButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -686,8 +686,8 @@
             filePath = "ComeHear/Scenes/StorySearch/StoryDetailMiddleView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "feelLikeButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -702,8 +702,8 @@
             filePath = "ComeHear/Scenes/StorySearch/StoryDetailMiddleView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
             landmarkName = "feelLikeButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -718,8 +718,8 @@
             filePath = "ComeHear/Scenes/SearchTabBar/RegionSearchViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "tapCountryPopupView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -734,10 +734,26 @@
             filePath = "ComeHear/Scenes/MainTabBar/HomeCollectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "372"
-            endingLineNumber = "372"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
             landmarkName = "requestMainBanner(_:_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4C9079E5-B66F-46FF-96B2-8BDC34347549"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ComeHear/Enum/AlertType.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "AlertTwoButtonType"
+            landmarkType = "13">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

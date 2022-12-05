@@ -9,23 +9,25 @@ import UIKit
 import Alamofire
 
 class MyInfoViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    
     // MARK: - 스크롤 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = personalColor
+        scrollView.backgroundColor = ContentColor.personalColor.getColor()
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
     
     private lazy var subContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
@@ -38,7 +40,7 @@ class MyInfoViewController: UIViewController {
     
     private lazy var myInfoLabelView: UIView = {
         let view = UIView()
-        view.setupSubViewHeader(color: firstCellColor)
+        view.setupSubViewHeader(color: ContentColor.firstCellColor.getColor())
         return view
     }()
     
@@ -52,7 +54,7 @@ class MyInfoViewController: UIViewController {
     
     private lazy var userNicknameView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 10
         return view
     }()
@@ -80,7 +82,7 @@ class MyInfoViewController: UIViewController {
     
     private lazy var userLoginTypeView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 10
         return view
     }()
@@ -115,7 +117,7 @@ class MyInfoViewController: UIViewController {
     
     private lazy var myInfoChangeLabelView: UIView = {
         let view = UIView()
-        view.setupSubViewHeader(color: firstCellColor)
+        view.setupSubViewHeader(color: ContentColor.firstCellColor.getColor())
         return view
     }()
     
@@ -138,7 +140,7 @@ class MyInfoViewController: UIViewController {
     
     private lazy var myNicknameChangeTextFieldView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 10
         return view
     }()
@@ -173,7 +175,7 @@ class MyInfoViewController: UIViewController {
     
     private lazy var passwordChangeLabelView: UIView = {
         let view = UIView()
-        view.setupSubViewHeader(color: firstCellColor)
+        view.setupSubViewHeader(color: ContentColor.firstCellColor.getColor())
         return view
     }()
     
@@ -195,7 +197,7 @@ class MyInfoViewController: UIViewController {
     
     private lazy var currentPasswordTextFieldView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 10
         return view
     }()
@@ -213,7 +215,7 @@ class MyInfoViewController: UIViewController {
     
     private lazy var passwordTextFieldView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 10
         return view
     }()
@@ -231,7 +233,7 @@ class MyInfoViewController: UIViewController {
     
     private lazy var passwordConfirmTextFieldView: UIView = {
         let view = UIView()
-        view.backgroundColor = moreLightGrayColor
+        view.backgroundColor = ContentColor.moreLightGrayColor.getColor()
         view.layer.cornerRadius = 10
         return view
     }()
@@ -263,7 +265,7 @@ class MyInfoViewController: UIViewController {
     
     private lazy var secessionLabelView: UIView = {
         let view = UIView()
-        view.setupSubViewHeader(color: firstCellColor)
+        view.setupSubViewHeader(color: ContentColor.firstCellColor.getColor())
         return view
     }()
     
@@ -351,10 +353,10 @@ extension MyInfoViewController {
         
         // MARK: - 나의정보 UI_SETUP
         myInfoView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.width.equalTo(frameSizeWidth-(intervalSize * 2))
+            $0.top.equalToSuperview().offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.width.equalTo(constantSize.frameSizeWidth-(constantSize.intervalSize * 2))
         }
         
         [
@@ -375,16 +377,16 @@ extension MyInfoViewController {
         
         myInfoLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         userNicknameView.snp.makeConstraints {
-            $0.top.equalTo(myInfoLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.width.equalTo(frameSizeWidth-(intervalSize * 2))
+            $0.top.equalTo(myInfoLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.width.equalTo(constantSize.frameSizeWidth-(constantSize.intervalSize * 2))
             $0.height.equalTo(40)
         }
         
@@ -394,23 +396,23 @@ extension MyInfoViewController {
         
         userNicknameTitle.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         userNicknameLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         userLoginTypeView.snp.makeConstraints {
-            $0.top.equalTo(userNicknameView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
-            $0.width.equalTo(frameSizeWidth-(intervalSize * 2))
+            $0.top.equalTo(userNicknameView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
+            $0.width.equalTo(constantSize.frameSizeWidth-(constantSize.intervalSize * 2))
             $0.height.equalTo(40)
         }
         
@@ -420,23 +422,23 @@ extension MyInfoViewController {
         
         myLoginTypeTitle.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         myLoginTypeLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         // MARK: - 추가정보변경 UI_SETUP
         myInfoChangeView.snp.makeConstraints {
-            $0.top.equalTo(myInfoView.snp.bottom).offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.width.equalTo(frameSizeWidth-(intervalSize * 2))
+            $0.top.equalTo(myInfoView.snp.bottom).offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.width.equalTo(constantSize.frameSizeWidth-(constantSize.intervalSize * 2))
         }
         
         [
@@ -458,36 +460,36 @@ extension MyInfoViewController {
         
         myInfoChangeLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         myNicknamePlaceHold.snp.makeConstraints {
-            $0.top.equalTo(myInfoChangeLabelView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(myInfoChangeLabelView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         myNicknameChangeTextFieldView.snp.makeConstraints {
-            $0.top.equalTo(myNicknamePlaceHold.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(myNicknamePlaceHold.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         myNicknameChangeTextField.snp.makeConstraints {
             $0.top.equalTo(myNicknameChangeTextFieldView.snp.top)
-            $0.leading.equalTo(myNicknameChangeTextFieldView.snp.leading).offset(intervalSize)
-            $0.trailing.equalTo(myNicknameChangeTextFieldView.snp.trailing).inset(intervalSize)
+            $0.leading.equalTo(myNicknameChangeTextFieldView.snp.leading).offset(constantSize.intervalSize)
+            $0.trailing.equalTo(myNicknameChangeTextFieldView.snp.trailing).inset(constantSize.intervalSize)
             $0.bottom.equalTo(myNicknameChangeTextFieldView.snp.bottom)
         }
         
         myInfoChangeButton.snp.makeConstraints {
-            $0.top.equalTo(myNicknameChangeTextField.snp.bottom).offset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(myNicknameChangeTextField.snp.bottom).offset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(frameSizeWidth / 2)
+            $0.width.equalTo(constantSize.frameSizeWidth / 2)
             $0.height.equalTo(40)
         }
         
@@ -502,11 +504,11 @@ extension MyInfoViewController {
         passwordView.addSubview(passwordSubView)
         
         passwordSubView.snp.makeConstraints {
-            $0.top.equalTo(myInfoChangeView.snp.bottom).offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(myInfoChangeView.snp.bottom).offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
-            $0.width.equalTo(frameSizeWidth-(intervalSize * 2))
+            $0.width.equalTo(constantSize.frameSizeWidth-(constantSize.intervalSize * 2))
         }
         
         [
@@ -530,74 +532,74 @@ extension MyInfoViewController {
         
         passwordChangeLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         passwordChangeSecondLabel.snp.makeConstraints {
-            $0.top.equalTo(passwordChangeLabelView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(passwordChangeLabelView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         currentPasswordTextFieldView.snp.makeConstraints {
-            $0.top.equalTo(passwordChangeSecondLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(passwordChangeSecondLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         currentPasswordTextField.snp.makeConstraints {
             $0.top.equalTo(currentPasswordTextFieldView.snp.top)
-            $0.leading.equalTo(currentPasswordTextFieldView.snp.leading).offset(intervalSize)
-            $0.trailing.equalTo(currentPasswordTextFieldView.snp.trailing).inset(intervalSize)
+            $0.leading.equalTo(currentPasswordTextFieldView.snp.leading).offset(constantSize.intervalSize)
+            $0.trailing.equalTo(currentPasswordTextFieldView.snp.trailing).inset(constantSize.intervalSize)
             $0.bottom.equalTo(currentPasswordTextFieldView.snp.bottom)
         }
         
         passwordTextFieldView.snp.makeConstraints {
-            $0.top.equalTo(currentPasswordTextFieldView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(currentPasswordTextFieldView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         passwordTextField.snp.makeConstraints {
             $0.top.equalTo(passwordTextFieldView.snp.top)
-            $0.leading.equalTo(passwordTextFieldView.snp.leading).offset(intervalSize)
-            $0.trailing.equalTo(passwordTextFieldView.snp.trailing).inset(intervalSize)
+            $0.leading.equalTo(passwordTextFieldView.snp.leading).offset(constantSize.intervalSize)
+            $0.trailing.equalTo(passwordTextFieldView.snp.trailing).inset(constantSize.intervalSize)
             $0.bottom.equalTo(passwordTextFieldView.snp.bottom)
         }
         
         passwordConfirmTextFieldView.snp.makeConstraints {
-            $0.top.equalTo(passwordTextFieldView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(passwordTextFieldView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         passwordConfirmTextField.snp.makeConstraints {
             $0.top.equalTo(passwordConfirmTextFieldView.snp.top)
-            $0.leading.equalTo(passwordConfirmTextFieldView.snp.leading).offset(intervalSize)
-            $0.trailing.equalTo(passwordConfirmTextFieldView.snp.trailing).inset(intervalSize)
+            $0.leading.equalTo(passwordConfirmTextFieldView.snp.leading).offset(constantSize.intervalSize)
+            $0.trailing.equalTo(passwordConfirmTextFieldView.snp.trailing).inset(constantSize.intervalSize)
             $0.bottom.equalTo(passwordConfirmTextFieldView.snp.bottom)
         }
         
         passwordChangeButton.snp.makeConstraints {
-            $0.top.equalTo(passwordConfirmTextFieldView.snp.bottom).offset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(passwordConfirmTextFieldView.snp.bottom).offset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(frameSizeWidth / 2)
+            $0.width.equalTo(constantSize.frameSizeWidth / 2)
             $0.height.equalTo(40)
         }
         
         // MARK: - 탈퇴/연동 UI_SETUP
         secessionView.snp.makeConstraints {
-            $0.top.equalTo(passwordView.snp.bottom).offset(intervalSize * 2)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize * 2)
-            $0.width.equalTo(frameSizeWidth-(intervalSize * 2))
+            $0.top.equalTo(passwordView.snp.bottom).offset(constantSize.intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize * 2)
+            $0.width.equalTo(constantSize.frameSizeWidth-(constantSize.intervalSize * 2))
         }
         
         [
@@ -617,16 +619,16 @@ extension MyInfoViewController {
         
         secessionLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
         }
         
         secessionButton.snp.makeConstraints {
-            $0.top.equalTo(secessionLabelView.snp.bottom).offset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(secessionLabelView.snp.bottom).offset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(frameSizeWidth / 2)
+            $0.width.equalTo(constantSize.frameSizeWidth / 2)
             $0.height.equalTo(40)
         }
     }
@@ -672,16 +674,16 @@ extension MyInfoViewController {
     }
     
     @objc private func changeMyInfo() {
-        guard let nickname = myNicknameChangeTextField.text, nickname != "", !nickname.contains(" ") else { return showConfirmAlert("별명은 띄어쓰기 및 빈칸이\n포함될 수 없습니다.", "알림") }
+        guard let nickname = myNicknameChangeTextField.text, nickname != "", !nickname.contains(" ") else { return showConfirmAlert(type: .nicknameNotBlank) }
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         if app.languageCode == "ko" {
-            guard myNicknameChangeTextField.text?.count ?? 0 <= 10 else { return showConfirmAlert("별명은 글자수 10자까지 가능합니다.", "알림") }
+            guard myNicknameChangeTextField.text?.count ?? 0 <= 10 else { return showConfirmAlert(type: .limitNickname) }
         }
         
         if let app = UIApplication.shared.delegate as? AppDelegate, app.loginState == .login {
             guard let memberIdx = app.userMemberIdx else { return }
-            
-            var request = URLRequest(url: URL(string: nicknameChangeURL)!)
+            guard let url = URL(string: URLString.SubDomain.nicknameChangeURL.getURL()) else { return }
+            var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.timeoutInterval = 10
@@ -708,20 +710,18 @@ extension MyInfoViewController {
                             app.userNickName = nickname
                             UserDefaults.standard.set(nickname, forKey: "user_nickName")
                         }
-                        self.showCloseAlert("별명이 변경되었습니다.", "알림")
+                        self.showCloseAlert(type: .nicknameChange)
                     } else if data.status == 406 {
-                        self.showConfirmAlert("잘못된 별명입니다.\n다른 별명을 입력해주세요.", "잘못된 별명")
+                        self.showConfirmAlert(type: .nicknameError)
                     } else if data.status == 409 {
-                        self.showConfirmAlert("중복된 별명입니다.\n다른 별명을 입력해주세요.", "중복된 별명")
+                        self.showConfirmAlert(type: .duplicateNickname)
                     } else {
                         print(data.status)
                     }
-                case .failure(let error):
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                    print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                case .failure(_):
+                    self.showCloseAlert(type: .unknownError)
                 }
+
                 DispatchQueue.main.async {
                     LoadingIndicator.hideLoading()
                 }
@@ -730,16 +730,17 @@ extension MyInfoViewController {
     }
     
     @objc private func changePassword() {
-        guard isValidCurrentPassword() else { return showConfirmAlert("현재 비밀번호가 유효하지 않습니다.", "알림") }
-        guard isValidPassword() else { return showConfirmAlert("비밀번호가 유효하지 않습니다.", "알림") }
-        guard let passwordCheck = passwordTextField.text, !passwordCheck.contains(" ") else { return showConfirmAlert("비밀번호는 띄어쓰기 및 빈칸이\n포함될 수 없습니다.", "알림") }
-        guard isSamePassword() else { return showConfirmAlert("비밀번호가 일치하지 않습니다.", "알림") }
+        guard isValidCurrentPassword() else { return showConfirmAlert(type: .currentPasswordInvalid) }
+        guard isValidPassword() else { return showConfirmAlert(type: .passwordInvalid) }
+        guard let passwordCheck = passwordTextField.text, !passwordCheck.contains(" ") else { return showConfirmAlert(type: .passwordNotBlank) }
+        guard isSamePassword() else { return showConfirmAlert(type: .passwordInvalid) }
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard let originPassword = currentPasswordTextField.text else { return }
         guard let newPassword = passwordTextField.text else { return }
         guard let memberIdx = app.userMemberIdx else { return }
+        guard let url = URL(string: URLString.SubDomain.passwordChangeURL.getURL()) else { return }
         
-        var request = URLRequest(url: URL(string: passwordChangeURL)!)
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 10
@@ -764,18 +765,16 @@ extension MyInfoViewController {
             switch response.result {
             case .success(let data):
                 if data.status == 200 {
-                    self.showCloseAlert("비밀번호가 변경되었습니다.", "알림")
+                    self.showCloseAlert(type: .passwordChange)
                 } else if data.status == 400 {
-                    self.showConfirmAlert("비밀번호가 일치하지 않습니다.", "알림")
+                    self.showConfirmAlert(type: .passwordInvalid)
                 } else {
                     print(data.status)
                 }
-            case .failure(let error):
-                self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+            case .failure(_):
+                self.showCloseAlert(type: .unknownError)
             }
+
             DispatchQueue.main.async {
                 LoadingIndicator.hideLoading()
             }
@@ -788,7 +787,8 @@ extension MyInfoViewController {
                 
                 guard let self = self else { return }
                 guard let memberIdx = app.userMemberIdx else { return }
-                var request = URLRequest(url: URL(string: secessionURL)!)
+                guard let url = URL(string: URLString.SubDomain.secessionURL.getURL()) else { return }
+                var request = URLRequest(url: url)
                 request.httpMethod = "DELETE"
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 request.timeoutInterval = 10
@@ -815,20 +815,18 @@ extension MyInfoViewController {
                                 guard let topViewController = keyWindow?.visibleViewController else { return }
                                 topViewController.tabBarController?.selectedIndex = 0
                             }
-                            self.showOneActionAlert("탈퇴처리 되었습니다.".localized(), "알림".localized(), goMainAction)
+                            self.showOneButtonAlert("탈퇴처리 되었습니다.".localized(), "알림".localized(), goMainAction)
                         }
-                    case .failure(let error):
-                        self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                        print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                    case .failure(_):
+                        self.showCloseAlert(type: .unknownError)
                     }
+                    
                     DispatchQueue.main.async {
                         LoadingIndicator.hideLoading()
                     }
                 }
             }
-            showTwoActionAlert("정말 탈퇴 하시겠습니까?", "탈퇴", secessionAction)
+            showTwoButtonAlert(type: .secession, secessionAction)
         }
     }
 }

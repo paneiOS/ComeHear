@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 
 class MyFavoriteTabBarViewController: UIViewController {
+    private let constantSize = ConstantSize()
     // MARK: - 변수, 상수
     private let seguementedItems = ["즐겨찾기 한 관광지".localized(), "내가 좋아요 한 느낌".localized()]
     private var myFavoriteList = [DestinationDetailData]()
@@ -18,7 +19,7 @@ class MyFavoriteTabBarViewController: UIViewController {
     // MARK: - 즐겨찾기_로그아웃상태 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
@@ -102,7 +103,7 @@ class MyFavoriteTabBarViewController: UIViewController {
     
     private lazy var favoriteCoverImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = landScapeImage
+        imageView.image = ContentImage.landScapeImage.getImage()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -117,7 +118,7 @@ class MyFavoriteTabBarViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.separatorStyle = .none
-        tableView.backgroundColor = personalColor
+        tableView.backgroundColor = ContentColor.personalColor.getColor()
         tableView.clipsToBounds = true
         tableView.isHidden = true
         return tableView
@@ -251,13 +252,13 @@ extension MyFavoriteTabBarViewController {
             $0.trailing.equalToSuperview().inset(5)
             $0.bottom.equalToSuperview().inset(5)
         }
-
+        
         // MARK: - 로그아웃상태 UI_SETUP
         logoutStateCoverView.snp.makeConstraints {
-            $0.top.equalTo(seguementedControlView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(intervalSize)
+            $0.top.equalTo(seguementedControlView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(constantSize.intervalSize)
         }
         
         [
@@ -267,23 +268,23 @@ extension MyFavoriteTabBarViewController {
         }
         
         logoutStatePlacehold.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         logoutStateCoverImageView.snp.makeConstraints {
-            $0.top.equalTo(logoutStatePlacehold.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.height.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.top.equalTo(logoutStatePlacehold.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.height.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
         }
         
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(logoutStateCoverImageView.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize * 2)
+            $0.top.equalTo(logoutStateCoverImageView.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.height.equalTo(40)
         }
         
@@ -311,10 +312,10 @@ extension MyFavoriteTabBarViewController {
         }
         
         favoriteCoverView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -324,24 +325,24 @@ extension MyFavoriteTabBarViewController {
         }
         
         favoriteCoverPlaceholderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         favoriteSearchTabButton.snp.makeConstraints {
-            $0.top.equalTo(favoriteCoverPlaceholderLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(favoriteCoverPlaceholderLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         favoriteCoverImageView.snp.makeConstraints {
-            $0.top.equalTo(favoriteSearchTabButton.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize * 2)
-            $0.height.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.top.equalTo(favoriteSearchTabButton.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize * 2)
+            $0.height.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
         }
         
         favoriteTableView.snp.makeConstraints {
@@ -361,10 +362,10 @@ extension MyFavoriteTabBarViewController {
         }
         
         feelLikeCoverView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         [
@@ -374,31 +375,31 @@ extension MyFavoriteTabBarViewController {
         }
         
         feelLikeCoverPlaceholderLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         feelLikeSearchTabButton.snp.makeConstraints {
-            $0.top.equalTo(feelLikeCoverPlaceholderLabel.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(feelLikeCoverPlaceholderLabel.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(40)
         }
         
         feelLikeCoverImageView.snp.makeConstraints {
-            $0.top.equalTo(feelLikeSearchTabButton.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalTo(feelLikeSearchTabButton.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.bottom.equalToSuperview()
-            $0.height.equalTo(frameSizeWidth - intervalSize * 2)
+            $0.height.equalTo(constantSize.frameSizeWidth - constantSize.intervalSize * 2)
         }
         
         feelLikeTableShadowView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         feelLikeTableShadowView.addSubview(feelLikeTableView)
@@ -414,7 +415,7 @@ extension MyFavoriteTabBarViewController {
             self.favoriteCoverView.isHidden = true
             self.favoriteTableView.isHidden = true
             guard let app = UIApplication.shared.delegate as? AppDelegate, app.loginState == .login, let memberIdx = app.userMemberIdx else { return }
-            let urlString = favoritePlace + "?memberIdx=\(memberIdx)&pageNo=1&pageSize=20000"
+            let urlString = URLString.SubDomain.favoritePlace.getURL() + "?memberIdx=\(memberIdx)&pageNo=1&pageSize=20000"
             LoadingIndicator.showLoading(className: self.className, function: "requestData")
             AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
                 .responseDecodable(of: DestinationModel.self) { [weak self] response in
@@ -431,13 +432,10 @@ extension MyFavoriteTabBarViewController {
                             self.favoriteTableView.isHidden = false
                         }
                         LoadingIndicator.hideLoading()
-                    case .failure(let error):
+                    case .failure(_):
                         LoadingIndicator.hideLoading()
-                        self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
+                        self.showCloseAlert(type: .unknownError)
                         self.favoriteCoverView.isHidden = false
-#if DEBUG
-                        print(error)
-#endif
                     }
                 }
         } else {
@@ -445,7 +443,7 @@ extension MyFavoriteTabBarViewController {
             self.feelLikeTableView.isHidden = true
             self.feelLikeTableShadowView.isHidden = true
             guard let app = UIApplication.shared.delegate as? AppDelegate, app.loginState == .login, let memberIdx = app.userMemberIdx else { return }
-            let urlString = feelLikeURL + "?memberIdx=\(memberIdx)"
+            let urlString = URLString.SubDomain.feelLikeURL.getURL() + "?memberIdx=\(memberIdx)"
             
             AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
                 .responseDecodable(of: MyFeelShareDataModel.self) { [weak self] response in
@@ -465,12 +463,9 @@ extension MyFavoriteTabBarViewController {
                             self.feelLikeTableShadowView.isHidden = false
                         }
                         LoadingIndicator.hideLoading()
-                    case .failure(let error):
+                    case .failure(_):
                         LoadingIndicator.hideLoading()
-                        self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                        print(error)
-#endif
+                        self.showCloseAlert(type: .unknownError)
                     }
                 }
         }
@@ -576,19 +571,19 @@ extension MyFavoriteTabBarViewController: UITableViewDataSource {
         if tableView == favoriteTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyFavoriteTableViewCell") as? MyFavoriteTableViewCell else { return UITableViewCell() }
             guard let memberLike = myFavoriteList[indexPath.row].memberLike else { return UITableViewCell() }
-            cell.bgImageView.setImage(with: myFavoriteList[indexPath.row].imageUrl ?? "", placeholder: landScapeImage, cornerRadius: 0)
+            cell.bgImageView.setImage(with: myFavoriteList[indexPath.row].imageUrl ?? "", placeholder: ContentImage.landScapeImage.getImage(), cornerRadius: 0)
             cell.titleLabel.text = "  # " + myFavoriteList[indexPath.row].title + "  "
             cell.favoriteButton.tag = indexPath.row
             if memberLike {
-                cell.bgImageView.layer.borderColor = checkButtonColor?.cgColor
-                cell.buttonView.backgroundColor = checkButtonColor
+                cell.bgImageView.layer.borderColor = ContentColor.checkButtonColor.getColor().cgColor
+                cell.buttonView.backgroundColor = ContentColor.checkButtonColor.getColor()
                 cell.bgImageView.alpha = 1.0
                 if app.languageCode == "ko" {
                     cell.buttonView.accessibilityLabel = "즐겨찾기 취소하는"
                 }
             } else {
-                cell.bgImageView.layer.borderColor = moreLightGrayColor?.cgColor
-                cell.buttonView.backgroundColor = moreLightGrayColor
+                cell.bgImageView.layer.borderColor = ContentColor.moreLightGrayColor.getColor().cgColor
+                cell.buttonView.backgroundColor = ContentColor.moreLightGrayColor.getColor()
                 cell.bgImageView.alpha = 0.3
                 if app.languageCode == "ko" {
                     cell.buttonView.accessibilityLabel = "즐겨찾기 추가하는"
@@ -607,13 +602,13 @@ extension MyFavoriteTabBarViewController: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyFavoriteTableViewSectionCell") as? MyFeelSectionTableViewCell else { return UITableViewCell() }
                 cell.titleLabel.text = "# \(myFeelShareList[indexPath.section].place) ( \(myFeelShareList[indexPath.section].list.count) )"
                 if myFeelBoolList[indexPath.section] {
-                    cell.openButton.setImage(systemName: "chevron.up", pointSize: buttonSize)
-                    cell.contentView.backgroundColor = moreLightGrayColor
+                    cell.openButton.setImage(systemName: "chevron.up", pointSize: constantSize.buttonSize)
+                    cell.contentView.backgroundColor = ContentColor.moreLightGrayColor.getColor()
                     if app.languageCode == "ko" {
                         cell.accessibilityLabel = "\(myFeelShareList[indexPath.section].place)의 이야기 느낌 \(myFeelShareList[indexPath.section].list.count)개 접기 버튼"
                     }
                 } else {
-                    cell.openButton.setImage(systemName: "chevron.down", pointSize: buttonSize)
+                    cell.openButton.setImage(systemName: "chevron.down", pointSize: constantSize.buttonSize)
                     cell.contentView.backgroundColor = .white
                     if app.languageCode == "ko" {
                         cell.accessibilityLabel = "\(myFeelShareList[indexPath.section].place)의 이야기 느낌 \(myFeelShareList[indexPath.section].list.count)개 펼치기 버튼"
@@ -628,12 +623,12 @@ extension MyFavoriteTabBarViewController: UITableViewDataSource {
                 cell.titleLabel.text = myFeelShareList[indexPath.section].list[indexPath.row-1].title
                 cell.indexPath = IndexPath(item: indexPath.row-1, section: indexPath.section)
                 if (myFeelShareList[indexPath.section].list[indexPath.row-1].memberLike ?? false) {
-                    cell.likeButton.setImage(systemName: "heart.fill", pointSize: buttonSize)
+                    cell.likeButton.setImage(systemName: "heart.fill", pointSize: constantSize.buttonSize)
                     if app.languageCode == "ko" {
                         cell.likeButton.accessibilityLabel = "좋아요를 취소하는"
                     }
                 } else {
-                    cell.likeButton.setImage(systemName: "heart", pointSize: buttonSize)
+                    cell.likeButton.setImage(systemName: "heart", pointSize: constantSize.buttonSize)
                     if app.languageCode == "ko" {
                         cell.likeButton.accessibilityLabel = "좋아요를 누르는"
                     }
@@ -654,13 +649,13 @@ extension MyFavoriteTabBarViewController: MyFavoriteTableViewDelegate {
                 let loginViewContrller = LoginViewController()
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             let favoriteData = myFavoriteList[tag]
             guard let memberIdx = app.userMemberIdx else { return }
             guard let memberLike = favoriteData.memberLike else { return }
-            
-            var request = URLRequest(url: URL(string: favoritePlace)!)
+            guard let url = URL(string: URLString.SubDomain.favoritePlace.getURL()) else { return }
+            var request = URLRequest(url: url)
             request.httpMethod = memberLike ? "DELETE" : "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.timeoutInterval = 10
@@ -677,7 +672,7 @@ extension MyFavoriteTabBarViewController: MyFavoriteTableViewDelegate {
             } catch {
 #if DEBUG
                 print("http Body Error")
-                #endif
+#endif
             }
             
             LoadingIndicator.showLoading(className: self.className, function: "MyFavoriteTabBarViewController")
@@ -691,12 +686,9 @@ extension MyFavoriteTabBarViewController: MyFavoriteTableViewDelegate {
                         self.showToVoice(type: .announcement, text: !memberLike ?  "즐겨찾기에 추가되었습니다." : "즐겨찾기에서 삭제되었습니다.")
                         self.favoriteTableView.reloadRows(at: [IndexPath(row: tag, section: 0)], with: .automatic)
                     }
-                case .failure(let error):
+                case .failure(_):
                     guard let topViewController = keyWindow?.visibleViewController else { return }
-                    topViewController.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                    topViewController.showCloseAlert(type: .unknownError)
                 }
                 DispatchQueue.main.async {
                     LoadingIndicator.hideLoading()
@@ -719,7 +711,7 @@ extension MyFavoriteTabBarViewController: MyFeelLikeTableViewDelegate {
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             LoadingIndicator.showLoading(className: self.className, function: "feelListenButtonTapped")
             let playViewController = FeelPlayViewController()
@@ -753,11 +745,12 @@ extension MyFavoriteTabBarViewController: MyFeelLikeTableViewDelegate {
                 let loginViewContrller = LoginViewController()
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             guard let memberIdx = app.userMemberIdx else { return }
             let feel = myFeelShareList[indexPath.section].list[indexPath.row]
-            var request = URLRequest(url: URL(string: feelLikeURL)!)
+            guard let url = URL(string: URLString.SubDomain.feelLikeURL.getURL()) else { return }
+            var request = URLRequest(url: url)
             request.httpMethod = (feel.memberLike ?? false) ? "DELETE" : "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.timeoutInterval = 10
@@ -794,13 +787,11 @@ extension MyFavoriteTabBarViewController: MyFeelLikeTableViewDelegate {
                         self.showToVoice(type: .announcement, text: "좋아요를 취소하였습니다.")
                         self.feelLikeTableView.reloadData()
                     }
-                case .failure(let error):
+                case .failure(_):
                     guard let topViewController = keyWindow?.visibleViewController else { return }
-                    topViewController.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
-#endif
+                    topViewController.showCloseAlert(type: .unknownError)
                 }
+                
                 DispatchQueue.main.async {
                     LoadingIndicator.hideLoading()
                 }
@@ -818,7 +809,7 @@ print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.error
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             let feelReportViewController = FeelReportViewController(selectFeel: feel)
             feelReportViewController.hero.isEnabled = true

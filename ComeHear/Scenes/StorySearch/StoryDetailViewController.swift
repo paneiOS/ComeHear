@@ -13,13 +13,14 @@ import Hero
 
 class StoryDetailViewController: UIViewController {
     // MARK: - 변수, 상수
+    private let constantSize = ConstantSize()
     let storyDetail: StoryDetail
     var feelList: [FeelListData] = []
     
     // MARK: - 이야기상세 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
@@ -41,7 +42,7 @@ class StoryDetailViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
-        stackView.spacing = intervalSize
+        stackView.spacing = constantSize.intervalSize
         
         storyDetailTopView.scriptView.text = storyDetail.script
         if let url = storyDetail.audioUrl, url != "" {
@@ -53,12 +54,12 @@ class StoryDetailViewController: UIViewController {
         
         if let url = storyDetail.imageUrl {
             if url == "" {
-                storyDetailTopView.imageView.image = landScapeImage
+                storyDetailTopView.imageView.image = ContentImage.landScapeImage.getImage()
             } else {
-                storyDetailTopView.imageView.setImage(with: url, placeholder: landScapeImage, cornerRadius: 0)
+                storyDetailTopView.imageView.setImage(with: url, placeholder: ContentImage.landScapeImage.getImage(), cornerRadius: 0)
             }
         } else {
-            storyDetailTopView.imageView.image = landScapeImage
+            storyDetailTopView.imageView.image = ContentImage.landScapeImage.getImage()
         }
         
         storyDetailMiddleView.titleLabel.text = "# " + (storyDetail.audioTitle ?? "이야기의".localized())
@@ -152,15 +153,15 @@ extension StoryDetailViewController {
         subContentView.addSubview(stackView)
         
         stackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
     }
     
     @objc private func requestFeelList() {
-        var urlString = feelListURL + "?langCode=ko&pageNo=1&pageSize=20000&stid=\(storyDetail.stid)&stlid=\(storyDetail.stlid)"
+        var urlString = URLString.SubDomain.feelListURL.getURL() + "?langCode=ko&pageNo=1&pageSize=20000&stid=\(storyDetail.stid)&stlid=\(storyDetail.stlid)"
         if let app = UIApplication.shared.delegate as? AppDelegate, app.loginState == .login, let memberIdx = app.userMemberIdx {
             urlString += "&likeMemberIdx=\(memberIdx)"
         }
@@ -176,11 +177,8 @@ extension StoryDetailViewController {
                         self.scrollView.isScrollEnabled = false
                     }
                     NotificationCenter.default.post(name: Notification.Name("reloadFeelList"), object: data.feelList)
-                case .failure(let error):
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                    print(error)
-#endif
+                case .failure(_):
+                    self.showCloseAlert(type: .unknownError)
                 }
             }
     }
@@ -193,7 +191,7 @@ extension StoryDetailViewController {
                 completion(allowed)
             })
         case .denied: // 사용자가 녹음 권한 거부, 사용자가 직접 설정 화면에서 권한 허용을 하게끔 유도
-            self.showSettingAlert(title: "녹음권한 요청", message: "녹음을 위해 권한을 허용해주세요.")
+            self.showSettingAlert(type: .record)
             completion(false)
         case .granted: // 사용자가 녹음 권한 허용
             completion(true)
@@ -260,11 +258,11 @@ extension StoryDetailViewController {
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
             guard let userMemberIdx = app.userMemberIdx else { return }
-            let urlString = feelUploadURL + "?regMemberIdx=\(userMemberIdx)&stid=\(storyDetail.stid)&stlid=\(storyDetail.stlid)"
+            let urlString = URLString.SubDomain.feelUploadURL.getURL() + "?regMemberIdx=\(userMemberIdx)&stid=\(storyDetail.stid)&stlid=\(storyDetail.stlid)"
             
             AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
                 .responseDecodable(of: BasicResponseMsgModel.self) { [weak self] response in
@@ -276,14 +274,11 @@ extension StoryDetailViewController {
                         } else {
                             if let dataData = data.data {
                                 let msg = dataData.message
-                                self.showConfirmAlert2(msg, "알림")
+                                self.showConfirmAlert(msg, "알림")
                             }
                         }
-                    case .failure(let error):
-                        self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                        print("error", error)
-#endif
+                    case .failure(_):
+                        self.showCloseAlert(type: .unknownError)
                     }
                 }
         }

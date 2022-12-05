@@ -13,6 +13,7 @@ import MapKit
 
 final class HomeCollectionViewController: UICollectionViewController {
     // MARK: - 변수, 상수
+    private let constantSize = ConstantSize()
     private var locationManager: CLLocationManager!
     private var banner: [BannerData] = [] {
         didSet {
@@ -213,7 +214,7 @@ final class HomeCollectionViewController: UICollectionViewController {
         //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 0, leading: 0, bottom: intervalSize, trailing: 0)
+        item.contentInsets = .init(top: 0, leading: 0, bottom: constantSize.intervalSize, trailing: 0)
         //group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.7))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
@@ -223,7 +224,7 @@ final class HomeCollectionViewController: UICollectionViewController {
         
         let sectionHeader = self.createBasicSectionHeader()
         section.boundarySupplementaryItems  = [sectionHeader]
-        section.contentInsets = .init(top: 0, leading: intervalSize-5, bottom: intervalSize, trailing: intervalSize-5)
+        section.contentInsets = .init(top: 0, leading: constantSize.intervalSize-5, bottom: constantSize.intervalSize, trailing: constantSize.intervalSize-5)
         
         let decorationView = NSCollectionLayoutDecorationItem.background(elementKind: "MyBgDecorationView")
         decorationView.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
@@ -237,8 +238,8 @@ final class HomeCollectionViewController: UICollectionViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
         //group
-        if frameSizeHeight/3 >= 350 {
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(frameSizeHeight/3))
+        if constantSize.frameSizeHeight/3 >= 350 {
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(constantSize.frameSizeHeight/3))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
             group.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
             //secion
@@ -246,7 +247,7 @@ final class HomeCollectionViewController: UICollectionViewController {
             section.orthogonalScrollingBehavior = .continuous
             let sectionHeader = self.createBasicSectionHeader()
             section.boundarySupplementaryItems  = [sectionHeader]
-            section.contentInsets = .init(top: 0, leading: intervalSize-5, bottom: 10, trailing: intervalSize-5)
+            section.contentInsets = .init(top: 0, leading: constantSize.intervalSize-5, bottom: 10, trailing: constantSize.intervalSize-5)
             return section
         } else {
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
@@ -257,7 +258,7 @@ final class HomeCollectionViewController: UICollectionViewController {
             section.orthogonalScrollingBehavior = .continuous
             let sectionHeader = self.createBasicSectionHeader()
             section.boundarySupplementaryItems  = [sectionHeader]
-            section.contentInsets = .init(top: 0, leading: intervalSize-5, bottom: 10, trailing: intervalSize-5)
+            section.contentInsets = .init(top: 0, leading: constantSize.intervalSize-5, bottom: 10, trailing: constantSize.intervalSize-5)
             return section
         }
     }
@@ -298,7 +299,7 @@ final class HomeCollectionViewController: UICollectionViewController {
         section.orthogonalScrollingBehavior = .continuous
         let sectionHeader = self.createBasicSectionHeader()
         section.boundarySupplementaryItems  = [sectionHeader]
-        section.contentInsets = .init(top: 0, leading: intervalSize-5, bottom: intervalSize, trailing: intervalSize-5)
+        section.contentInsets = .init(top: 0, leading: constantSize.intervalSize-5, bottom: constantSize.intervalSize, trailing: constantSize.intervalSize-5)
         
         let decorationView = NSCollectionLayoutDecorationItem.background(elementKind: "MyBgDecorationView")
         decorationView.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -0.25, bottom: 0, trailing: -0.25)
@@ -365,7 +366,7 @@ final class HomeCollectionViewController: UICollectionViewController {
     private func requestMainBanner(_ mapX: String?, _ mapY: String?) {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         let languageCode = app.languageCode == "ja" ? "jp" : app.languageCode
-        var urlString = mainAll + "?langCode=\(languageCode)"
+        var urlString = URLString.SubDomain.mainAll.getURL() + "?langCode=\(languageCode)"
         if let x = mapX, let y = mapY {
             urlString += "&mapX=\(x)&mapY=\(y)"
         }
@@ -374,6 +375,7 @@ final class HomeCollectionViewController: UICollectionViewController {
                 guard let self = self else { return }
                 switch response.result {
                 case .success(let data):
+                    print("data", data)
                     if self.banner.isEmpty {
                         self.banner = data.data.banner.content
                     }
@@ -388,7 +390,7 @@ final class HomeCollectionViewController: UICollectionViewController {
                         self.refresh.endRefreshing()
                         LoadingIndicator.hideLoading()
                     }
-                case .failure(let error):
+                case .failure(_):
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
                         app.isMainLoading = false
@@ -396,10 +398,7 @@ final class HomeCollectionViewController: UICollectionViewController {
                         self.refresh.endRefreshing()
                         LoadingIndicator.hideLoading()
                     }
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                    print("error", error)
-#endif
+                    self.showCloseAlert(type: .unknownError)
                 }
             }
     }
@@ -411,7 +410,7 @@ final class HomeCollectionViewController: UICollectionViewController {
             guard let topViewController = keyWindow?.visibleViewController else { return }
             topViewController.navigationController?.pushViewController(viewController, animated: true)
         } else {
-            self.showSettingAlert(title: "GPS권한 요청", message: "현재위치 정보를 얻기 위해 권한을 허용해주세요.")
+            showSettingAlert(type: .gps)
         }
     }
 }
@@ -464,7 +463,7 @@ extension HomeCollectionViewController {
             cell.thirdTag.text = "   # " + tagArr[2] + "   "
             cell.detailLabel.text = "   " + banner[indexPath.row].bannerTitle + "   "
             let url = banner[indexPath.row].bannerImgUrl
-            cell.imageView.setImage(with: url, placeholder: loadingImage, cornerRadius: 15)
+            cell.imageView.setImage(with: url, placeholder: ContentImage.loadingImage.getImage(), cornerRadius: 15)
             cell.accessibilityElementsHidden = true
             return cell
         case 2:
@@ -474,16 +473,16 @@ extension HomeCollectionViewController {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCollectionViewFeelCell", for: indexPath) as? ContentCollectionViewFeelCell else { return UICollectionViewCell() }
             if let url = recentFeel[indexPath.row].imageUrl {
                 if url == "" {
-                    cell.imageView.image = UIImage(named: "LoadingImage_Circle_\(randumNumber)")
+                    cell.imageView.image = UIImage(named: "LoadingImage_Circle_\(constantSize.randumNumber)")
                 } else {
                     cell.imageView.setImage(
                         with: url,
-                        placeholder: UIImage(named: "LoadingImage_Circle_\(randumNumber)"),
+                        placeholder: UIImage(named: "LoadingImage_Circle_\(constantSize.randumNumber)"),
                         cornerRadius: 0
                     )
                 }
             } else {
-                cell.imageView.image = UIImage(named: "LoadingImage_Circle_\(randumNumber)")
+                cell.imageView.image = UIImage(named: "LoadingImage_Circle_\(constantSize.randumNumber)")
             }
             cell.titleLabel.text = recentFeel[indexPath.row].title
             cell.backgroundColor = .white
@@ -499,16 +498,16 @@ extension HomeCollectionViewController {
                 cell.setupAroundViewShadow()
                 if let url = placeList[indexPath.row].imageUrl {
                     if url == "" {
-                        cell.imageView.image = landScapeImage
+                        cell.imageView.image = ContentImage.landScapeImage.getImage()
                     } else {
                         cell.imageView.setImage(
                             with: url,
-                            placeholder: landScapeImage,
+                            placeholder: ContentImage.landScapeImage.getImage(),
                             cornerRadius: 0
                         )
                     }
                 } else {
-                    cell.imageView.image = landScapeImage
+                    cell.imageView.image = ContentImage.landScapeImage.getImage()
                 }
                 cell.titleLabel.text = placeList[indexPath.row].title
                 cell.descriptionLabel.text = placeList[indexPath.row].themeCategory ?? ""
@@ -579,7 +578,7 @@ extension HomeCollectionViewController {
             guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
             let recentFeel = recentFeel[indexPath.row]
             let languageCode = app.languageCode == "ja" ? "jp" : app.languageCode
-            let urlString = storyDetail + "?langCode=\(languageCode)&pageNo=1&pageSize=20000&stid=\(recentFeel.stid)&stlid=\(recentFeel.stlid)"
+            let urlString = URLString.SubDomain.storyDetail.getURL() + "?langCode=\(languageCode)&pageNo=1&pageSize=20000&stid=\(recentFeel.stid)&stlid=\(recentFeel.stlid)"
             if !app.preventTap {
                 app.preventTap = true
             } else {
@@ -595,16 +594,13 @@ extension HomeCollectionViewController {
                         let storyDetail = data.storyDetails[0]
                         let viewController = StoryDetailViewController(storyDetail: storyDetail)
                         self.navigationController?.pushViewController(viewController, animated: true)
-                    case .failure(let error):
-                        self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                        print(error)
-#endif
+                    case .failure(_):
+                        self.showCloseAlert(type: .unknownError)
                     }
                 }
         case 4:
             if placeList.isEmpty {
-                self.showSettingAlert(title: "GPS권한 요청", message: "현재위치 정보를 얻기 위해 권한을 허용해주세요.")
+                showSettingAlert(type: .gps)
             } else {
                 let placeList = self.placeList[indexPath.row]
                 let viewController = StorySearchSubViewController(storyTitle: placeList.title, tid: placeList.tid, tlid: placeList.tlid, image: placeList.imageUrl, favorite: false)

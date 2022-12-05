@@ -9,12 +9,13 @@ import UIKit
 import Alamofire
 
 class RecentSearchView: UIView {
+    private let constantSize = ConstantSize()
     var delegate: SendDataDelegate?
     var historyIdx: Int?
     
     private lazy var recentSearchKeywordView: UIView = {
         let view = UIView()
-        view.layer.borderColor = personalColor?.cgColor
+        view.layer.borderColor = ContentColor.personalColor.getColor().cgColor
         view.layer.cornerRadius = 15
         view.layer.borderWidth = 0.5
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapSearchKeyword))
@@ -26,7 +27,7 @@ class RecentSearchView: UIView {
     lazy var keywordLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
-        label.textColor = personalColor
+        label.textColor = ContentColor.personalColor.getColor()
         label.textAlignment = .center
         return label
     }()
@@ -35,7 +36,7 @@ class RecentSearchView: UIView {
         let button = UIButton()
         button.setImage(systemName: "multiply", pointSize: 15)
         button.titleLabel?.textAlignment = .right
-        button.tintColor = personalColor
+        button.tintColor = ContentColor.personalColor.getColor()
         button.addTarget(self, action: #selector(deleteStackView(sender:)), for: .touchUpInside)
         button.accessibilityLabel = "최근검색어 \(keywordLabel.text ?? "") 키워드 삭제하기"
         return button
@@ -50,10 +51,10 @@ class RecentSearchView: UIView {
         addSubview(recentSearchKeywordView)
         
         recentSearchKeywordView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/2)
-            $0.leading.equalToSuperview().offset(intervalSize/2)
-            $0.trailing.equalToSuperview().inset(intervalSize/2)
-            $0.bottom.equalToSuperview().inset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize/2)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/2)
         }
         
         [keywordLabel, deleteButton].forEach {
@@ -61,16 +62,16 @@ class RecentSearchView: UIView {
         }
         
         keywordLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/3)
-            $0.leading.equalToSuperview().offset(intervalSize/2)
-            $0.bottom.equalToSuperview().inset(intervalSize/3)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/3)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/3)
         }
         
         deleteButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/3)
-            $0.leading.equalTo(keywordLabel.snp.trailing).offset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/3)
+            $0.leading.equalTo(keywordLabel.snp.trailing).offset(constantSize.intervalSize/2)
             $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(intervalSize/3)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize/3)
             $0.width.equalTo(deleteButton.snp.height)
         }
     }
@@ -88,11 +89,14 @@ class RecentSearchView: UIView {
         guard let entryView = sender.superview else { return }
         guard let historyIdx = historyIdx else { return }
         LoadingIndicator.showLoading(className: "RecentSearchView", function: "deleteStackView")
+        
         guard let topViewController = keyWindow?.visibleViewController else { return }
         topViewController.showToVoice(type: .announcement, text: "최근검색어삭제".localized(with: keywordLabel.text ?? ""))
         entryView.removeFromSuperview()
         NotificationCenter.default.post(name: Notification.Name("recentCount"), object: historyIdx)
-        var request = URLRequest(url: URL(string: deleteSearchHistoryURL + "/\(historyIdx)")!)
+        
+        guard let url = URL(string: URLString.SubDomain.deleteSearchHistoryURL.getURL() + "/\(historyIdx)") else { return }
+        var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 10

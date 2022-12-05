@@ -9,6 +9,9 @@ import UIKit
 import Alamofire
 
 class FeelStoreSearchViewController: UIViewController {
+    private let constantSize = ConstantSize()
+    private let commonFunc = CommonFunc()
+    
     // MARK: - 변수, 상수
     private var timer: Timer?
     private var recentSearchKeywordArr = [String]()
@@ -20,7 +23,7 @@ class FeelStoreSearchViewController: UIViewController {
     private var topFeelList: [FeelListData] = []
     
     //MARK: - 최근검색어 UI
-    private let separatorView = SeparatorView(frame: .zero, color: moreLightGrayColor ?? .white)
+    private let separatorView = SeparatorView(frame: .zero, color: ContentColor.moreLightGrayColor.getColor())
     
     private lazy var noSearchStackView: UIStackView = {
         let stackView = UIStackView()
@@ -96,7 +99,7 @@ class FeelStoreSearchViewController: UIViewController {
     // MARK: - 검색화면 UI
     private lazy var mainContentView: UIView = {
         let view = UIView()
-        view.backgroundColor = personalColor
+        view.backgroundColor = ContentColor.personalColor.getColor()
         return view
     }()
     
@@ -261,14 +264,14 @@ extension FeelStoreSearchViewController {
         
         recentSearchHeaderLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(intervalSize * 2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize * 2)
             $0.bottom.equalToSuperview()
         }
         
         recentSearchHeaderButton.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalTo(recentSearchHeaderLabel.snp.trailing).offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize * 2)
+            $0.leading.equalTo(recentSearchHeaderLabel.snp.trailing).offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize * 2)
             $0.bottom.equalToSuperview()
         }
         
@@ -295,10 +298,10 @@ extension FeelStoreSearchViewController {
         noSearchCoverView.addSubview(noSearchView)
         
         noSearchView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         // MARK: - 검색화면_Top10 UI_SETUP
@@ -316,23 +319,23 @@ extension FeelStoreSearchViewController {
         }
         
         seguementedControl.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize/2)
-            $0.leading.equalToSuperview().offset(intervalSize/2)
-            $0.trailing.equalToSuperview().inset(intervalSize/2)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize/2)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize/2)
         }
         
         topTenTableView.snp.makeConstraints {
-            $0.top.equalTo(seguementedControl.snp.bottom).offset(intervalSize)
+            $0.top.equalTo(seguementedControl.snp.bottom).offset(constantSize.intervalSize)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         // MARK: - 검색화면_결과 UI_SETUP
         tableShadowView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
         
         tableShadowView.addSubview(searchTableView)
@@ -343,10 +346,10 @@ extension FeelStoreSearchViewController {
         
         // MARK: - 검색화면_결과없음 UI_SETUP
         noResultView.snp.makeConstraints {
-            $0.top.equalTo(searchBar.snp.bottom).offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(intervalSize)
+            $0.top.equalTo(searchBar.snp.bottom).offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(constantSize.intervalSize)
         }
         
         [noResultLabel, noResultImageView].forEach {
@@ -354,17 +357,17 @@ extension FeelStoreSearchViewController {
         }
         
         noResultLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(intervalSize)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
+            $0.top.equalToSuperview().offset(constantSize.intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
             $0.height.equalTo(100)
         }
         
         noResultImageView.snp.makeConstraints {
             $0.top.equalTo(noResultLabel.snp.bottom)
-            $0.leading.equalToSuperview().offset(intervalSize)
-            $0.trailing.equalToSuperview().inset(intervalSize)
-            $0.bottom.equalToSuperview().inset(intervalSize)
+            $0.leading.equalToSuperview().offset(constantSize.intervalSize)
+            $0.trailing.equalToSuperview().inset(constantSize.intervalSize)
+            $0.bottom.equalToSuperview().inset(constantSize.intervalSize)
         }
     }
     
@@ -372,7 +375,7 @@ extension FeelStoreSearchViewController {
     private func requestTopData(_ type: String) {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         let languageCode = app.languageCode == "ja" ? "jp" : app.languageCode
-        var urlString = feelListTopURL + "?sortType=\(type)" + "&langCode=\(languageCode)"
+        var urlString = URLString.SubDomain.feelListTopURL.getURL() + "?sortType=\(type)" + "&langCode=\(languageCode)"
         if app.loginState == .login, let memberIdx = app.userMemberIdx {
             urlString += "&memberIdx=\(memberIdx)"
         }
@@ -398,7 +401,7 @@ extension FeelStoreSearchViewController {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard searchKeyword != "" else { return searchFeelList.removeAll() }
         let languageCode = app.languageCode == "ja" ? "jp" : app.languageCode
-        var urlString = feelSearchURL + "?pageNo=1&pageSize=20000&langCode=\(languageCode)&Place=\(searchKeyword)"
+        var urlString = URLString.SubDomain.feelSearchURL.getURL() + "?pageNo=1&pageSize=20000&langCode=\(languageCode)&Place=\(searchKeyword)"
         if let userMemberIdx = app.userMemberIdx {
             urlString += "&memberIdx=\(userMemberIdx)"
         }
@@ -421,11 +424,8 @@ extension FeelStoreSearchViewController {
                         self.tableShadowView.isHidden = false
                     }
                     self.searchTableView.reloadData()
-                case .failure(let error):
-                    self.showCloseAlert("죄송합니다.\n서둘러 복구하겠습니다.", "서버점검")
-#if DEBUG
-                    print("error", error)
-#endif
+                case .failure(_):
+                    self.showCloseAlert(type: .unknownError)
                 }
             }
     }
@@ -435,8 +435,8 @@ extension FeelStoreSearchViewController {
         guard keyword != "" else { return }
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard let memberIdx = app.userMemberIdx else { return }
-        
-        var request = URLRequest(url: URL(string: searchHistoryURL)!)
+        guard let url = URL(string: URLString.SubDomain.searchHistoryURL.getURL()) else { return }
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 10
@@ -497,7 +497,7 @@ extension FeelStoreSearchViewController {
     private func requestRecentSearchKeyword() {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard let memberIdx = app.userMemberIdx else { return }
-        let urlString = searchHistoryURL + "?memberIdx=\(memberIdx)&type=FEEL"
+        let urlString = URLString.SubDomain.searchHistoryURL.getURL() + "?memberIdx=\(memberIdx)&type=FEEL"
         LoadingIndicator.showLoading(className: self.className, function: "requestRecentSearchKeyword")
         AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             .responseDecodable(of: RecentSearchKeywordModel.self) { [weak self] response in
@@ -575,7 +575,8 @@ extension FeelStoreSearchViewController {
         
         guard let app = UIApplication.shared.delegate as? AppDelegate else { return }
         guard let userMemberIdx = app.userMemberIdx else { return }
-        var request = URLRequest(url: URL(string: allDeleteSearchHistoryURL + "/\(userMemberIdx)" + "?searchCode=FEEL")!)
+        guard let url = URL(string: URLString.SubDomain.allDeleteSearchHistoryURL.getURL() + "/\(userMemberIdx)" + "?searchCode=FEEL") else { return }
+        var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 10
@@ -678,10 +679,10 @@ extension FeelStoreSearchViewController: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyFavoriteTableViewSectionCell") as? MyFeelSectionTableViewCell else { return UITableViewCell() }
                 cell.titleLabel.text = "# \(searchFeelList[indexPath.section].place) ( \(searchFeelList[indexPath.section].list.count) )"
                 if myFeelBoolList[indexPath.section] {
-                    cell.openButton.setImage(systemName: "chevron.up", pointSize: buttonSize)
-                    cell.contentView.backgroundColor = moreLightGrayColor
+                    cell.openButton.setImage(systemName: "chevron.up", pointSize: constantSize.buttonSize)
+                    cell.contentView.backgroundColor = ContentColor.moreLightGrayColor.getColor()
                 } else {
-                    cell.openButton.setImage(systemName: "chevron.down", pointSize: buttonSize)
+                    cell.openButton.setImage(systemName: "chevron.down", pointSize: constantSize.buttonSize)
                     cell.contentView.backgroundColor = .white
                 }
                 
@@ -703,21 +704,21 @@ extension FeelStoreSearchViewController: UITableViewDataSource {
                 cell.feelList = searchFeelList[indexPath.section].list[indexPath.row-1]
                 cell.titleLabel.text = searchFeelList[indexPath.section].list[indexPath.row-1].title
                 if app.languageCode == "ko" {
-                    cell.titleLabel.accessibilityLabel = "\(intToString(indexPath.row))번" + searchFeelList[indexPath.section].list[indexPath.row-1].title
-                    cell.listenButton.accessibilityLabel = "\(intToString(indexPath.row))번" + searchFeelList[indexPath.section].list[indexPath.row-1].title + "듣기"
-                    cell.reportButton.accessibilityLabel = "\(intToString(indexPath.row))번" + searchFeelList[indexPath.section].list[indexPath.row-1].title + "신고하기"
+                    cell.titleLabel.accessibilityLabel = "\(commonFunc.intToString(indexPath.row))번" + searchFeelList[indexPath.section].list[indexPath.row-1].title
+                    cell.listenButton.accessibilityLabel = "\(commonFunc.intToString(indexPath.row))번" + searchFeelList[indexPath.section].list[indexPath.row-1].title + "듣기"
+                    cell.reportButton.accessibilityLabel = "\(commonFunc.intToString(indexPath.row))번" + searchFeelList[indexPath.section].list[indexPath.row-1].title + "신고하기"
                 }
                 cell.indexPath = IndexPath(item: indexPath.row-1, section: indexPath.section)
                 cell.tableIndex = 1
                 if (searchFeelList[indexPath.section].list[indexPath.row-1].memberLike ?? false) {
-                    cell.likeButton.setImage(systemName: "heart.fill", pointSize: buttonSize)
+                    cell.likeButton.setImage(systemName: "heart.fill", pointSize: constantSize.buttonSize)
                     if app.languageCode == "ko" {
-                        cell.likeButton.accessibilityLabel = "\(intToString(indexPath.row))번" + searchFeelList[indexPath.section].list[indexPath.row-1].title + "의 좋아요를 취소하는"
+                        cell.likeButton.accessibilityLabel = "\(commonFunc.intToString(indexPath.row))번" + searchFeelList[indexPath.section].list[indexPath.row-1].title + "의 좋아요를 취소하는"
                     }
                 } else {
-                    cell.likeButton.setImage(systemName: "heart", pointSize: buttonSize)
+                    cell.likeButton.setImage(systemName: "heart", pointSize: constantSize.buttonSize)
                     if app.languageCode == "ko" {
-                        cell.likeButton.accessibilityLabel = "\(intToString(indexPath.row))번" + searchFeelList[indexPath.section].list[indexPath.row-1].title + "의 좋아요를 누르는"
+                        cell.likeButton.accessibilityLabel = "\(commonFunc.intToString(indexPath.row))번" + searchFeelList[indexPath.section].list[indexPath.row-1].title + "의 좋아요를 누르는"
                     }
                 }
                 return cell
@@ -730,37 +731,37 @@ extension FeelStoreSearchViewController: UITableViewDataSource {
             cell.titleLabel.text = topFeelList[indexPath.section].title
             if seguementedControl.selectedSegmentIndex == 0 {
                 if app.languageCode == "ko" {
-                    cell.titleLabel.accessibilityLabel = "인기느낌 \(intToString(indexPath.section + 1))위 제목" + topFeelList[indexPath.section].title
-                    cell.listenButton.accessibilityLabel = "인기느낌 \(intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "듣기"
-                    cell.reportButton.accessibilityLabel = "인기느낌 \(intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "신고하기"
+                    cell.titleLabel.accessibilityLabel = "인기느낌 \(commonFunc.intToString(indexPath.section + 1))위 제목" + topFeelList[indexPath.section].title
+                    cell.listenButton.accessibilityLabel = "인기느낌 \(commonFunc.intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "듣기"
+                    cell.reportButton.accessibilityLabel = "인기느낌 \(commonFunc.intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "신고하기"
                 }
                 
                 if (topFeelList[indexPath.section].memberLike ?? false) {
-                    cell.likeButton.setImage(systemName: "heart.fill", pointSize: buttonSize)
+                    cell.likeButton.setImage(systemName: "heart.fill", pointSize: constantSize.buttonSize)
                     if app.languageCode == "ko" {
-                        cell.likeButton.accessibilityLabel = "인기느낌 \(intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "의 좋아요를 취소하는"
+                        cell.likeButton.accessibilityLabel = "인기느낌 \(commonFunc.intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "의 좋아요를 취소하는"
                     }
                 } else {
-                    cell.likeButton.setImage(systemName: "heart", pointSize: buttonSize)
+                    cell.likeButton.setImage(systemName: "heart", pointSize: constantSize.buttonSize)
                     if app.languageCode == "ko" {
-                        cell.likeButton.accessibilityLabel = "인기느낌 \(intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "의 좋아요를 누르는"
+                        cell.likeButton.accessibilityLabel = "인기느낌 \(commonFunc.intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "의 좋아요를 누르는"
                     }
                 }
             } else {
                 if app.languageCode == "ko" {
-                    cell.titleLabel.accessibilityLabel = "최신느낌 \(intToString(indexPath.section + 1))위 제목" + topFeelList[indexPath.section].title
-                    cell.listenButton.accessibilityLabel = "최신느낌 \(intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "듣기"
-                    cell.reportButton.accessibilityLabel = "최신느낌 \(intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "신고하기"
+                    cell.titleLabel.accessibilityLabel = "최신느낌 \(commonFunc.intToString(indexPath.section + 1))위 제목" + topFeelList[indexPath.section].title
+                    cell.listenButton.accessibilityLabel = "최신느낌 \(commonFunc.intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "듣기"
+                    cell.reportButton.accessibilityLabel = "최신느낌 \(commonFunc.intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "신고하기"
                 }
                 if (topFeelList[indexPath.section].memberLike ?? false) {
-                    cell.likeButton.setImage(systemName: "heart.fill", pointSize: buttonSize)
+                    cell.likeButton.setImage(systemName: "heart.fill", pointSize: constantSize.buttonSize)
                     if app.languageCode == "ko" {
-                        cell.likeButton.accessibilityLabel = "최신느낌 \(intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "의 좋아요를 취소하는"
+                        cell.likeButton.accessibilityLabel = "최신느낌 \(commonFunc.intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "의 좋아요를 취소하는"
                     }
                 } else {
-                    cell.likeButton.setImage(systemName: "heart", pointSize: buttonSize)
+                    cell.likeButton.setImage(systemName: "heart", pointSize: constantSize.buttonSize)
                     if app.languageCode == "ko" {
-                        cell.likeButton.accessibilityLabel = "최신느낌 \(intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "의 좋아요를 누르는"
+                        cell.likeButton.accessibilityLabel = "최신느낌 \(commonFunc.intToString(indexPath.section + 1))위" + topFeelList[indexPath.section].title + "의 좋아요를 누르는"
                     }
                 }
             }
@@ -808,11 +809,12 @@ extension FeelStoreSearchViewController: MyFeelLikeTableViewDelegate {
                 let loginViewContrller = LoginViewController()
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             guard let memberIdx = app.userMemberIdx else { return }
             let feel = tableIndex != 0 ? searchFeelList[indexPath.section].list[indexPath.row] : topFeelList[indexPath.section]
-            var request = URLRequest(url: URL(string: feelLikeURL)!)
+            guard let url = URL(string: URLString.SubDomain.feelLikeURL.getURL()) else { return }
+            var request = URLRequest(url: url)
             request.httpMethod = (feel.memberLike ?? false) ? "DELETE" : "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.timeoutInterval = 10
@@ -865,7 +867,7 @@ extension FeelStoreSearchViewController: MyFeelLikeTableViewDelegate {
                     }
                 case .failure(let error):
 #if DEBUG
-                    print("🚫 Alamofire Request Error\nCode:\(error._code), Message: \(error.errorDescription!)")
+                    print(error)
 #endif
                 }
                 DispatchQueue.main.async {
@@ -885,7 +887,7 @@ extension FeelStoreSearchViewController: MyFeelLikeTableViewDelegate {
                 guard let topViewController = keyWindow?.visibleViewController else { return }
                 topViewController.navigationController?.pushViewController(loginViewContrller, animated: true)
             }
-            topViewController.showTwoActionAlert("로그인이 필요합니다.\n로그인페이지로 이동하시겠습니까?", "로그인", loginAction)
+            topViewController.showTwoButtonAlert(type: .requestLogin, loginAction)
         } else {
             let feelReportViewController = FeelReportViewController(selectFeel: feel)
             searchBar.endEditing(true)
