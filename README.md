@@ -44,6 +44,7 @@
 |<img width="200" src="https://user-images.githubusercontent.com/62927862/205616612-7f0745cc-0e0b-42b1-baf4-c730c07c1b57.gif">|<img width="200" src="https://user-images.githubusercontent.com/62927862/205618163-9dc7371c-3e22-4c82-ac5d-9ff9eef8395b.gif">|<img width="200" src="https://user-images.githubusercontent.com/62927862/205618215-0444257c-4bf0-4ff4-8608-5931aa355a22.gif">|<img width="200" src="https://user-images.githubusercontent.com/62927862/205618171-d5cc88b2-71b4-47ad-808b-cee9375d9536.gif">|<img width="200" src="https://user-images.githubusercontent.com/62927862/205618223-b30fbc27-9827-4128-8e96-7ac7c156c1a3.gif">|
 
 
+
 ## 🌐 Feature-1. 누구를 위한 화면을 구현할 것인지?
 ### 1-1 고민한점
 #### 1️⃣ 누구를 위한 화면을 구현할 것인지?
