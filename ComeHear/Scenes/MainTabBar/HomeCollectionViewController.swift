@@ -375,7 +375,6 @@ final class HomeCollectionViewController: UICollectionViewController {
                 guard let self = self else { return }
                 switch response.result {
                 case .success(let data):
-                    print("data", data)
                     if self.banner.isEmpty {
                         self.banner = data.data.banner.content
                     }

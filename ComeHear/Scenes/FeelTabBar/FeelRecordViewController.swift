@@ -665,7 +665,9 @@ class FeelRecordViewController: UIViewController {
         do {
             try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         } catch {
+#if DEBUG
             print("audioSession properties weren't disable.")
+#endif
         }
     }
     

@@ -405,7 +405,6 @@ extension FeelStoreSearchViewController {
         if let userMemberIdx = app.userMemberIdx {
             urlString += "&memberIdx=\(userMemberIdx)"
         }
-        print("urlString", urlString)
         AF.request(urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             .responseDecodable(of: MyFeelShareDataModel.self) { [weak self] response in
                 guard let self = self else { return }

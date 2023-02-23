@@ -26,11 +26,6 @@ class LoadingIndicator {
             }
             loadingIndicatorView.startAnimating()
             loadingIndicatorView.isAccessibilityElement = false
-#if DEBUG
-            print("\n로딩시작----------------------------------------------------------------------------------------------------")
-            print("로딩바의 위치는 \(className)입니다.")
-            print("로딩바의 기능은 \(function)입니다.")
-#endif
         }
     }
     
@@ -38,9 +33,6 @@ class LoadingIndicator {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.windows.last else { return }
             window.subviews.filter({ $0 is UIActivityIndicatorView }).forEach { $0.removeFromSuperview() }
-#if DEBUG
-            print("----------------------------------------------------------------------------------------------------로딩끝\n")
-#endif
         }
     }
 }

@@ -14,7 +14,6 @@ final class ContentCollectionViewAroundCell: UICollectionViewCell {
         let view = UIView()
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
-//        view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMaxXMinYCorner, .layerMinXMinYCorner)
         return view
     }()
     
@@ -60,18 +59,14 @@ final class ContentCollectionViewAroundCell: UICollectionViewCell {
         }
         
         subContentView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(subContentView.snp.width)
+            $0.edges.equalToSuperview()
+
         }
         
         subContentView.addSubview(imageView)
         
         imageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        [titleLabel, descriptionLabel].forEach {
-            labelView.addSubview($0)
+            $0.top.leading.trailing.equalToSuperview()
         }
         
         labelView.snp.makeConstraints {
@@ -79,12 +74,16 @@ final class ContentCollectionViewAroundCell: UICollectionViewCell {
             $0.height.equalTo(30)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+
+        [titleLabel, descriptionLabel].forEach {
+            labelView.addSubview($0)
+        }
         
         titleLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalToSuperview().offset(intervalSize)
         }
-        
+
         descriptionLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalTo(titleLabel.snp.trailing)
